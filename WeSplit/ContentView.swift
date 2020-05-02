@@ -34,6 +34,7 @@ struct ContentView: View {
                         .keyboardType(.decimalPad)
 
                     TextField("Number of people", text: $numberOfPeople)
+                        .keyboardType(.numberPad)
                 }
 
                 Section(header: Text("How much of a tip do you want to leave?")) {
