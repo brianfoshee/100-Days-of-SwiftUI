@@ -9,19 +9,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    let students: [String] = ["Harry", "Hermione", "Ron"]
-    @State private var selectedStudent: Int = 0
+    @State private var checkAmount: String = ""
+    @State private var numberOfPeople: Int = 2
+    @State private var tipPercentage: Int = 2
+    let tipPercentages: [Int] = [10, 15, 20, 25, 0]
 
     var body: some View {
-        VStack {
-            Picker("Select your student", selection: $selectedStudent) {
-                ForEach(0 ..< students.count) { i in
-                    Text(self.students[i])
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Amount", text: $checkAmount)
+                        .keyboardType(.decimalPad)
+
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2 ..< 100) { i in
+                            Text("\(i) people")
+                        }
+                    }
+                }
+
+                Section {
+                    Text("$\(checkAmount)")
                 }
             }
-            Text("You chose: Student # \(students[selectedStudent])")
+                .navigationBarTitle("WeSplit")
         }
-
     }
 }
 
