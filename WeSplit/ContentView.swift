@@ -9,11 +9,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tapCount: Int = 0
+    @State private var name: String = ""
 
     var body: some View {
-        Button("Tap Count: \(tapCount)") {
-            self.tapCount += 1
+        Form {
+            // $name binds the name variable so that changes are saved to the variable AND
+            // the value can be read out of it into the text field.
+            // This is a two-way binding.
+            TextField("Enter your name", text: $name)
+
+            // Don't need $name here because the variable is only being read, not written to
+            Text("Your name is \(name)")
         }
     }
 }
