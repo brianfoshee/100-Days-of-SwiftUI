@@ -9,18 +9,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var name: String = ""
+    let students: [String] = ["Harry", "Hermione", "Ron"]
+    @State private var selectedStudent: Int = 0
 
     var body: some View {
-        Form {
-            // $name binds the name variable so that changes are saved to the variable AND
-            // the value can be read out of it into the text field.
-            // This is a two-way binding.
-            TextField("Enter your name", text: $name)
-
-            // Don't need $name here because the variable is only being read, not written to
-            Text("Your name is \(name)")
+        VStack {
+            Picker("Select your student", selection: $selectedStudent) {
+                ForEach(0 ..< students.count) { i in
+                    Text(self.students[i])
+                }
+            }
+            Text("You chose: Student # \(students[selectedStudent])")
         }
+
     }
 }
 
