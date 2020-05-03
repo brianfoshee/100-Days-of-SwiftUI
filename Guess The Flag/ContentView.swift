@@ -27,9 +27,9 @@ struct ContentView: View {
                     Text("Tap the flag of")
                         .foregroundColor(.white)
                     Text(countries[correctAnswer])
-                        .foregroundColor(.white)
                         .font(.largeTitle)
                         .fontWeight(.black)
+                        .foregroundColor(.white)
                 }
 
                 ForEach(0 ..< 3){ i in
