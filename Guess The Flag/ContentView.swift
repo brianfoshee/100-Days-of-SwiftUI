@@ -44,6 +44,9 @@ struct ContentView: View {
                     }
                 }
 
+                Text("Score: \(score)")
+                    .foregroundColor(.white)
+
                 Spacer()
             }
         }
