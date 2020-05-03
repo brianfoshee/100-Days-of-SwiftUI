@@ -9,41 +9,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingAlert: Bool = false
+
     var body: some View {
-        VStack {
-            // if the button is only text
-            Button("Push Here") {
-                print("pushed")
-            }
-
-            // to add more views inside a button
-            Button(action: {
-                print("pushed")
-            }) {
-                Text("No push here")
-            }
-
-            Button(action: {
-                print("pushed")
-            }) {
-                // using this form, the screen reader will read the image name
-                // Image("pencil")
-
-                // using this for the screen reader will not read it
-                // Image(decorative: "pencil")
-
-                // load from SF Symbols
-                Image(systemName: "pencil")
-            }
-
-            Button(action: {
-                print("pushed")
-            }) {
-                HStack(spacing: 20) {
-                    Image(systemName: "pencil")
-                    Text("Edit")
-                }
-            }
+        Button("show alert") {
+            self.showingAlert = true
+        }
+            // the binding here will set showingAlert back to false when it's dismissed
+        .alert(isPresented: $showingAlert) {
+            Alert(
+                title: Text("Hello"),
+                message: Text("message of the alert"),
+                dismissButton: .default(Text("ok"))
+            )
         }
     }
 }
