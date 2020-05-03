@@ -9,20 +9,57 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingAlert: Bool = false
+    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    @State private var correctAnswer = Int.random(in: 0...2)
+    @State private var showingScore: Bool = false
+    @State private var scoreTitle: String = ""
 
     var body: some View {
-        Button("show alert") {
-            self.showingAlert = true
+        ZStack {
+            Color.blue.edgesIgnoringSafeArea(.all)
+            VStack(spacing: 30) {
+                VStack {
+                    Text("Tap the flag of")
+                        .foregroundColor(.white)
+                    Text(countries[correctAnswer])
+                        .foregroundColor(.white)
+                }
+
+                ForEach(0 ..< 3){ i in
+                    Button(action: {
+                        self.flagTapped(i)
+                    }) {
+                        Image(self.countries[i])
+                            .renderingMode(.original)
+                    }
+                }
+
+                Spacer()
+            }
         }
-            // the binding here will set showingAlert back to false when it's dismissed
-        .alert(isPresented: $showingAlert) {
+        .alert(isPresented: $showingScore) {
             Alert(
-                title: Text("Hello"),
-                message: Text("message of the alert"),
-                dismissButton: .default(Text("ok"))
-            )
+                title: Text(scoreTitle),
+                message: Text("Your score is ???"),
+                dismissButton: .default(Text("Continue")) {
+                    self.askQuestion()
+                })
         }
+    }
+
+    func flagTapped(_ number: Int) {
+        if number == correctAnswer {
+            scoreTitle = "Correct"
+        } else {
+            scoreTitle = "Wrong"
+        }
+
+        showingScore = true
+    }
+
+    func askQuestion() {
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
     }
 }
 
