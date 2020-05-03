@@ -11,11 +11,39 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            LinearGradient(gradient: Gradient(colors: [.white, .black]), startPoint: .top, endPoint: .bottom)
+            // if the button is only text
+            Button("Push Here") {
+                print("pushed")
+            }
 
-            RadialGradient(gradient: Gradient(colors: [.blue, .black]), center: .center, startRadius: 20, endRadius: 200)
+            // to add more views inside a button
+            Button(action: {
+                print("pushed")
+            }) {
+                Text("No push here")
+            }
 
-            AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), center: .center)
+            Button(action: {
+                print("pushed")
+            }) {
+                // using this form, the screen reader will read the image name
+                // Image("pencil")
+
+                // using this for the screen reader will not read it
+                // Image(decorative: "pencil")
+
+                // load from SF Symbols
+                Image(systemName: "pencil")
+            }
+
+            Button(action: {
+                print("pushed")
+            }) {
+                HStack(spacing: 20) {
+                    Image(systemName: "pencil")
+                    Text("Edit")
+                }
+            }
         }
     }
 }
