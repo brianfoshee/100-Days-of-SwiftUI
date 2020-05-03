@@ -16,13 +16,19 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Color.blue.edgesIgnoringSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [.blue, .black]),
+                           startPoint: .top,
+                           endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+
             VStack(spacing: 30) {
                 VStack {
                     Text("Tap the flag of")
                         .foregroundColor(.white)
                     Text(countries[correctAnswer])
                         .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .fontWeight(.black)
                 }
 
                 ForEach(0 ..< 3){ i in
@@ -31,6 +37,9 @@ struct ContentView: View {
                     }) {
                         Image(self.countries[i])
                             .renderingMode(.original)
+                            .clipShape(Capsule())
+                            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+                            .shadow(color: .black, radius: 2)
                     }
                 }
 
@@ -38,10 +47,9 @@ struct ContentView: View {
             }
         }
         .alert(isPresented: $showingScore) {
-            Alert(
-                title: Text(scoreTitle),
-                message: Text("Your score is ???"),
-                dismissButton: .default(Text("Continue")) {
+            Alert(title: Text(scoreTitle),
+                  message: Text("Your score is ???"),
+                  dismissButton: .default(Text("Continue")) {
                     self.askQuestion()
                 })
         }
