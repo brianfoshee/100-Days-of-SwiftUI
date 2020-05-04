@@ -10,7 +10,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        Text("wtf")
+            .prominentTitle()
+
+    }
+}
+
+struct LargeBlue: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.blue)
+            .font(.largeTitle)
+    }
+}
+
+extension View {
+    func prominentTitle() -> some View {
+        return self.modifier(LargeBlue())
     }
 }
 
