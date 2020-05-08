@@ -13,69 +13,7 @@ struct ContentView: View {
     @State private var sleepAmount: Double = 8.0
     @State private var coffeeAmount: Int = 1
 
-    @State private var alertTitle: String = ""
-    @State private var alertMessage: String = ""
-    @State private var showingAlert: Bool = false
-
-    static var defaultWakeTime: Date {
-        var components: DateComponents = DateComponents()
-        components.hour = 7
-        components.minute = 0
-        return Calendar.current.date(from: components) ?? Date()
-    }
-
-    var body: some View {
-        NavigationView {
-            Form {
-                VStack {
-                    Text("When do you want to wake up?")
-                        .font(.headline)
-                    
-                    DatePicker("Please enter a time",
-                               selection: $wakeUp,
-                               displayedComponents: .hourAndMinute)
-                        .labelsHidden()
-                        .datePickerStyle(WheelDatePickerStyle())
-                }
-
-                VStack {
-                    Text("Desired amount of sleep")
-                        .font(.headline)
-
-                    Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
-                        Text("\(sleepAmount, specifier: "%g") hours")
-                    }
-                }
-
-                VStack {
-                    Text("Daily coffee intake")
-                        .font(.headline)
-
-                    Stepper(value: $coffeeAmount, in: 1...20) {
-                        if coffeeAmount == 1 {
-                            Text("1 cup")
-                        } else {
-                            Text("\(coffeeAmount) cups")
-                        }
-                    }
-                }
-            }
-            .navigationBarTitle("BetterRest")
-            .navigationBarItems(trailing:
-                Button(action: calculateBedTime) {
-                    Text("Calculate")
-                }
-            )
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text(alertTitle),
-                      message: Text(alertMessage),
-                      dismissButton: .default(Text("OK"))
-                )
-            }
-        }
-    }
-
-    func calculateBedTime() {
+    private var idealBedTime: String {
         let model: SleepCalculator = SleepCalculator()
         let components: DateComponents = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
         let hour: Int = (components.hour ?? 0) * 60 * 60
@@ -91,13 +29,57 @@ struct ContentView: View {
             let formatter: DateFormatter = DateFormatter()
             formatter.timeStyle = .short
 
-            alertMessage = formatter.string(from: sleepTime)
-            alertTitle = "Your ideal bedtime is..."
+            return formatter.string(from: sleepTime)
         } catch {
-            alertTitle = "Error"
-            alertMessage = "Sorry, there was a problem calculating your bedtime."
+            print("Error calculating bed time")
         }
-        showingAlert = true
+        return ""
+    }
+
+    static var defaultWakeTime: Date {
+        var components: DateComponents = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? Date()
+    }
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("Your ideal bed time is:")) {
+                    Text("\(idealBedTime)")
+                }
+
+                Section(header: Text("When do you want to wake up?")) {
+                    DatePicker("Please enter a time",
+                               selection: $wakeUp,
+                               displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                        .datePickerStyle(WheelDatePickerStyle())
+                }
+
+                Section(header: Text("Desired amount of sleep")) {
+                    Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
+                        Text("\(sleepAmount, specifier: "%g") hours")
+                    }
+                }
+
+                Section(header: Text("Daily coffee intake")) {
+                    Picker("Daily Coffee Intake", selection: $coffeeAmount) {
+                        ForEach(1 ..< 21) { i in
+                            if i == 1 {
+                                Text("1 cup")
+                            } else {
+                                Text("\(i) cups")
+                            }
+                        }
+                    }
+                    .labelsHidden()
+                    .pickerStyle(WheelPickerStyle())
+                }
+            }
+            .navigationBarTitle("BetterRest")
+        }
     }
 }
 
