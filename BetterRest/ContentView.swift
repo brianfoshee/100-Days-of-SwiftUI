@@ -9,8 +9,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var sleepAmount = 8.0
+    @State private var wakeup: Date = Date()
+
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
+                Text("\(sleepAmount, specifier: "%g") hours")
+            }
+
+            // looks weird with text on the left
+            // two options:
+            // 1) embed in a Form
+            // 2) use hide labels
+            DatePicker("Please enter a date", selection: $wakeup, in: Date()...)
+                .labelsHidden()
+        }
     }
 }
 
