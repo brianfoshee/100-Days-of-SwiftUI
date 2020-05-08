@@ -13,6 +13,7 @@
 		D36F60C62464D46C0068EDAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D36F60C52464D46C0068EDAE /* Assets.xcassets */; };
 		D36F60C92464D46C0068EDAE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D36F60C82464D46C0068EDAE /* Preview Assets.xcassets */; };
 		D36F60CC2464D46C0068EDAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D36F60CA2464D46C0068EDAE /* LaunchScreen.storyboard */; };
+		D36F60D4246502F20068EDAE /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D36F60D3246502F20068EDAE /* SleepCalculator.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D36F60C82464D46C0068EDAE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D36F60CB2464D46C0068EDAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D36F60CD2464D46C0068EDAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D36F60D3246502F20068EDAE /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				D36F60C52464D46C0068EDAE /* Assets.xcassets */,
 				D36F60CA2464D46C0068EDAE /* LaunchScreen.storyboard */,
 				D36F60CD2464D46C0068EDAE /* Info.plist */,
+				D36F60D3246502F20068EDAE /* SleepCalculator.mlmodel */,
 				D36F60C72464D46C0068EDAE /* Preview Content */,
 			);
 			path = BetterRest;
@@ -148,6 +151,7 @@
 			files = (
 				D36F60C02464D4680068EDAE /* AppDelegate.swift in Sources */,
 				D36F60C22464D4680068EDAE /* SceneDelegate.swift in Sources */,
+				D36F60D4246502F20068EDAE /* SleepCalculator.mlmodel in Sources */,
 				D36F60C42464D4680068EDAE /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
