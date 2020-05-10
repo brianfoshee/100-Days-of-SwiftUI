@@ -14,6 +14,9 @@ struct ContentView: View {
     @State private var showingScore: Bool = false
     @State private var scoreTitle: String = ""
     @State private var score: Int = 0
+    @State private var animationAmount: Double = 0.0
+    @State private var opacityAmount: Double = 1.0
+    @State private var scaleAmount: Double = 1.0
 
     var body: some View {
         ZStack {
@@ -34,10 +37,17 @@ struct ContentView: View {
 
                 ForEach(0 ..< 3){ i in
                     Button(action: {
-                        self.flagTapped(i)
+                        withAnimation {
+                            self.flagTapped(i)
+                        }
                     }) {
                         FlagImage(name: self.countries[i])
                     }
+                    .opacity(i == self.correctAnswer ? 1.0 : self.opacityAmount)
+                    .scaleEffect(CGFloat(i == self.correctAnswer ? 1.0 : self.scaleAmount))
+                    .rotation3DEffect(
+                        .degrees(i == self.correctAnswer ? self.animationAmount : 0),
+                        axis: (x: 0, y: 1, z: 0))
                 }
 
                 Text("Score: \(score)")
@@ -57,10 +67,13 @@ struct ContentView: View {
 
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
+            animationAmount += 360
+            opacityAmount = 0.25
             scoreTitle = "Correct"
             score += 1
         } else {
             scoreTitle = "Wrong! That's the flag of \(countries[number])"
+            scaleAmount = 0.5
         }
 
         showingScore = true
@@ -69,6 +82,8 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        opacityAmount = 1
+        scaleAmount = 1
     }
 }
 
