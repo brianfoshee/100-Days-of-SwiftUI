@@ -89,10 +89,10 @@ struct ContentView: View {
                           message: Text(alertMessage),
                           dismissButton: .default(Text("OK")){
                             self.guess = ""
-                            if self.currentQuestionIndex == self.multiplicationTable.count - 1 {
-                                // done, show score
-                            } else {
+                            if self.currentQuestionIndex < self.multiplicationTable.count - 1 {
                                 self.currentQuestionIndex += 1
+                            } else {
+                                // done, start a new game
                             }
                         })
                 }
@@ -104,6 +104,8 @@ struct ContentView: View {
         let question: Question = multiplicationTable[currentQuestionIndex]
         if let guess = Int(guess) {
             let correct: Bool = question.isCorrect(guess: guess)
+            let isFinalQuestion: Bool = (self.currentQuestionIndex == self.multiplicationTable.count - 1)
+
             if correct {
                 // score plus 1
                 alertTitle = "Correct!"
@@ -112,6 +114,7 @@ struct ContentView: View {
                 alertTitle = "Incorrect"
                 alertMessage = "\(question.x) x \(question.y) = \(question.answer)"
             }
+
             isShowingAlert = true
         }
     }
