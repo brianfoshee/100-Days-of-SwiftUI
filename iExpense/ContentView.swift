@@ -9,8 +9,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingSheet: Bool = false
+
     var body: some View {
-        Text("Hello, World!")
+        Button("Show sheet") {
+            self.showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView(name: "brian")
+        }
+    }
+}
+
+struct SecondView: View {
+    var name: String
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    var body: some View {
+        HStack {
+            Text("Hello, \(name)")
+
+            Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 
