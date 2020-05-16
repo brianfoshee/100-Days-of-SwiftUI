@@ -9,30 +9,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingSheet: Bool = false
+    @State private var numbers: [Int] = [Int]()
+    @State private var currentNumber: Int = 1
 
     var body: some View {
-        Button("Show sheet") {
-            self.showingSheet.toggle()
-        }
-        .sheet(isPresented: $showingSheet) {
-            SecondView(name: "brian")
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(numbers, id: \.self) { i in
+                        Text("\(i)")
+                    }
+                    .onDelete(perform: removeRows)
+                }
+
+                Button("Add Number") {
+                    self.numbers.append(self.currentNumber)
+                    self.currentNumber += 1
+                }
+            }
+            .navigationBarItems(leading: EditButton())
         }
     }
-}
 
-struct SecondView: View {
-    var name: String
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
-    var body: some View {
-        HStack {
-            Text("Hello, \(name)")
-
-            Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }
-        }
+    func removeRows(at offsets: IndexSet) {
+        numbers.remove(atOffsets: offsets)
     }
 }
 
