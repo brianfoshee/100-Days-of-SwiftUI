@@ -58,12 +58,14 @@ struct ContentView: View {
 
                         Spacer()
                         Text("$\(item.amount)")
+                            .foregroundColor(self.colorFor(amount: item.amount))
                     }
                 }
                 .onDelete(perform: removeItems)
             }
             .navigationBarTitle("iExpense")
-            .navigationBarItems(trailing:
+            .navigationBarItems(leading: EditButton(),
+                                trailing:
                 Button(action: {
                     self.showingAddExpense.toggle()
                 }) {
@@ -80,9 +82,16 @@ struct ContentView: View {
         expenses.items.remove(atOffsets: offsets)
         expenses.items = expenses.items // bug in swift, fixed in 11.5
     }
+
+    func colorFor(amount number: Int) -> Color? {
+        if number < 10 {
+            return Color.green
+        } else if number < 100 {
+            return Color.yellow
+        }
+        return Color.red
+    }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -12,8 +12,12 @@ struct AddView: View {
     @ObservedObject var expenses: Expenses
     
     @State private var name: String = ""
-    @State private var type: String = "personal"
+    @State private var type: String = "Personal"
     @State private var amount: String = ""
+
+    @State private var isShowingAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
 
     @Environment(\.presentationMode) var presentationMode
 
@@ -41,8 +45,19 @@ struct AddView: View {
                     self.expenses.items.append(item)
                     self.expenses.items = self.expenses.items // bug in swift, fixed in 11.5
                     self.presentationMode.wrappedValue.dismiss()
+                } else {
+                    self.alertTitle = "Invalid amount"
+                    self.alertMessage = "Amount cannot be \(self.amount)."
+                    self.isShowingAlert.toggle()
                 }
             })
+            .alert(isPresented: $isShowingAlert) {
+                Alert(title: Text(alertTitle),
+                      message: Text(alertMessage),
+                      dismissButton: .default(Text("Ok")) {
+                        // todo
+                    })
+            }
         }
     }
 }
