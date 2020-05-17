@@ -13,6 +13,7 @@
 		D3F28D52246C2EB90082655E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F28D51246C2EB90082655E /* Assets.xcassets */; };
 		D3F28D55246C2EB90082655E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F28D54246C2EB90082655E /* Preview Assets.xcassets */; };
 		D3F28D58246C2EB90082655E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F28D56246C2EB90082655E /* LaunchScreen.storyboard */; };
+		D3F28D62247065CB0082655E /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F28D61247065CB0082655E /* AddView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D3F28D54246C2EB90082655E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D3F28D57246C2EB90082655E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3F28D59246C2EB90082655E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3F28D61247065CB0082655E /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				D3F28D4B246C2EB50082655E /* AppDelegate.swift */,
 				D3F28D4D246C2EB50082655E /* SceneDelegate.swift */,
 				D3F28D4F246C2EB50082655E /* ContentView.swift */,
+				D3F28D61247065CB0082655E /* AddView.swift */,
 				D3F28D51246C2EB90082655E /* Assets.xcassets */,
 				D3F28D56246C2EB90082655E /* LaunchScreen.storyboard */,
 				D3F28D59246C2EB90082655E /* Info.plist */,
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3F28D62247065CB0082655E /* AddView.swift in Sources */,
 				D3F28D4C246C2EB50082655E /* AppDelegate.swift in Sources */,
 				D3F28D4E246C2EB50082655E /* SceneDelegate.swift in Sources */,
 				D3F28D50246C2EB50082655E /* ContentView.swift in Sources */,
