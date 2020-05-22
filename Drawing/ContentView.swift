@@ -49,13 +49,66 @@ struct Arc: InsettableShape {
     }
 }
 
-struct ContentView: View {
-    var body: some View {
-//        Circle()
-//            .strokeBorder(Color.blue, lineWidth: 40)
+struct Flower: Shape {
+    // how much to move this petal away from the center
+    var petalOffset: Double = -20
 
-        Arc(startAngle: .degrees(-90), endAngle: .degrees(90), clockwise: true)
-            .strokeBorder(Color.blue, lineWidth: 40)
+    // how wide to make each petal
+    var petalWidth: Double = 100
+
+    func path(in rect: CGRect) -> Path {
+        // the path that will hold all of the petals
+        var path = Path()
+
+        // count from 0 to pi * 2, moving up pi / 8 each time
+        for number in stride(from: 0, to: CGFloat.pi * 2, by: CGFloat.pi / 8) {
+            // rotate the petal by the current value of our loop
+            let rotation = CGAffineTransform(rotationAngle: number)
+
+            // move the petal to be at the center of our view
+            let position = rotation.concatenating(
+                CGAffineTransform(translationX: rect.width / 2,
+                                  y: rect.height / 2)
+            )
+
+            // create a path for this petal using our properties plus a fixed
+            // Y and height
+            let originalPetal = Path(ellipseIn: CGRect(x: CGFloat(petalOffset),
+                                                       y: 0,
+                                                       width: CGFloat(petalWidth),
+                                                       height: rect.width / 2))
+
+            // apply rotation/position transformation to the petal
+            let rotatedPetal = originalPetal.applying(position)
+
+            // add it to the main path
+            path.addPath(rotatedPetal)
+        }
+
+        // send the path back
+        return path
+    }
+}
+
+struct ContentView: View {
+    @State private var petalOffset: Double = -20
+    @State private var petalWidth: Double = 100
+
+    var body: some View {
+        VStack {
+            Flower(petalOffset: petalOffset, petalWidth: petalWidth)
+                //.stroke(Color.red, lineWidth: 1)
+                .fill(Color.red, style: FillStyle(eoFill: true))
+
+            Text("Offset")
+            Slider(value: $petalOffset, in: -40...40)
+                .padding([.horizontal, .bottom])
+
+            Text("Width")
+            Slider(value: $petalWidth, in: 0...100)
+                .padding(.horizontal)
+        }
+
     }
 }
 
