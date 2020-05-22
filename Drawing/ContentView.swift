@@ -21,10 +21,11 @@ struct Triangle: Shape {
     }
 }
 
-struct Arc: Shape {
+struct Arc: InsettableShape {
     var startAngle: Angle
     var endAngle: Angle
     var clockwise: Bool
+    var insetAmount: CGFloat = 0
 
     func path(in rect: CGRect) -> Path {
         // 0 degrees is to the right. this adjusts so 0 is up top.
@@ -34,25 +35,27 @@ struct Arc: Shape {
 
         var path = Path()
         path.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
-                    radius: rect.width / 2,
+                    radius: rect.width / 2 - insetAmount,
                     startAngle: modifiedStart,
                     endAngle: modifiedEnd,
-                    clockwise: clockwise)
+                    clockwise: !clockwise)
         return path
+    }
+
+    func inset(by amount: CGFloat) -> some InsettableShape {
+        var arc = self
+        arc.insetAmount += amount
+        return arc
     }
 }
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Triangle()
-                .fill(Color.red)
-                .frame(width: 200, height: 200)
+//        Circle()
+//            .strokeBorder(Color.blue, lineWidth: 40)
 
-            Arc(startAngle: .degrees(0), endAngle: .degrees(110), clockwise: true)
-                .stroke(Color.blue, lineWidth: 10)
-                .frame(width: 200, height: 120)
-        }
+        Arc(startAngle: .degrees(-90), endAngle: .degrees(90), clockwise: true)
+            .strokeBorder(Color.blue, lineWidth: 40)
     }
 }
 
