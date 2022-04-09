@@ -3,6 +3,12 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 9
+8 April
+https://www.hackingwithswift.com/100/swiftui/9
+
+Closures
+
 # Day 8
 7 April
 https://www.hackingwithswift.com/100/swiftui/8
