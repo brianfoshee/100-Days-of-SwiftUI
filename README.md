@@ -3,6 +3,16 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 13
+10 April
+https://www.hackingwithswift.com/100/swiftui/13
+
+Protocols and Extensions
+
+>  if you’re returning a new value rather than changing it in place, you should
+>  use word endings like ed or ing, like reversed(). reverse() would change in
+>  place.
+
 # Day 12
 9 April
 https://www.hackingwithswift.com/100/swiftui/12
