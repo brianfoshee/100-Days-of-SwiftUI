@@ -3,11 +3,18 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 15
+10 April
+https://www.hackingwithswift.com/100/swiftui/15
+
+Swift review, before getting into SwiftUI
+https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour
+
 # Day 14
 10 April
 https://www.hackingwithswift.com/100/swiftui/14
 
-Options
+Optionals
 
 Three ways to unwrap:
 - `if let`
