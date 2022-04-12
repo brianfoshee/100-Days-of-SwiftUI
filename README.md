@@ -3,6 +3,41 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 16
+11 April
+https://www.hackingwithswift.com/100/swiftui/16
+
+> View protocol has one requirement: a computed property called Body that
+> returns `some View`
+
+> Modifiers (`.padding()` for instance) return the original View plus the extra
+> modification you asked for.
+
+option + command + P to restart the Preview
+
+SwiftUI has a limit of 10 children views per parent view. Get around it with
+Group. Groups don't change things visually.
+
+Use `Section` to split the view visually.
+
+`Safe Area` keeps views out of eg the menu bar. Use a `NavigationView` to keep
+content from scrolling up there.
+
+Navigation Titles are added to children of `NavigationView`
+
+"Views are a function of their state"
+
+Property Wrappers allow struct properties to eg be mutable even though they're
+in a Struct. `@State` allows a property to be stored by SwiftUI somewhere that
+it can be modified. Recommended to use `private` with these.
+
+Two-way bindings: when a view needs to write back a value that it's also
+reading. Done with `$` in front of the var name eg
+`TextField("hi", text: $name)`
+
+`ForEach` creates views in a loop. Another way to get around the 10 child view
+limit.
+
 # Day 15
 10 April
 https://www.hackingwithswift.com/100/swiftui/15
