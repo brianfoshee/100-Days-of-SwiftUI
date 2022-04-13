@@ -3,9 +3,25 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 18
+12 April
+https://www.hackingwithswift.com/100/swiftui/18
+
+WeSplit review and challenges.
+
+To store a TextField formatter:
+
+```swift
+var currencyFormat: FloatingPointFormatStyle<Double>.Currency {
+    FloatingPointFormatStyle<Double>.Currency(code: Locale.current.currencyCode ?? "USD")
+}
+```
+
 # Day 17
 12 April
 https://www.hackingwithswift.com/100/swiftui/17
+
+WeSplit app.
 
 `TextField(blah, value: number, format: .currency())`
 
