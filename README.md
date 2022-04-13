@@ -3,6 +3,18 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 17
+12 April
+https://www.hackingwithswift.com/100/swiftui/17
+
+`TextField(blah, value: number, format: .currency())`
+
+To determine focus and show/hide keyboard based on that, first add a
+`@FocusState` property, then add a `.focused($isFocused)` modifier to the
+TextField, then add a toolbar to the NavigationView with a done button to set
+isFocused to false. This button has a `placement` of `.keyboard` so it only
+shows up with the keyboard.
+
 # Day 16
 11 April
 https://www.hackingwithswift.com/100/swiftui/16
