@@ -40,6 +40,15 @@ not.
 You can pass a custom label to a Button's trailing closure to customize it. This
 is typically used when you want an image to be the background.
 
+> when should an alert be shown and how? Views are a function of our program
+> state, and alerts aren’t an exception to that. So, rather than saying “show
+> the alert”, we instead create our alert and set the conditions under which it
+> should be shown.
+
+> any button inside an alert will automatically dismiss the alert
+
+add trailing closure to alert to add additional message.
+
 # Day 19
 13 April
 https://www.hackingwithswift.com/100/swiftui/19

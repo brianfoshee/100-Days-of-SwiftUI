@@ -7,53 +7,20 @@
 
 import SwiftUI
 
+// https://www.hackingwithswift.com/books/ios-swiftui/showing-alert-messages
 struct ContentView: View {
+    @State private var showingAlert = false
+
     var body: some View {
-        // https://www.hackingwithswift.com/books/ios-swiftui/buttons-and-images
-        
-        VStack {
-            Button("Button 1", action: executeDelete)
-                .buttonStyle(.bordered)
-
-            Button("Button 2", role: .destructive, action: executeDelete)
-                .buttonStyle(.bordered)
-
-            Button("Button 3", action: executeDelete)
-                .buttonStyle(.borderedProminent)
-                .tint(.mint)
-
-            Button("Button 4", role: .destructive, action: executeDelete)
-                .buttonStyle(.borderedProminent)
-
-            // custom button
-            // This is particularly common when you want to incorporate images into your buttons.
-            Button {
-                print("Button was tapped")
-            } label: {
-                Text("Tap me!")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(.red)
-            }
-
-            // just the image
-            Button {
-                print("Edit button was tapped")
-            } label: {
-                Image(systemName: "pencil")
-            }
-
-            // image plus label
-            Button {
-                print("tapped")
-            } label: {
-                Label("Edit", systemImage: "pencil")
-            }
+        Button("show alert") {
+            showingAlert = true
         }
-    }
-
-    func executeDelete() {
-        print("deleting")
+        .alert("Important", isPresented: $showingAlert) {
+            Button("delete", role: .destructive) {}
+            Button("cancel", role: .cancel) {}
+        } message: {
+            Text("pls read v important")
+        }
     }
 }
 
