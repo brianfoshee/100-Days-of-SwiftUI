@@ -34,6 +34,12 @@ Use `.ignoresSafeArea() ` to draw into the entire screen even around the notch
 Use `foregroundStyle` and `foregroundColor` to allow a background through or
 not.
 
+> Important: Apple explicitly recommends against using too many prominent
+> buttons, because when everything is prominent nothing is.
+
+You can pass a custom label to a Button's trailing closure to customize it. This
+is typically used when you want an image to be the background.
+
 # Day 19
 13 April
 https://www.hackingwithswift.com/100/swiftui/19

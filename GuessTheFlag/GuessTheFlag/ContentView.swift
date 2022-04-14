@@ -9,33 +9,51 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                // https://www.hackingwithswift.com/books/ios-swiftui/gradients
+        // https://www.hackingwithswift.com/books/ios-swiftui/buttons-and-images
+        
+        VStack {
+            Button("Button 1", action: executeDelete)
+                .buttonStyle(.bordered)
 
-                // LinearGradient(gradient: Gradient(colors: [.white, .black]), startPoint: .top, endPoint: .bottom)
+            Button("Button 2", role: .destructive, action: executeDelete)
+                .buttonStyle(.bordered)
 
-                // begin after 45%, end at 55%
-                /*
-                LinearGradient(gradient: Gradient(stops: [
-                       Gradient.Stop(color: .white, location: 0.45),
-                       Gradient.Stop(color: .black, location: 0.55),
-                   ]), startPoint: .top, endPoint: .bottom)
-                 */
+            Button("Button 3", action: executeDelete)
+                .buttonStyle(.borderedProminent)
+                .tint(.mint)
 
-                // RadialGradient(gradient: Gradient(colors: [.blue, .black]), center: .center, startRadius: 20, endRadius: 200)
+            Button("Button 4", role: .destructive, action: executeDelete)
+                .buttonStyle(.borderedProminent)
 
-                AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), center: .center)
-
+            // custom button
+            // This is particularly common when you want to incorporate images into your buttons.
+            Button {
+                print("Button was tapped")
+            } label: {
+                Text("Tap me!")
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(.red)
             }
 
-            Text("Your Content")
-                .foregroundColor(.secondary)
-                //.foregroundStyle(.secondary)
-                .padding(50)
-                .background(.ultraThinMaterial)
+            // just the image
+            Button {
+                print("Edit button was tapped")
+            } label: {
+                Image(systemName: "pencil")
+            }
+
+            // image plus label
+            Button {
+                print("tapped")
+            } label: {
+                Label("Edit", systemImage: "pencil")
+            }
         }
-        .ignoresSafeArea()
+    }
+
+    func executeDelete() {
+        print("deleting")
     }
 }
 
