@@ -24,6 +24,16 @@ To get around that, use groups like nav controllers or stacks.
 
 > ZStack draws its contents from top to bottom, back to front
 
+To set a background on an entire view, set it in a ZStack and add Color.red or
+w/e as the first view.
+
+Colors take up all space available, but can add a frame on them.
+
+Use `.ignoresSafeArea() ` to draw into the entire screen even around the notch
+
+Use `foregroundStyle` and `foregroundColor` to allow a background through or
+not.
+
 # Day 19
 13 April
 https://www.hackingwithswift.com/100/swiftui/19
