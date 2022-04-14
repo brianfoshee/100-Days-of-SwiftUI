@@ -3,6 +3,27 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 20
+13 April
+https://www.hackingwithswift.com/100/swiftui/20
+
+If you want `some View` to show multiple views, you have to wrap them first.
+Otherwise doing something like this will give you two _screens_:
+```swift
+var body: some View {
+  Text("one")
+  Text("two")
+}
+```
+To get around that, use groups like nav controllers or stacks.
+
+> Vertical and horizontal stacks automatically fit their content, and prefer to
+> align themselves to the center of the available space. If you want to change
+> that you can use one or more Spacer views to push the contents of your stack
+> to one side.
+
+> ZStack draws its contents from top to bottom, back to front
+
 # Day 19
 13 April
 https://www.hackingwithswift.com/100/swiftui/19
