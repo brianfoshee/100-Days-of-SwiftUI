@@ -43,6 +43,10 @@ Containers are vstack group etc
 > modifiers and which are regular modifiers other than reading the individual
 > documentation for each modifier and hope it’s mentioned
 
+Views can be set as properties on a struct to be re-used in `Body`, but not
+really ideal
+https://www.hackingwithswift.com/books/ios-swiftui/views-as-properties
+
 # Day 22
 15 April
 https://www.hackingwithswift.com/100/swiftui/22

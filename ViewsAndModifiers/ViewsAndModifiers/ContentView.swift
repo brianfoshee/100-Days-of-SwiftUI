@@ -8,20 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var useRed = true
+    let motto1 = Text("Draco dormiens")
+    let motto2 = Text("nunquam titillandus")
 
     var body: some View {
         VStack {
-            Text("Gryffindor")
-            Text("Hufflepuff")
-            Text("Ravenclaw")
-            Text("Slytherin")
+            motto1
+            motto2
         }
-        // this applies to all text views because vstack is a container
-        .font(.title)
     }
 }
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
