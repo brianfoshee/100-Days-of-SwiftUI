@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showingScore = false
+    @State private var showingGameOver = false
     @State private var scoreTitle = ""
-
+    @State private var gameOverMessage = ""
+    @State private var score = 0
+    @State private var questionsRemaining = 8
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
 
@@ -57,7 +60,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
 
-                Text("Score ???")
+                Text("Score \(score)")
                     .foregroundColor(.white)
                     .font(.title.bold())
 
@@ -68,23 +71,36 @@ struct ContentView: View {
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
         } message: {
-            Text("Your score is ???")
+            Text("Your score is \(score)")
+        }
+        .alert("Game Over!", isPresented: $showingGameOver) {
+            Button("Play Again", action: askQuestion)
+        } message: {
+            Text(gameOverMessage)
         }
     }
 
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
+            score += 1
         } else {
-            scoreTitle = "Wrong"
+            scoreTitle = "Wrong! That's the flag of \(countries[number])"
         }
 
+        questionsRemaining -= 1
         showingScore = true
     }
 
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+
+        if questionsRemaining == 0 {
+            questionsRemaining = 8
+            gameOverMessage = "Game Over! You answered \(score) correct out of 8."
+            showingGameOver = true
+        }
     }
 }
 
