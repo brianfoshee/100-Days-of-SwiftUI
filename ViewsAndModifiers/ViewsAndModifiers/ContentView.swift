@@ -7,26 +7,35 @@
 
 import SwiftUI
 
+// custom modifier. must conform to ViewModifier.
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+}
+
 struct ContentView: View {
     var body: some View {
-        VStack(spacing: 10) {
-            CapsuleText(text: "First")
-            CapsuleText(text: "Second")
+        VStack {
+            Text("hello")
+                .modifier(Title())
+
+            // the extension doesn't need the .modifier thing
+            Text("wat")
+                .titleStyle()
         }
     }
 }
 
-// separating out a view to DRY another view
-struct CapsuleText: View {
-    var text: String
-
-    var body: some View {
-        Text(text)
-            .font(.largeTitle)
-            .padding()
-            .foregroundColor(.white)
-            .background(.blue)
-            .clipShape(Capsule())
+// create modifiers as extensions of View to make them easier to use
+extension View {
+    func titleStyle() -> some View {
+        modifier(Title())
     }
 }
 

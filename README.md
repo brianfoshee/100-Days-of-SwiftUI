@@ -49,6 +49,31 @@ https://www.hackingwithswift.com/books/ios-swiftui/views-as-properties
 
 It's very efficient to break up views to DRY code.
 
+> To create a custom modifier, create a new struct that conforms to the
+> ViewModifier protocol
+
+```swift
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+    }
+}
+```
+
+best to create these as extensions on View though
+
+```swift
+extension View {
+  func titleStyle() -> some View {
+    modifier(Title())
+  }
+}
+```
+
+> custom view modifiers can have their own stored properties, whereas extensions
+> to View cannot.
+
 # Day 22
 15 April
 https://www.hackingwithswift.com/100/swiftui/22
