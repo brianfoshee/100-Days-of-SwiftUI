@@ -3,6 +3,18 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 25
+16 April
+https://www.hackingwithswift.com/100/swiftui/25
+
+Review
+classes v structs
+bindings
+https://www.hackingwithswift.com/guide/ios-swiftui/2/2/key-points
+https://www.hackingwithswift.com/guide/ios-swiftui/2/1/what-you-learned
+
+Rock Paper Scissors game build
+
 # Day 24
 16 April
 https://www.hackingwithswift.com/100/swiftui/24
