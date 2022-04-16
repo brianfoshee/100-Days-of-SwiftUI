@@ -47,6 +47,8 @@ Views can be set as properties on a struct to be re-used in `Body`, but not
 really ideal
 https://www.hackingwithswift.com/books/ios-swiftui/views-as-properties
 
+It's very efficient to break up views to DRY code.
+
 # Day 22
 15 April
 https://www.hackingwithswift.com/100/swiftui/22
