@@ -45,10 +45,7 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+                            FlagImage(flag: countries[number])
                         }
                     }
                 }
@@ -101,6 +98,16 @@ struct ContentView: View {
             gameOverMessage = "Game Over! You answered \(score) correct out of 8."
             showingGameOver = true
         }
+    }
+}
+
+struct FlagImage: View {
+    var flag: String
+    var body: some View {
+        Image(flag)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .shadow(radius: 5)
     }
 }
 
