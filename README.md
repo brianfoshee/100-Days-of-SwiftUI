@@ -3,6 +3,46 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 23
+16 April
+https://www.hackingwithswift.com/100/swiftui/23
+
+Don't try to change what is 'behind' a view eg the background. Change the view
+itself with a modifier, using `.frame` and `.background`.
+
+> Whenever we apply a modifier to a SwiftUI view, we actually create a new view
+> with that change applied – we don’t just modify the existing view in place.
+
+Order matters with modifiers. Set a frame first.
+
+`TupleView` is what you get internally when multiple views are returned in a
+group like a stack. The max views is 10 per group because ToupleView only has
+support for 2-10 views inside.
+
+> Swift silently applies a special attribute to the body property called
+> @ViewBuilder. This has the effect of silently wrapping multiple views in one
+> of those TupleView containers, so that even though it looks like we’re sending
+> back multiple views they get combined into one TupleView.
+
+Can use ternary operator to control modifier properties.
+
+> You can often use regular if conditions to return different views based on
+> some state, but this actually creates more work for SwiftUI
+
+Environment vs regular modifiers:
+
+> Many modifiers can be applied to containers, which allows us to apply the same
+> modifier to many views at the same time.
+
+Containers are vstack group etc
+
+> This is called an environment modifier, and is different from a regular
+> modifier that is applied to a view.
+
+> there is no way of knowing ahead of time which modifiers are environment
+> modifiers and which are regular modifiers other than reading the individual
+> documentation for each modifier and hope it’s mentioned
+
 # Day 22
 15 April
 https://www.hackingwithswift.com/100/swiftui/22
