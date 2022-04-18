@@ -3,6 +3,75 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 26
+18 April
+https://www.hackingwithswift.com/100/swiftui/26
+
+Steppers
+can provide a limit on their range with `in: 2...4` param
+can provide a step by which to change with each tap `step: 0.25`
+use `.formatted()` on a Double to make it look nice
+
+DatePicker and Date
+use `.labelsHidden()` modifier to hide the DatePicker label but keep the text
+description for screen readers.
+
+note: `selection: $binding` seems to be how two way bindings take args
+(TextField and DatePicker for eg)
+
+use `displayedComponents: ` to determine which DatePicker UI to show.
+
+use `in: ` to limit the date input range. To create a range of Dates:
+```swift
+let tomorrow = Date.now.addingTimeInterval(86400)
+
+let range = Date.now...tomorrow
+ ```
+
+Swift has one-sided ranges too:
+```swift
+let range = Date.now...
+```
+
+Use `DateComponents` instead of `Date` to modify different parts of a Date:
+```swift
+var components = DateComponents()
+components.hour = 8
+components.minute = 0
+let date = Calendar.current.date(from: components)
+// date(from:) returns an Optional Date. Use nil coalescing:
+let date = Calendar.current.date(from: components) ?? Date.now
+```
+
+To pull out specific components from a Date:
+```
+let components = Calendar.current.dateComponents([.hour, .minute], from:
+someDate)
+// each component is an Optional
+let hour = components.hour ?? 0
+let minute = components.minute ?? 0
+
+```
+
+Date takes a formatter, which is locale-specific:
+```
+Text(Date.now, format: .dateTime.day().month().year())
+// or
+Text(Date.now.formatted(date: .long, time: .shortened))
+```
+
+CreateML
+
+`tabular regression`
+> throw a load of spreadsheet-like data at Create ML and ask it to figure out
+> the relationship between various values
+
+`target`: which is the value we want the computer to learn to predict, and the
+`features`: which are the values we want the computer to inspect in order to
+predict the target
+
+CreateML For Everyone: https://youtu.be/a905KIBw1hs
+
 # Day 25
 16 April
 https://www.hackingwithswift.com/100/swiftui/25
