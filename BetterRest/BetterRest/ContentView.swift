@@ -9,63 +9,20 @@ import CoreML
 import SwiftUI
 
 struct ContentView: View {
-    @State private var wakeUp = defaultWakeUpTime
-    @State private var sleepAmount = 8.0
-    @State private var coffeeAmount = 1
-
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
-    @State private var showingAlert = false
-
     // this needs to be static so that wakeUp can use it at init time
     static var defaultWakeUpTime: Date {
         var components = DateComponents()
         components.hour = 7
         components.minute = 0
         return Calendar.current.date(from: components) ?? Date.now
-
     }
 
-    var body: some View {
-        NavigationView {
-            Form {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("When do you want to wake up?")
-                        .font(.headline)
-
-                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
-                }
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Desired amount of sleep")
-                        .font(.headline)
-
-                    Stepper("\(sleepAmount.formatted())", value: $sleepAmount, in: 4...12, step: 0.25)
-                }
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Daily coffee intake")
-                        .font(.headline)
-
-                    Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
-                }
-
-            }
-            .navigationTitle("BetterRest")
-            .toolbar {
-                Button("Calculate", action: calculateBedTime)
-            }
-            .alert(alertTitle, isPresented: $showingAlert) {
-                Button("OK") {}
-            } message: {
-                Text(alertMessage)
-            }
-        }
-    }
+    @State private var wakeUp = defaultWakeUpTime
+    @State private var sleepAmount = 8.0
+    @State private var coffeeAmount = 1
 
     // https://www.hackingwithswift.com/books/ios-swiftui/connecting-swiftui-to-core-ml
-    func calculateBedTime() {
+    var bedTime: String {
         do {
             let config = MLModelConfiguration()
             let model = try SleepCalculator(configuration: config)
@@ -83,16 +40,39 @@ struct ContentView: View {
             // prediction will output seconds. need to subtract from desired wake up time.
             let sleepTime = wakeUp - prediction.actualSleep
 
-            alertTitle = "Your ideal bedtime is..."
-            alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
+            return sleepTime.formatted(date: .omitted, time: .shortened)
         } catch {
-            alertTitle = "Error"
-            alertMessage = "Sorry, something went wrong with predicting your bed time."
+            return "Sorry, something went wrong with predicting your bed time."
         }
-
-        showingAlert = true
     }
 
+    var body: some View {
+        NavigationView {
+            Form {
+                Section {
+                    DatePicker("Wake Up Time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                }
+
+                Section("Desired amount of sleep") {
+                    Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
+                }
+
+                Section {
+                    Picker("Daily Coffee Intake", selection: $coffeeAmount) {
+                        ForEach(0..<20) { i in
+                            Text(i == 1 ? "1 cup" : "\(i) cups")
+                        }
+                    }
+                }
+
+                Section("Your Ideal Bed Time") {
+                    Text("\(bedTime)")
+                        .font(.headline)
+                }
+            }
+            .navigationTitle("BetterRest")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
