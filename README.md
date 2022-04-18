@@ -3,6 +3,10 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 27
+18 April
+https://www.hackingwithswift.com/100/swiftui/27
+
 # Day 26
 18 April
 https://www.hackingwithswift.com/100/swiftui/26
@@ -17,7 +21,7 @@ use `.labelsHidden()` modifier to hide the DatePicker label but keep the text
 description for screen readers.
 
 note: `selection: $binding` seems to be how two way bindings take args
-(TextField and DatePicker for eg)
+(TextField and DatePicker for eg) but sometimes it's `value: $binding`
 
 use `displayedComponents: ` to determine which DatePicker UI to show.
 
