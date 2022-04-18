@@ -67,7 +67,7 @@ struct ContentView: View {
 
                 Section("Your Ideal Bed Time") {
                     Text("\(bedTime)")
-                        .font(.headline)
+                        .font(.largeTitle)
                 }
             }
             .navigationTitle("BetterRest")
