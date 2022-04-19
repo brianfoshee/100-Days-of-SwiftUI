@@ -3,6 +3,26 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 29
+19 April
+https://www.hackingwithswift.com/100/swiftui/29
+
+`List` is a workhorse. UITableView equvalent. `Form`, except form is for user
+input. Can have `Section`s. Style with `.listStyle`
+
+>  one thing List can do that Form can’t is to generate its rows entirely from
+>  dynamic content without needing a ForEach.
+
+```swift
+List(0..<5) {
+    Text("Dynamic row \($0)")
+}
+```
+
+# Day 28
+18 April
+https://www.hackingwithswift.com/100/swiftui/28
+
 # Day 27
 18 April
 https://www.hackingwithswift.com/100/swiftui/27
