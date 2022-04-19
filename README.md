@@ -19,6 +19,18 @@ List(0..<5) {
 }
 ```
 
+Fetching files from the app bundle
+
+```swift
+if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt") {
+  // we found the file in our bundle!
+  if let fileContents = try? String(contentsOf: fileURL) {
+      // we loaded the file into a string!
+      // NOTE: do this in a do/catch block
+  }
+}
+```
+
 # Day 28
 18 April
 https://www.hackingwithswift.com/100/swiftui/28
