@@ -8,34 +8,47 @@
 import SwiftUI
 
 struct ContentView: View {
-    let people = ["Finn", "Leia", "Luke", "Rey"]
+    @State private var usedWords = [String]()
+    @State private var rootWord = ""
+    @State private var newWord = ""
 
     var body: some View {
-        VStack {
-            // can create lists based on dynamic content, unlike forms
-            List(4..<10) { i in
-                Text("\(i)")
-            }
-            
-            // works with the id param for array sources
-            List(people, id: \.self) { name in
-                Text("\(name)")
-            }
-
-            // or a mix of static and dynamic content
+        NavigationView {
             List {
-                Text("row a")
-
-                ForEach(0..<5) { i in
-                    Text("\(i)")
+                Section {
+                    TextField("Enter your word", text: $newWord)
+                        .autocapitalization(.none)
                 }
 
-                Section("hi") {
-                    Text("inside")
+                Section {
+                    ForEach(usedWords, id: \.self) { word in
+                        HStack {
+                            Image(systemName: "\(word.count).circle")
+                            Text(word)
+                        }
+                    }
                 }
             }
-            .listStyle(.grouped)
+            .navigationTitle(rootWord)
+            .onSubmit(addNewWord)
         }
+    }
+
+    func addNewWord() {
+        let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // exit if the string is empty
+        guard answer.count > 0 else { return }
+
+        // TODO more
+
+        withAnimation {
+            // insert word into array at first position so it shows at top of list
+            usedWords.insert(answer, at: 0)
+        }
+        
+        // reset word entry
+        newWord = ""
     }
 }
 

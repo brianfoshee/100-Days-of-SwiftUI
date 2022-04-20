@@ -3,6 +3,28 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 30
+20 April
+https://www.hackingwithswift.com/100/swiftui/30
+
+> when the user presses return on the keyboard, and in SwiftUI we can do that by
+> adding an onSubmit() modifier somewhere in our view hierarchy – it could be
+> directly on the button, but it can be anywhere else in the view because it
+> will be triggered when any text is submitted
+
+Disable auto caps on a TextField with `.autocapitalization(.none)`.
+
+> SF Symbols provides numbers in circles from 0 through 50, all named using the
+> format “x.circle.fill” – so 1.circle.fill, 20.circle.fill.
+> `Image(systemName: "\(word.count).circle")`
+
+Animate an action (this is in a func. will cover animations later)
+```swift
+withAnimation {
+    usedWords.insert(answer, at: 0)
+}
+```
+
 # Day 29
 19 April
 https://www.hackingwithswift.com/100/swiftui/29
