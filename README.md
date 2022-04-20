@@ -25,6 +25,16 @@ withAnimation {
 }
 ```
 
+> When we call fatalError() it will – unconditionally and always – cause our app
+> to crash
+
+SwiftUI gives us a dedicated view modifier for running a closure when a view is
+shown:
+
+```swift
+.onAppear(perform: startGame)
+```
+
 # Day 29
 19 April
 https://www.hackingwithswift.com/100/swiftui/29
