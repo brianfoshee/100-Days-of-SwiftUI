@@ -31,6 +31,41 @@ if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt")
 }
 ```
 
+Separating a string into an array of components
+
+```swift
+let input = "a b c"
+let letters = input.components(separatedBy: " ")
+// output is ['a', 'b', 'c']
+// can get a random element
+letters.randomElement() // returns Optional String
+
+// trim whitespace
+let trimmed = letter?.trimmingCharacters(in: .whitespacesAndNewlines)
+```
+
+Spell check
+
+```swift
+let word = "swift"
+let checker = UITextChecker() // this is an objective-c API
+
+// convert a swift string into an objective-c range
+let range = NSRange(location: 0, length: word.utf16.count)
+
+// That sends back another Objective-C string range, telling us where the
+// misspelling was found.
+let misspelledRange = checker.rangeOfMisspelledWord(
+  in: word,
+  range: range,
+  startingAt: 0,
+  wrap: false,
+  language: "en"
+)
+// obj-c doesn't have the concept of optionals, so need to check for nil
+let allGood = misspelledRange.location == NSNotFound
+```
+
 # Day 28
 18 April
 https://www.hackingwithswift.com/100/swiftui/28
