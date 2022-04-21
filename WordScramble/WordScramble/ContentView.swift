@@ -16,12 +16,18 @@ struct ContentView: View {
     @State private var errorMessage = ""
     @State private var showingError = false
 
+    @State private var score = 0
+
     var body: some View {
         NavigationView {
             List {
                 Section {
                     TextField("Enter your word", text: $newWord)
                         .autocapitalization(.none)
+                }
+
+                Section("Score") {
+                    Text("\(score)")
                 }
 
                 Section {
@@ -36,6 +42,9 @@ struct ContentView: View {
             .navigationTitle(rootWord)
             .onSubmit(addNewWord)
             .onAppear(perform: startGame)
+            .toolbar {
+                Button("New Game", action: startGame)
+            }
             .alert(errorTitle, isPresented: $showingError) {
                 Button("OK", role: .cancel) { }
             } message: {
@@ -48,8 +57,15 @@ struct ContentView: View {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
 
         // exit if the string is empty
-        guard answer.count > 0 else { return }
+        guard answer.count >= 3 else {
+            wordError(title: "word not long enough", message: "Should be at least 3 characters")
+            return
+        }
 
+        guard isNotRoot(word: answer) else {
+            wordError(title: "word cannot be start word", message: "Nice try")
+            return
+        }
 
         guard isOriginal(word: answer) else {
             wordError(title: "word already used", message: "be more original")
@@ -65,7 +81,10 @@ struct ContentView: View {
             wordError(title: "word not recognized", message: "you can't just make them up, you know")
             return
         }
-        
+
+        // add to score
+        score += 1
+
         withAnimation {
             // insert word into array at first position so it shows at top of list
             usedWords.insert(answer, at: 0)
@@ -73,6 +92,10 @@ struct ContentView: View {
 
         // reset word entry
         newWord = ""
+    }
+
+    func isNotRoot(word: String) -> Bool {
+        word != rootWord
     }
 
     func isOriginal(word: String) -> Bool {
@@ -117,6 +140,9 @@ struct ContentView: View {
     }
 
     func startGame() {
+        usedWords.removeAll()
+        score = 0
+
         // 1. get the url of the start.txt file in the bundle
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             // 2. load start.txt into a string
