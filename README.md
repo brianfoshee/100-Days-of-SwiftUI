@@ -3,6 +3,18 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 33
+22 April
+https://www.hackingwithswift.com/100/swiftui/33
+
+only changes that occur before the animation() modifier get animated
+
+if we apply multiple animation() modifiers, each one controls everything before
+it up to the next animation
+
+it’s possible to disable animations entirely by passing nil to the modifier
+`.animation(nil, value: enabled)`
+
 # Day 32
 21 April
 https://www.hackingwithswift.com/100/swiftui/32
