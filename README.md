@@ -83,6 +83,30 @@ Can add overlays to views, and animate forever with `onAppear`:
         }
 ```
 
+The animation() modifier can be applied to any SwiftUI binding, which causes the
+value to animate between its current and new value
+
+Can bind a stepper to an animation:
+
+```swift
+@State private var animationAmount = 1.0
+
+// view body stuff
+Stepper("Scale amount", value: $animationAmount.animation(), in: 1...10)
+```
+
+SwiftUI is examining the state of our view before the binding changes, examining
+the target state of our views after the binding changes, then applying an
+animation to get from point A to point
+
+Can bind animations directly by adding a modifier to a view:
+```swift
+Stepper("Scale amount", value: $animationAmount.animation(
+    .easeInOut(duration: 1)
+        .repeatCount(3, autoreverses: true)
+), in: 1...10)
+```
+
 # Day 31
 20 April
 https://www.hackingwithswift.com/100/swiftui/31
