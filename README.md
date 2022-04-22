@@ -4,8 +4,84 @@ Goal: be done by memorial day. Which is 56 days total.
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
 # Day 32
-20 April
+21 April
 https://www.hackingwithswift.com/100/swiftui/32
+
+`scaleEffect()` modifier:
+
+provide this with a value from 0 up, and it will be drawn at that size – a value
+of 1.0 is equivalent to 100%, i.e. the button’s normal size
+
+create an implicit animation for our changes so that all the scaling happens
+smoothly by adding an `animation()` modifier to the button.
+
+`.animation(.default, value: animationAmount)`
+
+That implicit animation takes effect on all properties of the view that change
+
+ease in, ease out animation by default.
+
+other options exist
+`.animation(.easeOut, value: animationAmount)`
+
+Spring animation
+
+```swift
+.animation(.interpolatingSpring(
+                  stiffness: 50,
+                  damping: 1
+                  ),
+                  value: animationAmount)
+```
+
+change the duration
+`.animation(.easeInOut(duration: 2), value: animationAmount)`
+
+can also set a delay
+
+```swift
+.animation(
+    .easeInOut(duration: 2)
+        .delay(1), // delay is another modifier
+    value: animationAmount
+)
+```
+
+repeat animations:
+```swift
+.animation(
+    .easeInOut(duration: 1)
+        .repeatCount(3, autoreverses: true),
+    value: animationAmount
+)
+```
+
+continuous
+```swift
+.animation(
+    .easeInOut(duration: 1)
+        .repeatForever(autoreverses: true),
+    value: animationAmount
+)
+```
+
+Can add overlays to views, and animate forever with `onAppear`:
+```swift
+        .overlay {
+            Circle()
+                .stroke(.red)
+                .scaleEffect(animationAmount)
+                .opacity(2 - animationAmount)
+                .animation(
+                    .easeOut(duration: 1)
+                    .repeatForever(autoreverses: false),
+                    value: animationAmount
+                )
+        }
+        .onAppear {
+            animationAmount = 2
+        }
+```
 
 # Day 31
 20 April
