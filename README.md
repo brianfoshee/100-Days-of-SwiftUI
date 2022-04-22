@@ -107,6 +107,23 @@ Stepper("Scale amount", value: $animationAmount.animation(
 ), in: 1...10)
 ```
 
+rotation3DEffect(), which can be given a rotation amount in degrees as well as
+an axis that determines how the view rotates
+
+`.rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))`
+
+If we just write animationAmount += 360 then the change will happen immediately,
+because there is no animation modifier attached to the button. This is where
+explicit animations come in: if we use a withAnimation() closure then SwiftUI
+will ensure any changes resulting from the new state will automatically be
+animated.
+
+```swift
+withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
+    animationAmount += 360
+}
+```
+
 # Day 31
 20 April
 https://www.hackingwithswift.com/100/swiftui/31
