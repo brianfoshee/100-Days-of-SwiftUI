@@ -46,6 +46,13 @@ explicitly animate the snap back:
 }
 ```
 
+customize the way views are shown and hidden with transitions.
+
+use `.transition` to change how a view animates.
+
+use asymmetric to use one transition during showing, another during hiding
+`.transition(.asymmetric(insertion: .scale, removal: .opacity))`
+
 # Day 32
 21 April
 https://www.hackingwithswift.com/100/swiftui/32
