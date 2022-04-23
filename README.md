@@ -53,6 +53,12 @@ use `.transition` to change how a view animates.
 use asymmetric to use one transition during showing, another during hiding
 `.transition(.asymmetric(insertion: .scale, removal: .opacity))`
 
+Creating custom transitions
+
+rotationEffect() is similar to rotation3DEffect(), except it always rotates
+around the Z axis. it also gives us the ability to control the anchor point of
+the rotation
+
 # Day 32
 21 April
 https://www.hackingwithswift.com/100/swiftui/32
