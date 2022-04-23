@@ -7,6 +7,8 @@ Goal: be done by memorial day. Which is 56 days total.
 23 April
 https://www.hackingwithswift.com/100/swiftui/34
 
+Multiplication Tables game.
+
 # Day 33
 22 April
 https://www.hackingwithswift.com/100/swiftui/33
