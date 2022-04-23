@@ -15,6 +15,37 @@ it up to the next animation
 it’s possible to disable animations entirely by passing nil to the modifier
 `.animation(nil, value: enabled)`
 
+`.offset` modifier adjusts the x and y offset of a view.
+
+`DragGesture`
+
+> Drag gestures have two extra modifiers that are useful to us here: onChanged()
+> lets us run a closure whenever the user moves their finger, and onEnded() lets
+> us run a closure when the user lifts their finger off the screen, ending the
+> drag
+
+```swift
+// @State private var dragAmount = CGSize.zero
+.gesture(
+    DragGesture()
+        .onChanged { dragAmount = $0.translation }
+        .onEnded { _ in dragAmount = .zero }
+)
+```
+
+implicitly animate both the dragging and the snapping back:
+`.animation(.spring(), value: dragAmount)`
+
+explicitly animate the snap back:
+
+```swift
+.onEnded { _ in
+    withAnimation(.spring()) {
+        dragAmount = .zero
+    }
+}
+```
+
 # Day 32
 21 April
 https://www.hackingwithswift.com/100/swiftui/32
