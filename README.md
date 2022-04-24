@@ -183,6 +183,14 @@ struct ContentView: View {
 right now at least @AppStorage doesn’t make it easy to handle storing complex
 objects such as Swift structs
 
+Codable
+
+Codable: a protocol specifically for archiving and unarchiving data
+
+When working with a type that only has simple properties – strings, integers,
+Booleans, arrays of strings, and so on – the only thing we need to do to support
+archiving and unarchiving is add a conformance to Codable
+
 # Day 35
 23 April
 https://www.hackingwithswift.com/100/swiftui/35
