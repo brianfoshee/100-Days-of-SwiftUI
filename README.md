@@ -3,11 +3,27 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 36
+24 April
+https://www.hackingwithswift.com/100/swiftui/36
+
+`@State` monitors a var for changes and reloads the body as necessary. If a var
+marked with `@State` is a `class` instead of a `struct`, it cannot monitor
+changes since classes are mutable so the desired behavior doesn't happen.
+
+> If you want to use a class with your SwiftUI data then SwiftUI gives us three
+> property wrappers that are useful: @StateObject, @ObservedObject, and
+> @EnvironmentObject.
+
+# Day 35
+23 April
+https://www.hackingwithswift.com/100/swiftui/35
+
+Multiplication Tables game.
+
 # Day 34
 23 April
 https://www.hackingwithswift.com/100/swiftui/34
-
-Multiplication Tables game.
 
 # Day 33
 22 April
