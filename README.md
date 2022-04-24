@@ -125,6 +125,64 @@ VStack:
 }
 ```
 
+UserDefaults
+
+One common way to store a small amount of data is called UserDefaults
+
+everything you store in UserDefaults will automatically be loaded when your app
+launches – if you store a lot in there your app launch will slow down. To give
+you at least an idea, you should aim to store no more than 512KB in there.
+
+SwiftUI can often wrap up UserDefaults inside a nice and simple property wrapper
+called @AppStorage – it only supports a subset of functionality right now, but
+it can be really helpful.
+
+```swift
+UserDefaults.standard.set(self.tapCount, forKey: "Tap")
+```
+
+1. use UserDefaults.standard. This is the built-in instance of UserDefaults that
+   is attached to our app, but in more advanced apps you can create your own
+   instances. For example, if you want to share defaults across several app
+   extensions you might create your own UserDefaults instance
+2. There is a single set() method that accepts any kind of data – integers,
+   Booleans, strings, and more.
+3. We attach a string name to this data, in our case it’s the key “Tap”. This
+   key is case-sensitive,
+4. it takes iOS a little time to write your data to permanent storage
+
+Reading back out:
+```swift
+@State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
+```
+
+if the key can’t be found it just sends back 0.
+
+`@AppStorage`
+
+SwiftUI provides an @AppStorage property wrapper around UserDefaults:
+
+```swift
+struct ContentView: View {
+    @AppStorage("tapCount") private var tapCount = 0
+
+    var body: some View {
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+        }
+    }
+}
+```
+
+1. access to the UserDefaults system is through the @AppStorage property
+   wrapper. This works like @State: when the value changes, it will reinvoked
+   the body property so our UI reflects the new data.
+2. We attach a string name, which is the UserDefaults key where we want to store
+   the data
+
+right now at least @AppStorage doesn’t make it easy to handle storing complex
+objects such as Swift structs
+
 # Day 35
 23 April
 https://www.hackingwithswift.com/100/swiftui/35
