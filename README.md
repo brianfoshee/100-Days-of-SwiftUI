@@ -53,6 +53,42 @@ slightly different property wrapper called @ObservedObject. That’s the only
 difference: when creating the shared data use @StateObject, but when you’re just
 using it in a different view you should use @ObservedObject instead.
 
+Sheets
+
+Showing a sheet requires four steps:
+
+- we need some state to track whether the sheet is showing `@State private var
+  showingSheet = false`
+- we need to toggle that when our button is tapped `showingSheet.toggle()`
+- we need to attach our sheet somewhere to our view hierarchy
+- we need to decide what should actually be in the sheet
+
+```swift
+.sheet(isPresented: $showingSheet) {
+    // contents of the sheet
+    SecondView()
+}
+```
+
+`@Environment` allows us to create properties that store values provided
+to us externally. Is the user in light mode or dark mode? Have they asked for
+smaller or larger fonts? What timezone are they on?
+
+> we’re effectively saying “hey, figure out how my view was presented, then
+> dismiss it appropriately.”
+
+```swift
+struct SecondView: View {
+    let name: String
+    @Environment(\.dismiss) var dismiss
+    var body: some View {
+        Button("Hello, \(name)") {
+            dismiss()
+        }
+    }
+}
+```
+
 # Day 35
 23 April
 https://www.hackingwithswift.com/100/swiftui/35
