@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-// class doesn't work here.
-//class User {
-struct User {
-    var firstName = "Bilbo"
-    var lastName = "Baggins"
+class User: ObservableObject {
+    @Published var firstName = "Bilbo"
+    @Published var lastName = "Baggins"
 }
 
 struct ContentView: View {
-    @State private var user = User()
+    // removing private because classes are usually meant to be shared with other
+    // objects.
+    @StateObject var user = User()
 
     var body: some View {
         VStack {

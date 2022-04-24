@@ -15,6 +15,44 @@ changes since classes are mutable so the desired behavior doesn't happen.
 > property wrappers that are useful: @StateObject, @ObservedObject, and
 > @EnvironmentObject.
 
+we need to tell SwiftUI when interesting parts of our class have changed. We can
+do this using the @Published property observer
+
+`@Published` is more or less half of @State: it tells Swift that whenever either
+of those two properties changes, it should send an announcement out to any
+SwiftUI views that are watching that they should reload.
+
+`@StateObject`, which is the other half of @State – it tells SwiftUI that we’re
+creating a new class instance that should be watched for any change
+announcements.
+
+the @StateObject property wrapper can only be used on types that conform to the
+ObservableObject protocol.
+
+```swift
+class User: ObservableObject {
+    @Published var firstName = "Bilbo"
+    @Published var lastName = "Baggins"
+}
+
+// down in view stuff
+@StateObject var user = User()
+```
+
+As you’ve seen, rather than just using @State to declare local state, we now
+take three steps:
+
+- Make a class that conforms to the ObservableObject protocol.
+- Mark some properties with @Published so that any views using the class get
+  updated when they change.
+- Create an instance of our class using the @StateObject property wrapper.
+
+When you want to use a class instance elsewhere – when you’ve created it in view
+A using @StateObject and want to use that same object in view B – you use a
+slightly different property wrapper called @ObservedObject. That’s the only
+difference: when creating the shared data use @StateObject, but when you’re just
+using it in a different view you should use @ObservedObject instead.
+
 # Day 35
 23 April
 https://www.hackingwithswift.com/100/swiftui/35
