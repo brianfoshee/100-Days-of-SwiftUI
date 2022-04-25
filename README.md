@@ -19,6 +19,18 @@ Identifiable Protocol
 
 When using, no need for `id` param on `ForEach`
 
+JSON Decoder:
+
+```swift
+// get data from UserDefaults or wherever
+JSONDecoder.decode([String].self, from: data)
+```
+
+What is `[String].self`?
+we’re referring to the type itself, known as the type object – we write .self
+after it.
+It's there so the decoder knows what type to decode into.
+
 # Day 36
 24 April
 https://www.hackingwithswift.com/100/swiftui/36

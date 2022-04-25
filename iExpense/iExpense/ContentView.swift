@@ -11,23 +11,36 @@ struct ContentView: View {
     // Expenses is a class so we need StateObject
     @StateObject var expenses = Expenses()
 
+    // is the AddView showing
+    @State private var showingAddEpense = false
+
     var body: some View {
         NavigationView {
             List {
                 ForEach(expenses.items) { item in
-                    Text(item.name)
+                    HStack {
+                        VStack {
+                            Text(item.name)
+                                .font(.headline)
+                            Text(item.type)
+                        }
+
+                        Spacer()
+                        Text(item.amount, format: .currency(code: "USD"))
+                    }
                 }
                 .onDelete(perform: removeItems)
             }
             .navigationTitle("iExpense")
             .toolbar {
                 Button {
-                    let expense = ExpenseItem(name: "Item", type: "personal", amount: 25.4)
-                    expenses.items.append(expense)
-
+                    showingAddEpense = true
                 } label: {
                     Image(systemName: "plus")
                 }
+            }
+            .sheet(isPresented: $showingAddEpense) {
+                AddView(expenses: expenses)
             }
         }
     }
