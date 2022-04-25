@@ -7,9 +7,23 @@ Goal: be done by memorial day. Which is 56 days total.
 24 April
 https://www.hackingwithswift.com/100/swiftui/37
 
+UUID
+
+`let id = UUID()`
+
+Identifiable Protocol
+
+>  means “this type can be identified uniquely.” It has only one requirement,
+>  which is that there must be a property called id that contains a unique
+>  identifier
+
+When using, no need for `id` param on `ForEach`
+
 # Day 36
 24 April
 https://www.hackingwithswift.com/100/swiftui/36
+
+https://www.hackingwithswift.com/articles/227/which-swiftui-property-wrapper
 
 `@State` monitors a var for changes and reloads the body as necessary. If a var
 marked with `@State` is a `class` instead of a `struct`, it cannot monitor
