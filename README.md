@@ -3,6 +3,10 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 37
+24 April
+https://www.hackingwithswift.com/100/swiftui/37
+
 # Day 36
 24 April
 https://www.hackingwithswift.com/100/swiftui/36
@@ -189,7 +193,15 @@ Codable: a protocol specifically for archiving and unarchiving data
 
 When working with a type that only has simple properties – strings, integers,
 Booleans, arrays of strings, and so on – the only thing we need to do to support
-archiving and unarchiving is add a conformance to Codable
+archiving and unarchiving is add a conformance to Codable.
+
+```swift
+let encoder = JSONEncoder()
+
+if let data = try? encoder.encode(user) {
+    UserDefaults.standard.set(data, forKey: "UserData")
+}
+```
 
 # Day 35
 23 April
