@@ -3,8 +3,106 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 39
+25 April
+https://www.hackingwithswift.com/100/swiftui/39
+
+GeometryReader
+
+> When we create an Image view in SwiftUI, it will automatically size itself
+> according to the dimensions of its contents. So, if the picture is 1000x500,
+> the Image view will also be 1000x500.
+
+> how we can make an image fit some amount of the user’s screen width using a
+> new view type called GeometryReader.
+
+To resize an image this won't work:
+
+```swift
+Image("Example")
+    .frame(width: 300, height: 300)
+```
+
+because the content (the image) is still bigger than the frame.
+
+Can use clipped, but it crops the image into the frame:
+
+```swift
+Image("Example")
+    .frame(width: 300, height: 300)
+    .clipped()
+```
+
+Can use `resizable()` but that squishes the image into the frame, which could
+mess up the aspect ratio
+
+```
+Image("Example")
+    .resizable()
+    .frame(width: 300, height: 300)
+```
+
+> To fix this we need to ask the image to resize itself proportionally, which
+> can be done using the scaledToFit() and scaledToFill() modifiers. The first of
+> these means the entire image will fit inside the container even if that means
+> leaving some parts of the view empty, and the second means the view will have
+> no empty parts even if that means some of our image lies outside the
+> container.
+
+```swift
+// fit
+Image("Example")
+    .resizable()
+    .scaledToFit()
+    .frame(width: 300, height: 300)
+// or fill
+Image("Example")
+    .resizable()
+    .scaledToFill()
+    .frame(width: 300, height: 300)
+```
+
+> All this works great if we want fixed-sized images, but very often you want
+> images that automatically scale up to fill more of the screen in one or both
+> dimensions. That is, rather than hard-coding a width of 300, what you really
+> want to say is “make this image fill 80% of the width of the screen.”
+
+> GeometryReader is a view just like the others we’ve used, except when we
+> create it we’ll be handed a GeometryProxy object to use. This lets us query
+> the environment: how big is the container? What position is our view? Are
+> there any safe area insets? And so on.
+
+> In principle that seems simple enough, but in practice you need to use
+> GeometryReader carefully because it automatically expands to take up available
+> space in your layout, then positions its own content aligned to the top-left
+> corner.
+
+An image that is 80% the width, with fixed height of 300
+```swift
+GeometryReader { geo in
+    Image("Example")
+        .resizable()
+        .scaledToFit()
+        .frame(width: geo.size.width * 0.8, height: 300)
+}
+```
+
+> Tip: If you ever want to center a view inside a GeometryReader, rather than
+> aligning to the top-left corner, add a second frame that makes it fill the
+> full space of the container, like this:
+
+```swift
+GeometryReader { geo in
+    Image("Example")
+        .resizable()
+        .scaledToFit()
+        .frame(width: geo.size.width * 0.8)
+        .frame(width: geo.size.width, height: geo.size.height)
+}
+```
+
 # Day 38
-24 April
+25 April
 https://www.hackingwithswift.com/100/swiftui/38
 
 Get a users's Locale and various settings therin (currency code, language, etc)
