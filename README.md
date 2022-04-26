@@ -9,6 +9,46 @@ https://www.hackingwithswift.com/100/swiftui/40
 
 `Codable` is needed on a struct to encode/decode JSON.
 
+Embedded structs keep types clean and allows for namespacing.
+
+```swift
+struct CrewRole { }
+
+struct Mission { }
+
+// or
+
+struct Mission {
+  // refer to this as Mission.CrewRole
+  struct CrewRole { }
+}
+```
+
+Generics
+
+to make this generic:
+```swift
+    func decode(_ file: String) -> [String: Astronaut] {
+```
+
+Do this:
+```swift
+    func decode<T>(_ file: String) -> T {
+```
+
+Make `<T`> constrained to only types that are `Codable`:
+```swift
+func decode<T: Codable>
+```
+
+Then when using the func, need to specify types (type annotation):
+
+```swift
+let astronauts: [String: Astronaut] = Bundle.main.decode("a.json")
+```
+
+> Codable is just an alias for two separate protocols: Encodable and Decodable
+
 # Day 39
 25 April
 https://www.hackingwithswift.com/100/swiftui/39
