@@ -129,6 +129,25 @@ ScrollView {
     LazyVStack(spacing: 10) {
 ```
 
+NavigationLink
+
+NavigationLink: give this a destination and something that can be tapped and it
+will push a view onto the NavigationView stack
+
+This starts with `Hello, World`. When tapped, it pushes `Detail View` onto the
+stack:
+```swift
+NavigationView {
+    NavigationLink {
+        Text("Detail View")
+    } label: {
+        Text("Hello, world!")
+            .padding()
+    }
+    .navigationTitle("SwiftUI")
+}
+```
+
 # Day 38
 25 April
 https://www.hackingwithswift.com/100/swiftui/38
