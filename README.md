@@ -101,6 +101,34 @@ GeometryReader { geo in
 }
 ```
 
+ScrollView
+
+Scroll views can scroll horizontally, vertically, or in both directions, and you
+can also control whether the system should show scroll indicators next to them
+
+there’s an important catch that you need to be aware of: when we add views to a
+scroll view they get created immediately.
+
+If you want to avoid this happening, there’s an alternative for both VStack and
+HStack called LazyVStack and LazyHStack. These will load their content on-demand
+– they won’t create views until they are actually shown.
+
+there is one important layout difference: lazy stacks always take up as much as
+room as is available in our layouts, whereas regular stacks take up only as much
+space as is needed. Regular stacks need `.frame(maxWidth: .infinity)`.
+
+Horizontal ScrollView:
+```swift
+ScrollView(.horizontal) {
+    LazyHStack(spacing: 10) {
+```
+
+Vertical ScrollView:
+```swift
+ScrollView {
+    LazyVStack(spacing: 10) {
+```
+
 # Day 38
 25 April
 https://www.hackingwithswift.com/100/swiftui/38
