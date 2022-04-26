@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExpenseItem: Identifiable, Codable {
+struct ExpenseItem: Identifiable, Codable, Comparable {
     // needs to be a var for Codable. When decoding from JSON, we want id to be set to the ID
     // that was stored in JSON instead of creating a new id.
     var id = UUID()
@@ -15,6 +15,10 @@ struct ExpenseItem: Identifiable, Codable {
     let name: String
     let type: String
     let amount: Double
+
+    static func < (lhs: ExpenseItem, rhs: ExpenseItem) -> Bool {
+        return lhs.name < rhs.name
+    }
 }
 
 class Expenses: ObservableObject {
@@ -24,6 +28,18 @@ class Expenses: ObservableObject {
                 UserDefaults.standard.set(encoded, forKey: "Items")
             }
         }
+    }
+
+    func businessItems() -> [ExpenseItem] {
+        return items.filter({ item in
+            item.type == "Business"
+        }).sorted()
+    }
+
+    func personalItems() -> [ExpenseItem] {
+        return items.filter({ item in
+            item.type == "Personal"
+        }).sorted()
     }
 
     init() {

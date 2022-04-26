@@ -3,6 +3,13 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 38
+24 April
+https://www.hackingwithswift.com/100/swiftui/38
+
+Get a users's Locale and various settings therin (currency code, language, etc)
+https://developer.apple.com/documentation/foundation/nslocale
+
 # Day 37
 24 April
 https://www.hackingwithswift.com/100/swiftui/37
