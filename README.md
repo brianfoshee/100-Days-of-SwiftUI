@@ -3,6 +3,12 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 40
+26 April
+https://www.hackingwithswift.com/100/swiftui/40
+
+`Codable` is needed on a struct to encode/decode JSON.
+
 # Day 39
 25 April
 https://www.hackingwithswift.com/100/swiftui/39
