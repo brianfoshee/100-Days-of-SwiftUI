@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    let layout = [
+        GridItem(.adaptive(minimum: 80)),// or .fixed()
+        GridItem(.adaptive(minimum: 80)),
+        GridItem(.adaptive(minimum: 80))
+    ]
+
     var body: some View {
-        NavigationView {
-            List(0..<100) {i in
-                NavigationLink {
-                    Text("stacks on stacks \(i)")
-                } label: {
-                    Text("hello \(i)")
-                        .padding()
+        ScrollView(.horizontal) {
+            LazyHGrid(rows: layout) {
+                ForEach(0..<1000) {
+                    Text("Item \($0)")
                 }
             }
-            .navigationTitle("swift")
         }
     }
 }

@@ -148,6 +148,91 @@ NavigationView {
 }
 ```
 
+JSONDecoder for custom types
+
+Given this input
+```json
+{
+    "name": "Taylor Swift",
+    "address": {
+        "street": "555, Taylor Swift Avenue",
+        "city": "Nashville"
+    }
+}
+```
+
+Create these structs
+```swift
+struct User: Codable {
+    let name: String
+    let address: Address
+}
+
+struct Address: Codable {
+    let street: String
+    let city: String
+}
+```
+
+and decode with
+
+```swift
+let data = Data(input.utf8)
+let decoder = JSONDecoder()
+if let user = try? decoder.decode(User.self, from: data) {
+    print(user.address.street)
+}
+```
+
+LazyHGrid and LazyVGrid
+
+> columns of data – a grid of information, that is able to adapt to show more
+> data on larger screens
+
+Creating a grid is done in two steps. First, we need to define the rows or
+columns we want – we only define one of the two, depending on which kind of grid
+we want.
+
+vertically scrolling grid: we want our data laid out in three columns exactly 80
+points wide
+```swift
+let layout = [
+    GridItem(.fixed(80)),
+    GridItem(.fixed(80)),
+    GridItem(.fixed(80))
+]
+```
+
+place your grid inside a ScrollView, along with as many items as you want. Each
+item you create inside the grid is automatically assigned a column in the same
+way that rows inside a list automatically get placed inside their parent.
+```swift
+ScrollView {
+    LazyVGrid(columns: layout) {
+        ForEach(0..<1000) {
+            Text("Item \($0)")
+        }
+    }
+}
+```
+
+fit in as many columns as possible, as long as they are at least 80 points in
+width:
+```swift
+GridItem(.adaptive(minimum: 80))
+```
+
+set a max for more control:
+```swift
+GridItem(.adaptive(minimum: 80, maximum: 120))
+```
+
+Horizontal rows:
+```swift
+ScrollView(.horizontal) {
+    LazyHGrid(rows: layout) {
+```
+
 # Day 38
 25 April
 https://www.hackingwithswift.com/100/swiftui/38
