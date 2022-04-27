@@ -49,6 +49,27 @@ let astronauts: [String: Astronaut] = Bundle.main.decode("a.json")
 
 > Codable is just an alias for two separate protocols: Encodable and Decodable
 
+JSONDecoder type has a property called dateDecodingStrategy, which determines
+how it should decode dates. We can provide that with a DateFormatter instance
+that describes how our dates are formatted.
+
+`ShapeStyle` protocol
+
+Color conforms to a bigger protocol called ShapeStyle that is what lets us use
+colors, gradients, materials, and more as if they were the same thing.
+
+This ShapeStyle protocol is what the background() modifier uses, so what we
+really want to do is extend Color but do so in a way that all the SwiftUI
+modifiers using ShapeStyle work too:
+
+make an extension only if the type is Color:
+```swift
+extension ShapeStyle where Self == Color {
+```
+
+To force dark mode:
+`.preferredColorScheme(.dark)`
+
 # Day 39
 25 April
 https://www.hackingwithswift.com/100/swiftui/39
