@@ -3,6 +3,14 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 41
+27 April
+https://www.hackingwithswift.com/100/swiftui/41
+
+Placing a VStack inside another VStack allows us to control alignment for one
+specific part of our view – our main mission image can be centered, while the
+mission details can be aligned to the leading edge.
+
 # Day 40
 26 April
 https://www.hackingwithswift.com/100/swiftui/40
