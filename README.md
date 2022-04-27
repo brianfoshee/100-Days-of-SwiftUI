@@ -3,6 +3,15 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 42
+27 April
+https://www.hackingwithswift.com/100/swiftui/42
+
+aspectRatio(contentMode: .fit) is the same as scaledToFit()
+
+dateFormat allows us to specify a precise format for our dates, whereas
+dateStyle has a selection of built-in formats that match the user's settings.
+
 # Day 41
 27 April
 https://www.hackingwithswift.com/100/swiftui/41

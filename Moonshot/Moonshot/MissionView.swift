@@ -38,12 +38,11 @@ struct MissionView: View {
                         .frame(maxWidth: geometry.size.width * 0.6)
                         .padding(.top)
 
+                    Text(mission.formattedLaunchDate)
+
                     VStack(alignment: .leading) {
                         // Divider exists but it's not customizable
-                        Rectangle()
-                            .frame(height: 2)
-                            .foregroundColor(.lightBackground)
-                            .padding(.vertical)
+                        CustomSpacer()
 
                         Text("Mission Highlights")
                             .font(.title.bold())
@@ -51,10 +50,7 @@ struct MissionView: View {
 
                         Text(mission.description)
 
-                        Rectangle()
-                            .frame(height: 2)
-                            .foregroundColor(.lightBackground)
-                            .padding(.vertical)
+                        CustomSpacer()
 
                         Text("Crew")
                             .font(.title.bold())
@@ -103,12 +99,21 @@ struct MissionView: View {
     }
 }
 
+struct CustomSpacer: View {
+    var body: some View {
+        Rectangle()
+            .frame(height: 2)
+            .foregroundColor(.lightBackground)
+            .padding(.vertical)
+    }
+}
+
 struct MissionView_Previews: PreviewProvider {
     static let missions: [Mission] = Bundle.main.decode("missions.json")
     static let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
 
     static var previews: some View {
-        MissionView(mission: missions[0], astronauts: astronauts)
+        MissionView(mission: missions[1], astronauts: astronauts)
             .preferredColorScheme(.dark) // this comes in from ContentView normally but during preview needs set
     }
 }
