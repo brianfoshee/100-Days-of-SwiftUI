@@ -3,6 +3,27 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 43
+28 April
+https://www.hackingwithswift.com/100/swiftui/43
+
+Paths
+
+To draw a triangle:
+```swift
+Path { path in
+    path.move(to: CGPoint(x: 200, y: 100))
+    path.addLine(to: CGPoint(x: 100, y: 300))
+    path.addLine(to: CGPoint(x: 300, y: 300))
+    path.addLine(to: CGPoint(x: 200, y: 100))
+}
+```
+
+closing paths for stroking. Either `path.closeSubpath()` or
+```swift
+.stroke(.blue, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+```
+
 # Day 42
 27 April
 https://www.hackingwithswift.com/100/swiftui/42
