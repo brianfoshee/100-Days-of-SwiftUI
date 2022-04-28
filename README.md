@@ -24,6 +24,51 @@ closing paths for stroking. Either `path.closeSubpath()` or
 .stroke(.blue, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
 ```
 
+SwiftUI enables custom drawing with two subtly different types: paths and
+shapes. A path is a series of drawing instructions such as “start here, draw a
+line to here, then add a circle there”, all using absolute coordinates. In
+contrast, a shape has no idea where it will be used or how big it will be used,
+but instead will be asked to draw itself inside a given rectangle.
+
+SwiftUI implements Shape as a protocol with a single required method: given the
+following rectangle, what path do you want to draw?
+
+Triangle implemented using Shape, so it uses all free space available:
+```swift
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+
+        return path
+    }
+}
+
+// use with
+Triangle()
+    .fill(.red)
+    .frame(width: 300, height: 300)
+```
+
+- In the eyes of SwiftUI 0 degrees is not straight upwards, but instead directly
+  to the right.
+- Shapes measure their coordinates from the bottom-left corner rather than the
+  top-left corner, which means SwiftUI goes the other way around from one angle
+  to the other. This is, in my not very humble opinion, extremely alien.
+- If you create a shape without a specific size, it will automatically expand to
+  occupy all available space.
+
+`stroke(.blue, lineWidth: 10)` draws like a marker half on one side of the line
+half on the other. So the view may be cut off. Use `strokeBorder` instead, which
+draws on the inside of the shape's line.
+
+`InsettableShape`. This is a shape that can be inset – reduced inwards – by a
+certain amount to produce another shape.
+
 # Day 42
 27 April
 https://www.hackingwithswift.com/100/swiftui/42
