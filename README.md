@@ -3,6 +3,32 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 44
+28 April
+https://www.hackingwithswift.com/100/swiftui/44
+
+`CGAffineTransform`, which describes how a path or view should be rotated, scaled,
+or sheared; and the second is `even-odd fills`, which allow us to control how
+overlapping shapes should be rendered.
+
+even-odd fills:
+`.fill(.red, style: FillStyle(eoFill: true))`
+
+`ImagePaint`
+
+dedicated type that wraps images in a way that we have complete control over
+how they should be rendered, which in turn means we can use them for borders
+and fills without problem
+
+To use an image as a border:
+```swift
+Text("Hello World")
+    .frame(width: 300, height: 300)
+    .border(ImagePaint(image: Image("Example"), scale: 0.2), width: 30)
+```
+
+`drawingGroup()` modifier tells swiftui to render offscren using Metal
+
 # Day 43
 28 April
 https://www.hackingwithswift.com/100/swiftui/43
@@ -68,26 +94,6 @@ draws on the inside of the shape's line.
 
 `InsettableShape`. This is a shape that can be inset – reduced inwards – by a
 certain amount to produce another shape.
-
-`CGAffineTransform`, which describes how a path or view should be rotated, scaled,
-or sheared; and the second is `even-odd fills`, which allow us to control how
-overlapping shapes should be rendered.
-
-even-odd fills:
-`.fill(.red, style: FillStyle(eoFill: true))`
-
-`ImagePaint`
-
-dedicated type that wraps images in a way that we have complete control over
-how they should be rendered, which in turn means we can use them for borders
-and fills without problem
-
-To use an image as a border:
-```swift
-Text("Hello World")
-    .frame(width: 300, height: 300)
-    .border(ImagePaint(image: Image("Example"), scale: 0.2), width: 30)
-```
 
 # Day 42
 27 April
