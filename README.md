@@ -69,6 +69,13 @@ draws on the inside of the shape's line.
 `InsettableShape`. This is a shape that can be inset – reduced inwards – by a
 certain amount to produce another shape.
 
+`CGAffineTransform`, which describes how a path or view should be rotated, scaled,
+or sheared; and the second is `even-odd fills`, which allow us to control how
+overlapping shapes should be rendered.
+
+even-odd fills:
+`.fill(.red, style: FillStyle(eoFill: true))`
+
 # Day 42
 27 April
 https://www.hackingwithswift.com/100/swiftui/42
