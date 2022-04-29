@@ -3,6 +3,41 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 45
+29 April
+https://www.hackingwithswift.com/100/swiftui/45
+
+Blend modes allow us to control the way one view is rendered on top of another.
+The default mode is .normal, which just draws the pixels from the new view onto
+whatever is behind.
+
+`Multiply` is so named because it multiplies each source pixel color with the
+destination pixel color
+
+The long way:
+```swift
+ZStack {
+  Image("river")
+
+    Rectangle()
+    .fill(.red)
+    .blendMode(.multiply)
+}
+```
+
+The short way:
+```swift
+Image("river")
+    .colorMultiply(.red)
+```
+
+`screen`, which does the opposite of multiply: it inverts the colors, performs a
+multiply, then inverts them again, resulting in a brighter image rather than a
+darker image.
+
+saturation(), which adjusts how much color is used inside a view. Give this a
+value between 0 (no color, just grayscale) and 1 (full color)
+
 # Day 44
 28 April
 https://www.hackingwithswift.com/100/swiftui/44
