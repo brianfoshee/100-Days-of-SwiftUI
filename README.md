@@ -76,6 +76,19 @@ overlapping shapes should be rendered.
 even-odd fills:
 `.fill(.red, style: FillStyle(eoFill: true))`
 
+`ImagePaint`
+
+dedicated type that wraps images in a way that we have complete control over
+how they should be rendered, which in turn means we can use them for borders
+and fills without problem
+
+To use an image as a border:
+```swift
+Text("Hello World")
+    .frame(width: 300, height: 300)
+    .border(ImagePaint(image: Image("Example"), scale: 0.2), width: 30)
+```
+
 # Day 42
 27 April
 https://www.hackingwithswift.com/100/swiftui/42

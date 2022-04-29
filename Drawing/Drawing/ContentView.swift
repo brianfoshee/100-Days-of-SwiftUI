@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var petalOffset = -20.0
-    @State private var petalWidth = 100.0
 
     var body: some View {
+        Capsule()
+            .strokeBorder(ImagePaint(image: Image("river"), scale: 0.1), lineWidth: 20)
+            .frame(width: 300, height: 200)
+
+    }
+
+}
+
+/*
+    @State private var petalOffset = -20.0
+    @State private var petalWidth = 100.0
         VStack {
             Flower(petalOffset: petalOffset, petalWidth: petalWidth)
                 //.stroke(.red, lineWidth: 1)
@@ -25,10 +34,7 @@ struct ContentView: View {
             Slider(value: $petalWidth, in: 0...100)
                 .padding(.horizontal)
         }
-    }
-
-}
-
+ */
 struct Flower: Shape {
     // how much to move this petal away from the center
     var petalOffset: Double = -20
