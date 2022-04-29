@@ -13,6 +13,8 @@
 		D34923E9281AF99000A93D8A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34923E8281AF99000A93D8A /* Preview Assets.xcassets */; };
 		D34923F0281CA32500A93D8A /* ShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923EF281CA32500A93D8A /* ShapesView.swift */; };
 		D34923F2281CA60C00A93D8A /* BlendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923F1281CA60C00A93D8A /* BlendView.swift */; };
+		D34923F4281CA8BE00A93D8A /* Trapezoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923F3281CA8BE00A93D8A /* Trapezoid.swift */; };
+		D34923F6281CA90500A93D8A /* Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923F5281CA90500A93D8A /* Checkerboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		D34923E8281AF99000A93D8A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D34923EF281CA32500A93D8A /* ShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
 		D34923F1281CA60C00A93D8A /* BlendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendView.swift; sourceTree = "<group>"; };
+		D34923F3281CA8BE00A93D8A /* Trapezoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezoid.swift; sourceTree = "<group>"; };
+		D34923F5281CA90500A93D8A /* Checkerboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkerboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			children = (
 				D34923E1281AF98D00A93D8A /* DrawingApp.swift */,
 				D34923E3281AF98D00A93D8A /* ContentView.swift */,
+				D34923F5281CA90500A93D8A /* Checkerboard.swift */,
+				D34923F3281CA8BE00A93D8A /* Trapezoid.swift */,
 				D34923F1281CA60C00A93D8A /* BlendView.swift */,
 				D34923EF281CA32500A93D8A /* ShapesView.swift */,
 				D34923E5281AF99000A93D8A /* Assets.xcassets */,
@@ -143,6 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D34923F6281CA90500A93D8A /* Checkerboard.swift in Sources */,
+				D34923F4281CA8BE00A93D8A /* Trapezoid.swift in Sources */,
 				D34923E4281AF98D00A93D8A /* ContentView.swift in Sources */,
 				D34923E2281AF98D00A93D8A /* DrawingApp.swift in Sources */,
 				D34923F2281CA60C00A93D8A /* BlendView.swift in Sources */,

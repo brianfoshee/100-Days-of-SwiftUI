@@ -53,6 +53,31 @@ var animatableData: Double {
 }
 ```
 
+`AnimatablePair`
+
+As its name suggests, this contains a pair of animatable values,
+and because both its values can be animated the AnimatablePair can itself be
+animated. We can read individual values from the pair using .first and .second.
+
+```swift
+var animatableData: AnimatablePair<Double, Double> {
+    get {
+       AnimatablePair(Double(rows), Double(columns))
+    }
+
+    set {
+        rows = Int(newValue.first)
+        columns = Int(newValue.second)
+    }
+}
+```
+
+To animate a bunch of properties chain them
+
+```swift
+AnimatablePair<CGFloat, AnimatablePair<CGFloat, AnimatablePair<CGFloat, CGFloat>>>
+```
+
 # Day 44
 28 April
 https://www.hackingwithswift.com/100/swiftui/44
