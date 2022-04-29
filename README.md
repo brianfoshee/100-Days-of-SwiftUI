@@ -38,6 +38,21 @@ darker image.
 saturation(), which adjusts how much color is used inside a view. Give this a
 value between 0 (no color, just grayscale) and 1 (full color)
 
+`animatableData`
+
+When animating changes to a Shape using `withAnimation { }`, add an
+`animatableData` property to the Shape. SwiftUI will pass the interpolated
+values for the animation to this property so the animation actually occurs.
+Otherwise it just changes directly from one value to the other.
+
+```swift
+var insetAmount: Double
+var animatableData: Double {
+    get { insetAmount }
+    set { insetAmount = newValue }
+}
+```
+
 # Day 44
 28 April
 https://www.hackingwithswift.com/100/swiftui/44
