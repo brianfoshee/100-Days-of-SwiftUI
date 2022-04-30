@@ -8,23 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var rows = 4
-    @State private var columns = 4
+    @State private var thickness = 0.3
 
     var body: some View {
-        Checkerboard(rows: rows, columns: columns)
+        Arrow(length: 2/3, thickness: thickness)
             .onTapGesture {
-                withAnimation(.linear(duration: 3)) {
-                    rows = 8
-                    columns = 16
+                withAnimation {
+                    thickness = Double.random(in: 0.1...0.5)
                 }
             }
     }
 }
-
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

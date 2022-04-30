@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+/*
+    @State private var rows = 4
+    @State private var columns = 4
+
+    var body: some View {
+        Checkerboard(rows: rows, columns: columns)
+            .onTapGesture {
+                withAnimation(.linear(duration: 3)) {
+                    rows = 8
+                    columns = 16
+                }
+            }
+    }
+ */
 struct Checkerboard: Shape {
     var rows: Int
     var columns: Int
@@ -48,6 +62,6 @@ struct Checkerboard: Shape {
 
 struct Checkerboard_Previews: PreviewProvider {
     static var previews: some View {
-        Checkerboard(rows: 5, columns: 5)
+        Checkerboard(rows: 4, columns: 5)
     }
 }

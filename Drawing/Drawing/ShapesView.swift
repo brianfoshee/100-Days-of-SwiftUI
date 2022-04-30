@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct ShapesView: View {
+    @State private var colorCycle = 0.0
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            ColorCyclingCircle(amount: colorCycle)
+                .frame(width: 300, height: 300)
+
+            Slider(value: $colorCycle)
+        }
     }
 }
 

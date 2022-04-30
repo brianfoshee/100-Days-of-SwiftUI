@@ -15,6 +15,7 @@
 		D34923F2281CA60C00A93D8A /* BlendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923F1281CA60C00A93D8A /* BlendView.swift */; };
 		D34923F4281CA8BE00A93D8A /* Trapezoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923F3281CA8BE00A93D8A /* Trapezoid.swift */; };
 		D34923F6281CA90500A93D8A /* Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923F5281CA90500A93D8A /* Checkerboard.swift */; };
+		D34923F8281CADC200A93D8A /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34923F7281CADC200A93D8A /* Arrow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		D34923F1281CA60C00A93D8A /* BlendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendView.swift; sourceTree = "<group>"; };
 		D34923F3281CA8BE00A93D8A /* Trapezoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezoid.swift; sourceTree = "<group>"; };
 		D34923F5281CA90500A93D8A /* Checkerboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkerboard.swift; sourceTree = "<group>"; };
+		D34923F7281CADC200A93D8A /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				D34923E1281AF98D00A93D8A /* DrawingApp.swift */,
 				D34923E3281AF98D00A93D8A /* ContentView.swift */,
+				D34923F7281CADC200A93D8A /* Arrow.swift */,
 				D34923F5281CA90500A93D8A /* Checkerboard.swift */,
 				D34923F3281CA8BE00A93D8A /* Trapezoid.swift */,
 				D34923F1281CA60C00A93D8A /* BlendView.swift */,
@@ -153,6 +156,7 @@
 				D34923F4281CA8BE00A93D8A /* Trapezoid.swift in Sources */,
 				D34923E4281AF98D00A93D8A /* ContentView.swift in Sources */,
 				D34923E2281AF98D00A93D8A /* DrawingApp.swift in Sources */,
+				D34923F8281CADC200A93D8A /* Arrow.swift in Sources */,
 				D34923F2281CA60C00A93D8A /* BlendView.swift in Sources */,
 				D34923F0281CA32500A93D8A /* ShapesView.swift in Sources */,
 			);
