@@ -14,6 +14,8 @@
 		D33F291C281F1697003B5392 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F291B281F1697003B5392 /* User.swift */; };
 		D33F291E281F16B6003B5392 /* MusicRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F291D281F16B6003B5392 /* MusicRequest.swift */; };
 		D33F2920281F1C4F003B5392 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F291F281F1C4F003B5392 /* MusicView.swift */; };
+		D33F2922281F1E29003B5392 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F2921281F1E29003B5392 /* AsyncImageView.swift */; };
+		D33F2924281F1F56003B5392 /* DisabledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F2923281F1F56003B5392 /* DisabledView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		D33F291B281F1697003B5392 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D33F291D281F16B6003B5392 /* MusicRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRequest.swift; sourceTree = "<group>"; };
 		D33F291F281F1C4F003B5392 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
+		D33F2921281F1E29003B5392 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		D33F2923281F1F56003B5392 /* DisabledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 			children = (
 				D33F290D281EE7A2003B5392 /* CupcakeCornerApp.swift */,
 				D33F290F281EE7A2003B5392 /* ContentView.swift */,
+				D33F2923281F1F56003B5392 /* DisabledView.swift */,
+				D33F2921281F1E29003B5392 /* AsyncImageView.swift */,
 				D33F291F281F1C4F003B5392 /* MusicView.swift */,
 				D33F291D281F16B6003B5392 /* MusicRequest.swift */,
 				D33F291B281F1697003B5392 /* User.swift */,
@@ -147,10 +153,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33F2910281EE7A2003B5392 /* ContentView.swift in Sources */,
+				D33F2924281F1F56003B5392 /* DisabledView.swift in Sources */,
 				D33F290E281EE7A2003B5392 /* CupcakeCornerApp.swift in Sources */,
 				D33F2920281F1C4F003B5392 /* MusicView.swift in Sources */,
 				D33F291C281F1697003B5392 /* User.swift in Sources */,
 				D33F291E281F16B6003B5392 /* MusicRequest.swift in Sources */,
+				D33F2922281F1E29003B5392 /* AsyncImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

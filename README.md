@@ -169,6 +169,17 @@ AsyncImage(url: URL(string: "https://hws.dev/img/bad.png")) { phase in
 .frame(width: 200, height: 200)
 ```
 
+disabled() view modifier ... disables input views.
+
+`.disabled(username.isEmpty || email.isEmpty)`
+
+Can also make a computed property
+```swift
+var disableForm: Bool {
+    username.count < 5 || email.count < 5
+}
+```
+
 # Day 48
 29 April
 https://www.hackingwithswift.com/100/swiftui/48
