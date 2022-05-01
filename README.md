@@ -3,6 +3,72 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 49
+30 April
+https://www.hackingwithswift.com/100/swiftui/49
+
+If all the properties of a type already conform to Codable, then the type itself
+can conform to Codable with no extra work. However, this doesn’t work when we
+use property wrappers such as @Published.
+
+this compiles just fine:
+```swift
+class User: ObservableObject, Codable {
+    var name = "Paul Hudson"
+}
+```
+
+however this does not:
+
+```swift
+class User: ObservableObject, Codable {
+    @Published var name = "Paul Hudson"
+}
+```
+
+@Published is a struct called Published that can store any kind of value. you
+can’t make an instance of Published all by itself, but instead make an instance
+of Published<String> – a publishable object that contains a string.
+
+To confirm @Published to Codable, we need to tell Swift which properties should
+be loaded and saved, and how to do both of those actions.
+
+This is done using an enum that conforms to a special protocol called CodingKey,
+which means that every case in our enum is the name of a property we want to
+load and save. This enum is conventionally called CodingKeys, with an S on the
+end, but you can call it something else if you want.
+
+add that to the Class:
+```swift
+class User: ObservableObject, Codable {
+    // step 1: add the enum
+    enum CodingKeys: CodingKey {
+        case name
+    }
+
+    @Published var name = "Paul Hudson"
+
+    // step 2: create a custom initializer that will be given some sort of
+    container, and use that to read values for all our properties.
+    required init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+    }
+
+    // step 3: add an encoding method to do the opposite of init
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+    }
+}
+```
+
+anyone who subclasses our User class must override this initializer with a
+custom implementation to make sure they add their own values. We mark this using
+the required keyword: required init. An alternative is to mark this class as
+final so that subclassing isn’t allowed, in which case we’d write final class
+User and drop the required keyword entirely.
+
 # Day 48
 29 April
 https://www.hackingwithswift.com/100/swiftui/48
