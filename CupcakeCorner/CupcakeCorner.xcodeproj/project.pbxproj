@@ -11,6 +11,8 @@
 		D33F2910281EE7A2003B5392 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F290F281EE7A2003B5392 /* ContentView.swift */; };
 		D33F2912281EE7A3003B5392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33F2911281EE7A3003B5392 /* Assets.xcassets */; };
 		D33F2915281EE7A3003B5392 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33F2914281EE7A3003B5392 /* Preview Assets.xcassets */; };
+		D33F291C281F1697003B5392 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F291B281F1697003B5392 /* User.swift */; };
+		D33F291E281F16B6003B5392 /* MusicRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F291D281F16B6003B5392 /* MusicRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		D33F290F281EE7A2003B5392 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D33F2911281EE7A3003B5392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D33F2914281EE7A3003B5392 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D33F291B281F1697003B5392 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D33F291D281F16B6003B5392 /* MusicRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			children = (
 				D33F290D281EE7A2003B5392 /* CupcakeCornerApp.swift */,
 				D33F290F281EE7A2003B5392 /* ContentView.swift */,
+				D33F291D281F16B6003B5392 /* MusicRequest.swift */,
+				D33F291B281F1697003B5392 /* User.swift */,
 				D33F2911281EE7A3003B5392 /* Assets.xcassets */,
 				D33F2913281EE7A3003B5392 /* Preview Content */,
 			);
@@ -139,6 +145,8 @@
 			files = (
 				D33F2910281EE7A2003B5392 /* ContentView.swift in Sources */,
 				D33F290E281EE7A2003B5392 /* CupcakeCornerApp.swift in Sources */,
+				D33F291C281F1697003B5392 /* User.swift in Sources */,
+				D33F291E281F16B6003B5392 /* MusicRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

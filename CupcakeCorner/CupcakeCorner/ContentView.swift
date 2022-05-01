@@ -8,31 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var results = [Result]()
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
-
-class User: ObservableObject, Codable {
-    // this tells Codable what properties to work with
-    enum CodingKeys: CodingKey {
-        case name
-    }
-
-    @Published var name = "Paul Hudson"
-
-    // this tells Codable how to decode the properties
-    // anyone who subclasses our User class must override this initializer with a custom implementation to make sure they add their own values. We mark this using the required keyword
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
+        List(results, id: \.trackId) { item in
+            VStack(alignment: .leading) {
+                Text(item.trackName)
+                    .font(.headline)
+                Text(item.collectionName)
+            }
+        }
+        .task { // can't use onAppear here because it's not asyn
+            await loadData()
+        }
     }
 
-    // the opposite to init
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
+    func loadData() async {
+        guard let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song") else {
+            print("invalid url")
+            return // always return from a guard
+        }
+
+        do {
+            // always try await, in that order
+            let (data, _) = try await URLSession.shared.data(from: url)
+
+            if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+                results = decodedResponse.results
+            }
+        } catch {
+            print("Invalid data")
+        }
+
+
     }
 }
 

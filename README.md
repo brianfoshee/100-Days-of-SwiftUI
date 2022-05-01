@@ -69,6 +69,57 @@ the required keyword: required init. An alternative is to mark this class as
 final so that subclassing isn’t allowed, in which case we’d write final class
 User and drop the required keyword entirely.
 
+Asynchronous Functions
+
+we can’t just use onAppear() here because that doesn’t know how to handle
+sleeping functions – it expects its function to be synchronous.
+
+```swift
+func loadData() async { }
+```
+
+instead add a task modifier to the view:
+
+```swift
+.task {
+    await loadData()
+}
+```
+
+Making an HTTP Request
+
+1. parse a URL
+
+```swift
+guard let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song") else {
+    print("Invalid URL")
+    return
+}
+```
+
+2: make the request
+```swift
+do {
+    let (data, _) = try await URLSession.shared.data(from: url)
+
+    // more code to come
+} catch {
+    print("Invalid data")
+}
+```
+
+URLSession.data(from:) returns a tuple containing the data from the request and
+metadata about the request.
+
+3. convert data into an struct
+
+```swift
+// this goes in 'more code to come' above
+if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+    results = decodedResponse.results
+}
+```
+
 # Day 48
 29 April
 https://www.hackingwithswift.com/100/swiftui/48
