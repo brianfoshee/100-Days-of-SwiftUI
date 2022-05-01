@@ -120,6 +120,55 @@ if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
 }
 ```
 
+AsyncImage
+
+```swift
+AsyncImage(url: URL(string: "https://hws.dev/img/logo.png"))
+```
+
+Caveat: SwiftUI knows nothing about the image until our code is run and the
+image is downloaded, and so it isn’t able to size it appropriately ahead of
+time.
+
+tell SwiftUI ahead of time that we’re trying to load a 3x scale image
+```swift
+AsyncImage(url: URL(string: "https://hws.dev/img/logo.png"), scale: 3)
+```
+
+`resizable()` and `frame()` don't work because SwiftUI doesn't know what the
+image looks like until it's downloaded.
+
+Use this version of AsyncImage, which takes a closure that passes in the
+resulting Image view:
+
+```swift
+AsyncImage(url: URL(string: "https://hws.dev/img/logo.png")) { image in
+    image
+        .resizable()
+        .scaledToFit()
+} placeholder: {
+    Color.red // or ProgressView()
+}
+.frame(width: 200, height: 200)
+```
+
+use this version to catch any errors on download:
+
+```swift
+AsyncImage(url: URL(string: "https://hws.dev/img/bad.png")) { phase in
+    if let image = phase.image {
+        image
+            .resizable()
+            .scaledToFit()
+    } else if phase.error != nil {
+        Text("There was an error loading the image.")
+    } else {
+        ProgressView()
+    }
+}
+.frame(width: 200, height: 200)
+```
+
 # Day 48
 29 April
 https://www.hackingwithswift.com/100/swiftui/48
