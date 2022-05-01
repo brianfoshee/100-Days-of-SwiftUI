@@ -37,4 +37,24 @@ class Order: ObservableObject {
 
         return true
     }
+
+    var cost: Double {
+        // $ per cake
+        var cost = Double(quantity) * 2
+
+        // complicated types cost more
+        cost += (Double(type) / 2)
+
+        // $1 /cake for extra frosting
+        if extraFrosting {
+            cost += Double(quantity)
+        }
+
+        // $0.50 for extra sprinkles
+        if addSprinkles {
+            cost += Double(quantity) / 2
+        }
+
+        return cost
+    }
 }
