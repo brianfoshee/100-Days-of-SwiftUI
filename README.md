@@ -3,8 +3,12 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 50
+1 May
+https://www.hackingwithswift.com/100/swiftui/50
+
 # Day 49
-30 April
+1 May
 https://www.hackingwithswift.com/100/swiftui/49
 
 If all the properties of a type already conform to Codable, then the type itself
