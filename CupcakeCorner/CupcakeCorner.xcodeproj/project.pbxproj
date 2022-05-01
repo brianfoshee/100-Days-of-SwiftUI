@@ -18,6 +18,7 @@
 		D33F2924281F1F56003B5392 /* DisabledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F2923281F1F56003B5392 /* DisabledView.swift */; };
 		D33F2926281F3DBD003B5392 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F2925281F3DBD003B5392 /* Order.swift */; };
 		D33F2928281F407F003B5392 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F2927281F407F003B5392 /* AddressView.swift */; };
+		D33F292A281F4226003B5392 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F2929281F4226003B5392 /* CheckoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		D33F2923281F1F56003B5392 /* DisabledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledView.swift; sourceTree = "<group>"; };
 		D33F2925281F3DBD003B5392 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		D33F2927281F407F003B5392 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		D33F2929281F4226003B5392 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 			children = (
 				D33F290D281EE7A2003B5392 /* CupcakeCornerApp.swift */,
 				D33F290F281EE7A2003B5392 /* ContentView.swift */,
+				D33F2929281F4226003B5392 /* CheckoutView.swift */,
 				D33F2927281F407F003B5392 /* AddressView.swift */,
 				D33F2925281F3DBD003B5392 /* Order.swift */,
 				D33F2923281F1F56003B5392 /* DisabledView.swift */,
@@ -160,6 +163,7 @@
 			files = (
 				D33F2910281EE7A2003B5392 /* ContentView.swift in Sources */,
 				D33F2924281F1F56003B5392 /* DisabledView.swift in Sources */,
+				D33F292A281F4226003B5392 /* CheckoutView.swift in Sources */,
 				D33F2926281F3DBD003B5392 /* Order.swift in Sources */,
 				D33F290E281EE7A2003B5392 /* CupcakeCornerApp.swift in Sources */,
 				D33F2920281F1C4F003B5392 /* MusicView.swift in Sources */,
