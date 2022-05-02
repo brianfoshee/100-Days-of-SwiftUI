@@ -7,6 +7,42 @@ Goal: be done by memorial day. Which is 56 days total.
 2 May
 https://www.hackingwithswift.com/100/swiftui/51
 
+`Task` can be used inside eg a Button, since the `.task` modifier can't be used
+in that scenario.
+
+```swift
+Button("Place Order") {
+  Task {
+    await placeOrder()
+  }
+}
+```
+
+Making HTTP POST requests:
+
+```swift
+func placeOrder() async {
+    guard let encoded = try? JSONEncoder().encode(order) else {
+        print("failed to encode order")
+        return
+    }
+
+    let url = URL(string: "https://reqres.in/api/cupcakes")!
+    var request = URLRequest(url: url)
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpMethod = "POST"
+
+    do {
+        let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
+        let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
+        confirmationMessage = "Your order for \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
+        showingConfirmation = true
+    } catch {
+        print("error uploading data")
+    }
+}
+```
+
 # Day 50
 1 May
 https://www.hackingwithswift.com/100/swiftui/50
