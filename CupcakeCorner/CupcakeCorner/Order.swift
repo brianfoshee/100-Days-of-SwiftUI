@@ -7,7 +7,12 @@
 
 import Foundation
 
-class Order: ObservableObject {
+class Order: ObservableObject, Codable {
+    // to conform to Encodable
+    enum CodingKeys: CodingKey {
+        case type, quantity, extraFrosting, addSprinkles, name, streetAddress, city, zip
+    }
+
     static let types = ["Vanilla", "Strawberry", "Chocolate", "Rainbow"]
 
     @Published var type = 0
@@ -56,5 +61,41 @@ class Order: ObservableObject {
         }
 
         return cost
+    }
+
+    // a second initializer so the Class can be created without a Codable
+    init() { }
+
+    // for Codable conformance
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        type = try container.decode(Int.self, forKey: .type)
+        quantity = try container.decode(Int.self, forKey: .quantity)
+
+        extraFrosting = try container.decode(Bool.self, forKey: .extraFrosting)
+        addSprinkles = try container.decode(Bool.self, forKey: .addSprinkles)
+
+        name = try container.decode(String.self, forKey: .name)
+        streetAddress = try container.decode(String.self, forKey: .streetAddress)
+        city = try container.decode(String.self, forKey: .city)
+        zip = try container.decode(String.self, forKey: .zip)
+    }
+
+    // for Codable conformance
+    func encode(to encoder: Encoder) throws {
+        // use the enum created in the class to key on
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(type, forKey: .type)
+        try container.encode(quantity, forKey: .quantity)
+
+        try container.encode(extraFrosting, forKey: .extraFrosting)
+        try container.encode(addSprinkles, forKey: .addSprinkles)
+
+        try container.encode(name, forKey: .name)
+        try container.encode(streetAddress, forKey: .streetAddress)
+        try container.encode(city, forKey: .city)
+        try container.encode(zip, forKey: .zip)
     }
 }
