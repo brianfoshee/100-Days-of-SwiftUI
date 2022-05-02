@@ -13,6 +13,9 @@ struct CheckoutView: View {
     @State private var confirmationMessage = ""
     @State private var showingConfirmation = false
 
+    @State private var errorMessage = ""
+    @State private var showingError = false
+
     var body: some View {
         ScrollView {
             VStack {
@@ -44,6 +47,11 @@ struct CheckoutView: View {
         } message: {
             Text(confirmationMessage)
         }
+        .alert("Sorry, an error occurred", isPresented: $showingError) {
+            Button("OK") { }
+        } message: {
+            Text(errorMessage)
+        }
     }
 
     func placeOrder() async {
@@ -64,6 +72,8 @@ struct CheckoutView: View {
             showingConfirmation = true
         } catch {
             print("error uploading data")
+            errorMessage = "there was an error making your request"
+            showingError = true
         }
     }
 
