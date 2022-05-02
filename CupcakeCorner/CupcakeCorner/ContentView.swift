@@ -10,36 +10,36 @@ import SwiftUI
 struct ContentView: View {
     // the one place this data is created and stored. all other views will be
     // passed this object.
-    @StateObject var order = Order()
+    @StateObject var orderWrapper = OrderWrapper()
 
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Picker("Select your cake type", selection: $order.type) {
+                    Picker("Select your cake type", selection: $orderWrapper.order.type) {
                         ForEach(Order.types.indices, id: \.self) {
                             Text(Order.types[$0])
                         }
                     }
 
-                    Stepper("Number of cakes \(order.quantity)", value: $order.quantity)
+                    Stepper("Number of cakes \(orderWrapper.order.quantity)", value: $orderWrapper.order.quantity)
                 }
 
                 Section {
                     // .animation here so that upon changing the other two toggles smoothly
                     // animate in and out.
-                    Toggle("Any special requests?", isOn: $order.specialRequestEnabled.animation())
+                    Toggle("Any special requests?", isOn: $orderWrapper.order.specialRequestEnabled.animation())
 
-                    if order.specialRequestEnabled {
-                        Toggle("Add extra frosting", isOn: $order.extraFrosting)
+                    if orderWrapper.order.specialRequestEnabled {
+                        Toggle("Add extra frosting", isOn: $orderWrapper.order.extraFrosting)
 
-                        Toggle("Add extra sprinkles", isOn: $order.addSprinkles)
+                        Toggle("Add extra sprinkles", isOn: $orderWrapper.order.addSprinkles)
                     }
                 }
 
                 Section {
                     NavigationLink {
-                        AddressView(order: order)
+                        AddressView(orderWrapper: orderWrapper)
                     } label: {
                         Text("Delivery Details")
                     }
