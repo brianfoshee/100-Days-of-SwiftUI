@@ -3,6 +3,38 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 53
+3 May
+https://www.hackingwithswift.com/100/swiftui/53
+
+`@Binding`
+
+Lets us connect an @State property of one view to some underlying model
+data. It lets us store a mutable value in a view that actually points to some
+other value from elsewhere
+
+`@State` property wrapper lets us work with local value types (structs).
+`@StateObject` lets us work with shareable reference types (classes)
+
+@Binding is extremely important for whenever you want to create a custom user
+interface component. 
+
+@Binding allows us to create a two-way connection between the view it's being
+declared in and the view that container the former view.
+
+In the child view use this:
+```swift
+@Binding var isOn: Bool
+```
+
+In the parent view you'll have
+```swift
+@State private var rememberMe = false
+// etc view stuff then when using pass as binding:
+PushButton(title: "Remember Me", isOn: $rememberMe)
+```
+
+
 # Day 52
 2 May
 https://www.hackingwithswift.com/100/swiftui/52
