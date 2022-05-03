@@ -8,6 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("notes") private var notes = ""
+
+    var body: some View {
+        NavigationView {
+            TextEditor(text: $notes)
+                .navigationTitle("notes")
+                .padding()
+        }
+    }
+}
+
+/*
+ use with
+
     @State private var rememberMe = false
 
     var body: some View {
@@ -16,8 +30,7 @@ struct ContentView: View {
             Text(rememberMe ? "On" : "Off")
         }
     }
-}
-
+ */
 struct PushButton: View {
     let title: String
     @Binding var isOn: Bool

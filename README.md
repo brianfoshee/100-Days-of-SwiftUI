@@ -17,7 +17,7 @@ other value from elsewhere
 `@StateObject` lets us work with shareable reference types (classes)
 
 @Binding is extremely important for whenever you want to create a custom user
-interface component. 
+interface component.
 
 @Binding allows us to create a two-way connection between the view it's being
 declared in and the view that container the former view.
@@ -34,6 +34,10 @@ In the parent view you'll have
 PushButton(title: "Remember Me", isOn: $rememberMe)
 ```
 
+`TextEditor`
+
+be careful to make sure it doesn’t go outside the safe area, otherwise typing
+will be tricky; embed it in a NavigationView, a Form, or similar.
 
 # Day 52
 2 May
