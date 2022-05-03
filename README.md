@@ -39,6 +39,77 @@ PushButton(title: "Remember Me", isOn: $rememberMe)
 be careful to make sure it doesn’t go outside the safe area, otherwise typing
 will be tricky; embed it in a NavigationView, a Form, or similar.
 
+Core Data
+
+Setup:
+1. defining the data we want to use in our app. Create a Data Model file
+   `Bookworm`. Give it an entity with some attributes.
+2. writing a little Swift code to load that model and prepare it for us to use.
+```swift
+import CoreData
+
+class DataController: ObservableObject {
+  let container = NSPersistentContainer(name: "Bookworm")
+}
+```
+3. loadPersistentStores() on our container, which tells Core Data to access our
+   saved data according to the data model in Bookworm.xcdatamodeld
+```swift
+init() {
+    container.loadPersistentStores { description, error in
+        if let error = error {
+            print("Core data failed to load: \(error.localizedDescription)")
+        }
+    }
+}
+```
+4. create an instance of DataController and send it into SwiftUI’s environment
+```swift
+// in BookWormApp.swift, where the @main thing is
+
+// this loads the core data model once
+@StateObject private var dataController = DataController()
+
+var body: some Scene {
+    WindowGroup {
+        ContentView()
+            // set the container on the Environment object
+            .environment(\.managedObjectContext, dataController.container.viewContext)
+    }
+}
+```
+
+Managed Object Contexts effectively the “live” version of your data – when you
+load objects and change them, those changes only exist in memory until you
+specifically save them back to the persistent store.
+
+the job of the view context is to let us work with all our data in memory, which
+is much faster than constantly reading and writing data to disk. When we’re
+ready we still do need to write changes out to persistent store if we want them
+to be there when our app runs next, but you can also choose to discard changes
+if you don’t want them.
+
+Fetch Request
+
+Retrieving information from Core Data is done using a fetch request
+```swift
+@FetchRequest(sortDescriptors: []) var students: FetchedResults<Student>
+```
+that creates a fetch request with no sorting, and places it into a property
+called students that has the the type FetchedResults<Student>.
+
+For adding and saving objects, need access to the Managed Object Context:
+```swift
+@Environment(\.managedObjectContext) var moc
+```
+
+Then can create using the class Core Data generated
+```swift
+let student = Student(context: moc)
+
+try? moc.save()
+```
+
 # Day 52
 2 May
 https://www.hackingwithswift.com/100/swiftui/52
