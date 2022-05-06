@@ -7,6 +7,16 @@ Goal: be done by memorial day. Which is 56 days total.
 5 May
 https://www.hackingwithswift.com/100/swiftui/54
 
+`constant bindings`. These are bindings that have fixed values, which on the one
+hand means they can’t be changed in the UI, but also means we can create them
+trivially – they are perfect for previews
+
+```swift
+static var previews: some View {
+    RatingView(rating: .constant(4))
+}
+```
+
 # Day 53
 3 May
 https://www.hackingwithswift.com/100/swiftui/53
