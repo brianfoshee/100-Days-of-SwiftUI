@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct FilteredList: View {
+    enum SingerPredicate: String {
+        case beginsWith = "BEGINSWITH"
+    }
+
     @FetchRequest var fetchRequest: FetchedResults<Singer>
 
     var body: some View {
@@ -16,16 +20,16 @@ struct FilteredList: View {
         }
     }
 
-    init(filter: String) {
+    init(filter: String, predicate: SingerPredicate, sortDescriptors: [SortDescriptor<Singer>]) {
         _fetchRequest = FetchRequest<Singer>(
-            sortDescriptors: [],
-            predicate: NSPredicate(format: "lastName BEGINSWITH %@", filter)
+            sortDescriptors: sortDescriptors,
+            predicate: NSPredicate(format: "lastName \(predicate) %@", filter)
         )
     }
 }
 
 struct FilteredList_Previews: PreviewProvider {
     static var previews: some View {
-        FilteredList(filter: "A")
+        FilteredList(filter: "A", predicate: .beginsWith, sortDescriptors: [SortDescriptor(\.lastName)])
     }
 }
