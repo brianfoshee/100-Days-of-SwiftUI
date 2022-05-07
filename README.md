@@ -36,6 +36,19 @@ using a constant binding makes a view read-only
 RatingView(rating: .constant(Int(book.rating)))
 ```
 
+Sort results from Core Data with a SortDescriptor (or multiple):
+```swift
+@FetchRequest(sortDescriptors: [
+    SortDescriptor(\.title),
+    SortDescriptor(\.author)
+]) var books: FetchedResults<Book>
+```
+
+Sorting is done in ascending order by default. To reverse:
+```swift
+SortDescriptor(\.title, order: .reverse)
+```
+
 # Day 54
 5 May
 https://www.hackingwithswift.com/100/swiftui/54
