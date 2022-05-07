@@ -11,12 +11,12 @@
 		D33F296128260FCF003B5392 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F296028260FCF003B5392 /* ContentView.swift */; };
 		D33F296328260FCF003B5392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33F296228260FCF003B5392 /* Assets.xcassets */; };
 		D33F296628260FCF003B5392 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33F296528260FCF003B5392 /* Preview Assets.xcassets */; };
-		D33F296D28260FF1003B5392 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F296C28260FF1003B5392 /* DataController.swift */; };
 		D33F297028261004003B5392 /* CoreDataProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D33F296E28261004003B5392 /* CoreDataProject.xcdatamodeld */; };
 		D33F29732826ED8F003B5392 /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F29712826ED8F003B5392 /* Movie+CoreDataClass.swift */; };
 		D33F29742826ED8F003B5392 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F29722826ED8F003B5392 /* Movie+CoreDataProperties.swift */; };
 		D33F29772826FAC0003B5392 /* Singer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F29752826FAC0003B5392 /* Singer+CoreDataClass.swift */; };
 		D33F29782826FAC0003B5392 /* Singer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F29762826FAC0003B5392 /* Singer+CoreDataProperties.swift */; };
+		D33F297A2826FB97003B5392 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F29792826FB97003B5392 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,12 +25,12 @@
 		D33F296028260FCF003B5392 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D33F296228260FCF003B5392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D33F296528260FCF003B5392 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D33F296C28260FF1003B5392 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = ../../BookWorm/BookWorm/DataController.swift; sourceTree = "<group>"; };
 		D33F296F28261004003B5392 /* CoreDataProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataProject.xcdatamodel; sourceTree = "<group>"; };
 		D33F29712826ED8F003B5392 /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D33F29722826ED8F003B5392 /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D33F29752826FAC0003B5392 /* Singer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Singer+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D33F29762826FAC0003B5392 /* Singer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Singer+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D33F29792826FB97003B5392 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 				D33F29722826ED8F003B5392 /* Movie+CoreDataProperties.swift */,
 				D33F295E28260FCF003B5392 /* CoreDataProjectApp.swift */,
 				D33F296028260FCF003B5392 /* ContentView.swift */,
-				D33F296C28260FF1003B5392 /* DataController.swift */,
+				D33F29792826FB97003B5392 /* DataController.swift */,
 				D33F296E28261004003B5392 /* CoreDataProject.xcdatamodeld */,
 				D33F296228260FCF003B5392 /* Assets.xcassets */,
 				D33F296428260FCF003B5392 /* Preview Content */,
@@ -157,10 +157,10 @@
 			files = (
 				D33F29772826FAC0003B5392 /* Singer+CoreDataClass.swift in Sources */,
 				D33F296128260FCF003B5392 /* ContentView.swift in Sources */,
-				D33F296D28260FF1003B5392 /* DataController.swift in Sources */,
 				D33F297028261004003B5392 /* CoreDataProject.xcdatamodeld in Sources */,
 				D33F29732826ED8F003B5392 /* Movie+CoreDataClass.swift in Sources */,
 				D33F29782826FAC0003B5392 /* Singer+CoreDataProperties.swift in Sources */,
+				D33F297A2826FB97003B5392 /* DataController.swift in Sources */,
 				D33F29742826ED8F003B5392 /* Movie+CoreDataProperties.swift in Sources */,
 				D33F295F28260FCF003B5392 /* CoreDataProjectApp.swift in Sources */,
 			);
