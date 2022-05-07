@@ -90,7 +90,12 @@ NSPredicate(format: "%K BEGINSWITH %@", filterKey, filterValue)
 
 Data Relationships
 
+In core data model editor, can add relationships to other entities, specifiying
+one to many etc in the inspector.
+
 Need to make a custom NSManagedObject subclass for this to work with swift.
+
+Convert NSSet to Array, so swiftui's ForEach works.
 
 # Day 57
 7 May

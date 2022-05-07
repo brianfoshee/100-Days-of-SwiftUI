@@ -18,6 +18,10 @@
 		D33F29782826FAC0003B5392 /* Singer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F29762826FAC0003B5392 /* Singer+CoreDataProperties.swift */; };
 		D33F297A2826FB97003B5392 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F29792826FB97003B5392 /* DataController.swift */; };
 		D33F297C2826FC37003B5392 /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F297B2826FC37003B5392 /* FilteredList.swift */; };
+		D33F2981282704A3003B5392 /* Candy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F297D282704A3003B5392 /* Candy+CoreDataClass.swift */; };
+		D33F2982282704A3003B5392 /* Candy+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F297E282704A3003B5392 /* Candy+CoreDataProperties.swift */; };
+		D33F2983282704A3003B5392 /* Country+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F297F282704A3003B5392 /* Country+CoreDataClass.swift */; };
+		D33F2984282704A3003B5392 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33F2980282704A3003B5392 /* Country+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		D33F29762826FAC0003B5392 /* Singer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Singer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D33F29792826FB97003B5392 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		D33F297B2826FC37003B5392 /* FilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
+		D33F297D282704A3003B5392 /* Candy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Candy+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D33F297E282704A3003B5392 /* Candy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Candy+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D33F297F282704A3003B5392 /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D33F2980282704A3003B5392 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,14 +73,18 @@
 		D33F295D28260FCF003B5392 /* CoreDataProject */ = {
 			isa = PBXGroup;
 			children = (
+				D33F297D282704A3003B5392 /* Candy+CoreDataClass.swift */,
+				D33F297E282704A3003B5392 /* Candy+CoreDataProperties.swift */,
+				D33F297F282704A3003B5392 /* Country+CoreDataClass.swift */,
+				D33F2980282704A3003B5392 /* Country+CoreDataProperties.swift */,
 				D33F29752826FAC0003B5392 /* Singer+CoreDataClass.swift */,
 				D33F29762826FAC0003B5392 /* Singer+CoreDataProperties.swift */,
 				D33F29712826ED8F003B5392 /* Movie+CoreDataClass.swift */,
 				D33F29722826ED8F003B5392 /* Movie+CoreDataProperties.swift */,
 				D33F295E28260FCF003B5392 /* CoreDataProjectApp.swift */,
+				D33F29792826FB97003B5392 /* DataController.swift */,
 				D33F296028260FCF003B5392 /* ContentView.swift */,
 				D33F297B2826FC37003B5392 /* FilteredList.swift */,
-				D33F29792826FB97003B5392 /* DataController.swift */,
 				D33F296E28261004003B5392 /* CoreDataProject.xcdatamodeld */,
 				D33F296228260FCF003B5392 /* Assets.xcassets */,
 				D33F296428260FCF003B5392 /* Preview Content */,
@@ -159,6 +171,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33F29772826FAC0003B5392 /* Singer+CoreDataClass.swift in Sources */,
+				D33F2981282704A3003B5392 /* Candy+CoreDataClass.swift in Sources */,
+				D33F2984282704A3003B5392 /* Country+CoreDataProperties.swift in Sources */,
+				D33F2983282704A3003B5392 /* Country+CoreDataClass.swift in Sources */,
+				D33F2982282704A3003B5392 /* Candy+CoreDataProperties.swift in Sources */,
 				D33F296128260FCF003B5392 /* ContentView.swift in Sources */,
 				D33F297C2826FC37003B5392 /* FilteredList.swift in Sources */,
 				D33F297028261004003B5392 /* CoreDataProject.xcdatamodeld in Sources */,
