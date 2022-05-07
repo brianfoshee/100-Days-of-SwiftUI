@@ -3,6 +3,38 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 55
+6 May
+https://www.hackingwithswift.com/100/swiftui/55
+
+Setting up a preview when using Core Data:
+
+```swift
+import CoreData
+
+struct DetailView_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+
+    static var previews: some View {
+        let book = Book(context: moc)
+        book.title = "test book"
+        book.author = "test author"
+        book.genre = "fantasy"
+        book.rating = 4
+        book.review = "test review"
+
+        return NavigationView {
+            DetailView(book: book)
+        }
+    }
+}
+```
+
+using a constant binding makes a view read-only
+```swift
+RatingView(rating: .constant(Int(book.rating)))
+```
+
 # Day 54
 5 May
 https://www.hackingwithswift.com/100/swiftui/54
