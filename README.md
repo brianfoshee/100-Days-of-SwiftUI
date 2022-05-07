@@ -9,6 +9,7 @@ https://www.hackingwithswift.com/100/swiftui/55
 
 Setting up a preview when using Core Data:
 
+jk this doesn't work. figure out why?
 ```swift
 import CoreData
 
