@@ -49,6 +49,16 @@ Sorting is done in ascending order by default. To reverse:
 SortDescriptor(\.title, order: .reverse)
 ```
 
+Showing an alert to confirm deletion:
+```swift
+.alert("Delete Book", isPresented: $showingDeleteAlert) {
+    Button("Delete", role: .destructive, action: deleteBook)
+    Button("Cancel", role: .cancel) { }
+} message: {
+    Text("Are you sure?")
+}
+```
+
 # Day 54
 5 May
 https://www.hackingwithswift.com/100/swiftui/54
