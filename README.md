@@ -3,9 +3,102 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 58
+7 May
+https://www.hackingwithswift.com/100/swiftui/58
+
+Predicates allow you to control which results should be shows from a
+@FetchRequest. Here universe is an attribute on Ship:
+```swift
+@FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "universe == 'Star Wars'")) var ships: FetchedResults<Ship>
+```
+
+Can also provide params with `%@` if strings have quotes etc:
+```swift
+NSPredicate(format: "universe == %@", "Star Wars"))
+```
+
+Can also provide comparisons:
+```swift
+NSPredicate(format: "name < %@", "F"))
+```
+
+Can use IN to check for values in an array:
+```swift
+NSPredicate(format: "universe IN %@", ["Aliens", "Firefly", "Star Trek"])
+```
+
+Other examples
+```swift
+NSPredicate(format: "name BEGINSWITH %@", "E"))
+
+// non case-sensitive version of above
+NSPredicate(format: "name BEGINSWITH[c] %@", "e"))
+
+// check whether a string contains a value
+NSPredicate(format: "name CONTAINS[c] %@", "e"))
+
+// invert with NOT
+NSPredicate(format: "NOT name BEGINSWITH[c] %@", "e"))
+```
+
+If you need more complicated predicates, join them using AND to build up as much
+precision as you need, or add an import for Core Data and take a look at
+NSCompoundPredicate – it lets you build one predicate out of several smaller
+ones.
+
+Dynamic Filtering
+
+carve off the functionality we want into a separate view, then inject values
+into it.
+
+Because this view will be used inside ContentView, we don’t even need to inject
+a managed object context into the environment – it will inherit the context from
+ContentView.
+
+In the view it needs a filter property and a custom initializer:
+
+```swift
+@FetchRequest var fetchRequest: FetchedResults<Singer>
+
+init(filter: String) {
+    _fetchRequest = FetchRequest<Singer>(
+      sortDescriptors: [],
+      predicate: NSPredicate(format: "lastName BEGINSWITH %@", filter)
+    )
+}
+```
+
+Why the underscore on `_fetchRequest`? It completely replaces the existing
+`fetchRequest` variable that's wrapped by `@FetchRequest`, instead of adding to
+it (which would happen if we just did fetchRequest = blah). I don't fully get
+this yet.
+
+The call this new view:
+```swift
+FilteredView(filter: "A")
+```
+
+To filter on any field, and for any model type, see the `Want to go further?`
+heading here
+https://www.hackingwithswift.com/books/ios-swiftui/dynamically-filtering-fetchrequest-with-swiftui
+
+passing a filter key into a predicate:
+```swift
+NSPredicate(format: "%K BEGINSWITH %@", filterKey, filterValue)
+```
+
+Data Relationships
+
+Need to make a custom NSManagedObject subclass for this to work with swift.
+
 # Day 57
 7 May
 https://www.hackingwithswift.com/100/swiftui/57
+
+Can either use CoreData's generated models or have it write one out to modify
+the swift file: Editor -> CreateNSManagedObject Subclass. Also open the
+inspector and change `Codegen` to none.
 
 Always check a managed context for changes before actually saving:
 ```swift
