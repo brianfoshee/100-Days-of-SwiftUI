@@ -3,6 +3,29 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 57
+7 May
+https://www.hackingwithswift.com/100/swiftui/57
+
+Always check a managed context for changes before actually saving:
+```swift
+if moc.hasChanges {
+    try? moc.save()
+}
+```
+
+CoreData can merge duplicate objects with a merge policy
+```swift
+container.loadPersistentStores { description, error in
+    if let error = error {
+        print("Core Data failed to load: \(error.localizedDescription)")
+        return
+    }
+
+    self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+}
+```
+
 # Day 56
 6 May
 https://www.hackingwithswift.com/100/swiftui/56
