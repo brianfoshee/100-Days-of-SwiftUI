@@ -3,6 +3,10 @@ Goal: be done by memorial day. Which is 56 days total.
 [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 56
+6 May
+https://www.hackingwithswift.com/100/swiftui/56
+
 # Day 55
 6 May
 https://www.hackingwithswift.com/100/swiftui/55
@@ -14,10 +18,10 @@ jk this doesn't work. figure out why?
 import CoreData
 
 struct DetailView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var dataController = DataController()
 
     static var previews: some View {
-        let book = Book(context: moc)
+        let book = Book(context: dataController.container.viewContext)
         book.title = "test book"
         book.author = "test author"
         book.genre = "fantasy"

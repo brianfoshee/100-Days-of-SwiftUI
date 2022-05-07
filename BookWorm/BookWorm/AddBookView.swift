@@ -19,6 +19,16 @@ struct AddBookView: View {
 
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
 
+    var disableSave: Bool {
+        if title.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            author.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            genre.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return true
+        }
+
+        return false
+    }
+
     var body: some View {
         NavigationView {
             Form {
@@ -51,11 +61,13 @@ struct AddBookView: View {
                         newBook.rating = Int16(rating)
                         newBook.genre = genre
                         newBook.review = review
+                        newBook.date = Date.now
 
                         try? moc.save()
 
                         dismiss()
                     }
+                    .disabled(disableSave)
                 }
             }
             .navigationTitle("Add Book")

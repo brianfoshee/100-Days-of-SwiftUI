@@ -39,6 +39,8 @@ struct DetailView: View {
             Text(book.review ?? "No review")
                 .padding()
 
+            Text(book.date ?? Date.now, format: .dateTime.day().month().year())
+
             // using a constant binding here makes the view read-only
             RatingView(rating: .constant(Int(book.rating)))
                 .font(.largeTitle)
@@ -69,18 +71,17 @@ struct DetailView: View {
     }
 }
 
-/*
- this crashes
 struct DetailView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var dataController = DataController()
 
     static var previews: some View {
-        let book = Book(context: moc)
+        let book = Book(context: dataController.container.viewContext)
         book.title = "test book"
         book.author = "test author"
         book.genre = "fantasy"
         book.rating = 4
         book.review = "test review"
+        book.date = Date.now
 
         return NavigationView {
             DetailView(book: book)
@@ -88,4 +89,3 @@ struct DetailView_Previews: PreviewProvider {
     }
 }
 
-*/
