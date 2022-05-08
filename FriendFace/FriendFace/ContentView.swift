@@ -9,13 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var users = [User]()
-    
+
+    var userMap: [UUID: User] {
+        return users.reduce(into: [UUID: User]()) { map, user in
+            map[user.id] = user
+        }
+    }
+
     var body: some View {
         NavigationView {
             List {
                 ForEach(users, id: \.self) { user in
                     NavigationLink {
-                        UserView(user: user)
+                        UserView(user: user, users: userMap)
                     } label: {
                         Text(user.name)
                     }
@@ -46,10 +52,22 @@ struct ContentView: View {
             decoder.dateDecodingStrategy = .iso8601
             let decodedResponse = try decoder.decode([User].self, from: data)
             users = decodedResponse
+        } catch let DecodingError.dataCorrupted(context) {
+            print(context)
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.typeMismatch(type, context)  {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
         } catch {
-            print("could not fetch data \(error)")
+            print("error: ", error)
         }
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {

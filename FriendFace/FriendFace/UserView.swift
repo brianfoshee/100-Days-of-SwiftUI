@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UserView: View {
     var user: User
+    var users: [UUID: User]
+
     var body: some View {
         Form {
             Section("Age") {
@@ -36,7 +38,15 @@ struct UserView: View {
             }
             Section("Friends") {
                 ForEach(user.friends, id: \.self) { friend in
-                    Text(friend.name)
+                    NavigationLink {
+                        if let x = users[friend.id] {
+                            UserView(user: x, users: users)
+                        } else {
+                            Text("no matching user for \(friend.name)")
+                        }
+                    } label: {
+                        Text(friend.name)
+                    }
                 }
             }
         }
@@ -48,7 +58,7 @@ struct UserView: View {
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            UserView(user: User.brian)
+            UserView(user: User.brian, users: [:])
         }
     }
 }
