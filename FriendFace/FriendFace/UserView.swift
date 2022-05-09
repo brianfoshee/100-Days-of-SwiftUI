@@ -31,13 +31,11 @@ struct UserView: View {
             Section("Registered") {
                 Text(user.wrappedRegistered.formatted())
             }
-            /*
             Section("Tags") {
-                ForEach(user.tags, id: \.self) { tag in
+                ForEach(user.wrappedTags, id: \.self) { tag in
                     Text(tag)
                 }
             }
-             */
             Section("Friends") {
                 ForEach(user.wrappedFriends, id: \.self) { friend in
                     NavigationLink {

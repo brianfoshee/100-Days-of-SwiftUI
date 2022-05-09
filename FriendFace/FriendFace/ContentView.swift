@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
 
-    @FetchRequest(sortDescriptors: []) var users: FetchedResults<CachedUser>
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.name)
+    ]) var users: FetchedResults<CachedUser>
 
     var userMap: [UUID: CachedUser] {
         return users.reduce(into: [UUID: CachedUser]()) { map, user in
@@ -23,10 +25,9 @@ struct ContentView: View {
             List {
                 ForEach(users, id: \.self) { user in
                     NavigationLink {
-                        // UserView(user: user, users: userMap)
-                        Text(user.wrappedAbout)
+                        UserView(user: user, users: userMap)
                     } label: {
-                        Text(user.wrappedname)
+                        Text(user.wrappedName)
                     }
                 }
             }
@@ -54,27 +55,29 @@ struct ContentView: View {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             let decodedResponse = try decoder.decode([User].self, from: data)
-            decodedResponse.forEach { user in
-                // TODO add users to Core Data
-                let c = CachedUser(context: moc)
-                c.id = user.id
-                c.name = user.name
-                c.age = Int16(user.age)
-                c.about = user.about
-                c.company = user.company
-                c.email = user.email
-                c.isActive = user.isActive
-                c.address = user.address
-                c.tags = user.tags.joined(separator: ",")
+            // save things on the main thread to avoid issues
+            await MainActor.run {
+                decodedResponse.forEach { user in
+                    let c = CachedUser(context: moc)
+                    c.id = user.id
+                    c.name = user.name
+                    c.age = Int16(user.age)
+                    c.about = user.about
+                    c.company = user.company
+                    c.email = user.email
+                    c.isActive = user.isActive
+                    c.address = user.address
+                    c.tags = user.tags.joined(separator: ",")
 
-                // do friends
-                user.friends.forEach { friend in
-                    let f = CachedFriend(context: moc)
-                    f.id = friend.id
-                    f.name = friend.name
-                    c.addToFriends(f)
+                    user.friends.forEach { friend in
+                        let f = CachedFriend(context: moc)
+                        f.id = friend.id
+                        f.name = friend.name
+                        c.addToFriends(f)
+                    }
                 }
 
+                // save all at once
                 try? moc.save()
             }
         } catch let DecodingError.dataCorrupted(context) {

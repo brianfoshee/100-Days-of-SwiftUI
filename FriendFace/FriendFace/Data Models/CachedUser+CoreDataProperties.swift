@@ -56,6 +56,13 @@ extension CachedUser {
         registered ?? Date.now
     }
 
+    public var wrappedTags: [String] {
+        if let tags = tags {
+            return tags.components(separatedBy: ",")
+        }
+        return []
+    }
+
     public var wrappedFriends: [CachedFriend] {
         let set = friends as? Set<CachedFriend> ?? []
         return set.sorted { a, b in
