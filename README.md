@@ -32,6 +32,22 @@ Slider(value: $blurAmount, in: 0...20)
     }
 ```
 
+confirmationDialog(): an alternative to alert() that lets us add many buttons.
+
+confirmation dialogs slide up from the bottom, can contain multiple buttons, and
+can be dismissed by tapping on Cancel or by tapping outside of the options.
+
+```swift
+.confirmationDialog("Change background", isPresented: $showingConfirmation) {
+    Button("Red") { backgroundColor = .red }
+    Button("Green") { backgroundColor = .green }
+    Button("Blue") { backgroundColor = .blue }
+    Button("Cancel", role: .cancel) { }
+} message: {
+    Text("Select a new color")
+}
+```
+
 # Day 61
 9 May
 https://www.hackingwithswift.com/100/swiftui/61
