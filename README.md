@@ -3,6 +3,35 @@ Goal: be done by memorial day. Which is 56 days total.
 - [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 - [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 62
+9 May
+https://www.hackingwithswift.com/100/swiftui/62
+
+@State internals:
+
+this didSet will trigger when the value is changed directly, eg in a button, but
+not when changed by a binding eg on a slider because bindings change the
+underlying struct that makes @State work, not the struct itself.
+```swift
+@State private var blurAmount = 0.0 {
+    didSet {
+        print("New value is \(blurAmount)")
+    }
+}
+```
+
+How can we ensure some code is run whenever a binding is changed, no matter how
+that change happens? with the `.onChange()` modifier.
+
+```swift
+@State private var blurAmount = 0.0
+
+Slider(value: $blurAmount, in: 0...20)
+    .onChange(of: blurAmount) { newValue in
+        print("New value is \(newValue)")
+    }
+```
+
 # Day 61
 9 May
 https://www.hackingwithswift.com/100/swiftui/61
@@ -20,6 +49,7 @@ await MainActor.run {
 8 May
 https://www.hackingwithswift.com/100/swiftui/60
 
+FriendFace
 Build an app that fetches JSON from the internet and displays.
 
 # Day 59
