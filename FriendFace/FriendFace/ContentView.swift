@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var users = [User]()
+    @Environment(\.managedObjectContext) var moc
 
-    var userMap: [UUID: User] {
-        return users.reduce(into: [UUID: User]()) { map, user in
-            map[user.id] = user
+    @FetchRequest(sortDescriptors: []) var users: FetchedResults<CachedUser>
+
+    var userMap: [UUID: CachedUser] {
+        return users.reduce(into: [UUID: CachedUser]()) { map, user in
+            map[user.wrappedID] = user
         }
     }
 
@@ -21,9 +23,10 @@ struct ContentView: View {
             List {
                 ForEach(users, id: \.self) { user in
                     NavigationLink {
-                        UserView(user: user, users: userMap)
+                        // UserView(user: user, users: userMap)
+                        Text(user.wrappedAbout)
                     } label: {
-                        Text(user.name)
+                        Text(user.wrappedname)
                     }
                 }
             }
@@ -51,7 +54,29 @@ struct ContentView: View {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             let decodedResponse = try decoder.decode([User].self, from: data)
-            users = decodedResponse
+            decodedResponse.forEach { user in
+                // TODO add users to Core Data
+                let c = CachedUser(context: moc)
+                c.id = user.id
+                c.name = user.name
+                c.age = Int16(user.age)
+                c.about = user.about
+                c.company = user.company
+                c.email = user.email
+                c.isActive = user.isActive
+                c.address = user.address
+                c.tags = user.tags.joined(separator: ",")
+
+                // do friends
+                user.friends.forEach { friend in
+                    let f = CachedFriend(context: moc)
+                    f.id = friend.id
+                    f.name = friend.name
+                    c.addToFriends(f)
+                }
+
+                try? moc.save()
+            }
         } catch let DecodingError.dataCorrupted(context) {
             print(context)
         } catch let DecodingError.keyNotFound(key, context) {
@@ -71,7 +96,9 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static var controller = DataController()
     static var previews: some View {
         ContentView()
+            .environment(\.managedObjectContext, controller.container.viewContext)
     }
 }

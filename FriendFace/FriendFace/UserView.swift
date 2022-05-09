@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct UserView: View {
-    var user: User
-    var users: [UUID: User]
+    var user: CachedUser
+    var users: [UUID: CachedUser]
 
     var body: some View {
         Form {
@@ -17,44 +17,47 @@ struct UserView: View {
                 Text("\(user.age)")
             }
             Section("Company") {
-                Text(user.company)
+                Text(user.wrappedCompany)
             }
             Section("Email") {
-                Text(user.email)
+                Text(user.wrappedEmail)
             }
             Section("Address") {
-                Text(user.address)
+                Text(user.wrappedAddress)
             }
             Section("About") {
-                Text(user.about)
+                Text(user.wrappedAbout)
             }
             Section("Registered") {
-                Text(user.registered.formatted())
+                Text(user.wrappedRegistered.formatted())
             }
+            /*
             Section("Tags") {
                 ForEach(user.tags, id: \.self) { tag in
                     Text(tag)
                 }
             }
+             */
             Section("Friends") {
-                ForEach(user.friends, id: \.self) { friend in
+                ForEach(user.wrappedFriends, id: \.self) { friend in
                     NavigationLink {
-                        if let x = users[friend.id] {
+                        if let x = users[friend.wrappedID] {
                             UserView(user: x, users: users)
                         } else {
-                            Text("no matching user for \(friend.name)")
+                            Text("no matching user for \(friend.wrappedName)")
                         }
                     } label: {
-                        Text(friend.name)
+                        Text(friend.wrappedName)
                     }
                 }
             }
         }
-        .navigationTitle(user.name)
+        .navigationTitle(user.wrappedName)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
+/*
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -62,3 +65,4 @@ struct UserView_Previews: PreviewProvider {
         }
     }
 }
+*/
