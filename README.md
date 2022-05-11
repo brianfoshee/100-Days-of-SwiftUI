@@ -3,6 +3,119 @@ Goal: be done by memorial day. Which is 56 days total.
 - [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 - [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 63
+11 May
+https://www.hackingwithswift.com/100/swiftui/63
+
+Images
+
+- UIImage, which comes from UIKit. This is an extremely powerful image type
+  capable of working with a variety of image types, including bitmaps (like
+  PNG), vectors (like SVG), and even sequences that form an animation. UIImage
+  is the standard image type for UIKit, and of the three it’s closest to
+  SwiftUI’s Image type.
+- CGImage, which comes from Core Graphics. This is a simpler image type that is
+  really just a two-dimensional array of pixels.
+- CIImage, which comes from Core Image. This stores all the information required
+  to produce an image but doesn’t actually turn that into pixels unless it’s
+  asked to. Apple calls CIImage “an image recipe” rather than an actual image.
+  There is some interoperability between the various image types:
+
+- We can create a UIImage from a CGImage, and create a CGImage from a UIImage.
+- We can create a CIImage from a UIImage and from a CGImage, and can create a
+  CGImage from a CIImage.
+- We can create a SwiftUI Image from both a UIImage and a CGImage.
+
+1. We need to load our example image into a UIImage
+2. We’ll convert that into a CIImage, which is what Core Image wants to work
+   with.
+
+```swift
+func loadImage() {
+    guard let inputImage = UIImage(named: "Example") else { return }
+    let beginImage = CIImage(image: inputImage)
+
+    // more code to come
+}
+```
+
+3. The next step will be to create a Core Image context and a Core Image filter
+
+```swift
+import CoreImage
+import CoreImage.CIFilterBuiltins
+
+let context = CIContext()
+let currentFilter = CIFilter.sepiaTone()
+```
+
+4. customize our filter to change the way it works.
+
+```swift
+currentFilter.inputImage = beginImage
+currentFilter.intensity = 1
+```
+
+5. we need to convert the output from our filter to a SwiftUI Image that we can
+   display in our view
+   - Read the output image from our filter, which will be a CIImage. This might fail, so it returns an optional.
+   - Ask our context to create a CGImage from that output image. This also might fail, so again it returns an optional.
+   - Convert that CGImage into a UIImage.
+   - Convert that UIImage into a SwiftUI Image.
+
+```swfit
+// get a CIImage from our filter or exit if that fails
+guard let outputImage = currentFilter.outputImage else { return }
+
+// attempt to get a CGImage from our CIImage
+if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+    // convert that to a UIImage
+    let uiImage = UIImage(cgImage: cgimg)
+
+    // and convert that to a SwiftUI image
+    image = Image(uiImage: uiImage)
+}
+```
+
+Using the old API:
+Each filter you can ask whether it supports certain parameters and apply only if
+so:
+```swift
+// ask the filter whether these params are supported and set them if so
+let inputKeys = currentFilter.inputKeys
+if inputKeys.contains(kCIInputIntensityKey) {
+    currentFilter.setValue(amount, forKey: kCIInputIntensityKey)
+}
+```
+
+UIKit 101
+
+- UIKit has a class called UIView, which is the parent class of all views in the
+  layouts. So, labels, buttons, text fields, sliders, and so on – those are all
+  views.
+- UIKit has a class called UIViewController, which is designed to hold all the
+  code to bring views to life. Just like UIView, UIViewController has many
+  subclasses that do different kinds of work.
+- UIKit uses a design pattern called delegation to decide where work happens.
+  So, when it came to deciding how to respond to a text field changing, we’d
+  create a custom class with our functionality and make that the delegate of our
+  text field.
+
+Create a struct that conforms to UIViewControllerRepresentable, which builds on
+View but we don't need a Body property because that's handled by what UIKit
+returns:
+```swift
+struct ImagePicker: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> PHPickerViewController {
+        code
+    }
+
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
+        code
+    }
+}
+```
+
 # Day 62
 9 May
 https://www.hackingwithswift.com/100/swiftui/62
