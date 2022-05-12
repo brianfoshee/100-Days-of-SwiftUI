@@ -27,9 +27,27 @@ func makeCoordinator() -> Coordinator {
 // Coordinator handles communication between the UIViewController
 // (PHPickerViewController in this case) and SwiftUI
 class Coordinator: NSObject, PHPickerViewControllerDelegate {
-
+// add delegate methods
 }
 ```
+
+Write an image to photo library and handle callbacks, objective-c style:
+```swift
+class ImageSaver: NSObject {
+    func writeToPhotoAlbum(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
+    }
+
+    @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        print("Save finished!")
+    }
+}
+```
+
+- Mark the method using a special compiler directive called #selector, which
+  asks Swift to make sure the method name exists where we say it does.
+- Add an attribute called @objc to the method, which tells Swift to generate
+  code that can be read by Objective-C.
 
 # Day 63
 11 May

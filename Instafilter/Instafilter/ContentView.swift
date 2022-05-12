@@ -22,6 +22,14 @@ struct ContentView: View {
             Button("Select Image") {
                 showingImagePicker = true
             }
+
+            Button("Save Image") {
+                guard let inputImage = inputImage else { return }
+
+                // save image
+                let imageSaver = ImageSaver()
+                imageSaver.writeToPhotoAlbum(image: inputImage)
+            }
         }
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(image: $inputImage)
@@ -36,6 +44,17 @@ struct ContentView: View {
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
+    }
+
+    class ImageSaver: NSObject {
+        func writeToPhotoAlbum(image: UIImage) {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
+        }
+
+        // @objc tells the compiler to create objective-c bindings
+        @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+            print("Save finished")
+        }
     }
 
     func loadImageOG() {
