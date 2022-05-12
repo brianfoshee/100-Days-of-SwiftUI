@@ -3,6 +3,34 @@ Goal: be done by memorial day. Which is 56 days total.
 - [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 - [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 64
+11 May
+https://www.hackingwithswift.com/100/swiftui/64
+
+SwiftUI `Coordinators` are NOT UIKit coordinators.
+
+SwiftUI’s coordinators are designed to act as delegates for UIKit view
+controllers.
+
+SwiftUI calls `makeCoordinator()` when it creates an instance of a
+struct conforming to `UIViewControllerRepresentable` is created.
+
+```swift
+// up in makeUIViewController, set the delegate to the coordinator
+picker.delegate = context.coordinator // this is set by makeCoordinator()
+
+// this is so SwiftUI knows which Coordinator to use
+func makeCoordinator() -> Coordinator {
+    return Coordinator()
+}
+
+// Coordinator handles communication between the UIViewController
+// (PHPickerViewController in this case) and SwiftUI
+class Coordinator: NSObject, PHPickerViewControllerDelegate {
+
+}
+```
+
 # Day 63
 11 May
 https://www.hackingwithswift.com/100/swiftui/63
