@@ -10,6 +10,111 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var image: Image?
+    @State private var filterIntensity = 0.5
+
+    // image picker things
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+
+    // filter things
+    @State private var currentFilter = CIFilter.sepiaTone()
+    // contexts are expensive to make so do this once and reuse
+    let context = CIContext()
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                ZStack {
+                    Rectangle()
+                        .fill(.secondary)
+
+                    Text("Tap to select a picture")
+                        .foregroundColor(.white)
+                        .font(.headline)
+
+                    image?
+                        .resizable()
+                        .scaledToFit()
+                }
+                .onTapGesture {
+                    showingImagePicker = true
+                }
+
+                HStack {
+                    Text("Intensity")
+                    Slider(value: $filterIntensity)
+                        .onChange(of: filterIntensity) { _ in
+                            applyProcessing()
+                        }
+                }
+                .padding(.vertical)
+
+                HStack {
+                    Button("Change Filter") {
+                        // change
+                    }
+
+                    Spacer()
+
+                    Button("Save", action: save)
+                }
+            }
+            .padding([.horizontal, .bottom])
+            .navigationTitle("Instafilter")
+            // when the image picker sets inputImage this will run
+            .onChange(of: inputImage) { _ in loadImage() }
+            .sheet(isPresented: $showingImagePicker) {
+                ImagePicker(image: $inputImage)
+            }
+        }
+    }
+
+    func loadImage() {
+        guard let inputImage = inputImage else {
+            return
+        }
+
+        let beginImage = CIImage(image: inputImage)
+        currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        applyProcessing()
+    }
+
+    func applyProcessing() {
+        currentFilter.intensity = Float(filterIntensity)
+
+        guard let outputImage = currentFilter.outputImage else { return }
+
+        if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+            let uiImage = UIImage(cgImage: cgimg)
+            image = Image(uiImage: uiImage)
+        }
+    }
+
+    func save() {
+
+    }
+
+    class ImageSaver: NSObject {
+        func writeToPhotoAlbum(image: UIImage) {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
+        }
+
+        // @objc tells the compiler to create objective-c bindings
+        @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+            print("Save finished")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+/* keeping this for notes
+struct ContentView: View {
+    @State private var image: Image?
     @State private var inputImage: UIImage?
     @State private var showingImagePicker = false
 
@@ -91,9 +196,5 @@ struct ContentView: View {
         }
     }
 }
+ */
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
