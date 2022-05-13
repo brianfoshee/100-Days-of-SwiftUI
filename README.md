@@ -3,6 +3,32 @@ Goal: be done by memorial day. Which is 56 days total.
 - [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 - [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 68
+13 May
+https://www.hackingwithswift.com/100/swiftui/68
+
+Comparable Protocol
+
+How to sort arrays of custom structs?
+
+- Add the Comparable conformance to the struct definition
+- Add a method called `<` that takes two users and returns true if the first should
+be sorted before the second. `Operator Overloading`
+- This method must be static
+- Adding this method also gives us the `<` automatically
+
+```swift
+struct User: Identifiable, Comparable {
+    let id = UUID()
+    let firstName: String
+    let lastName: String
+
+    static func <(lhs: User, rhs: User) -> Bool {
+        lhs.lastName < rhs.lastName
+    }
+}
+```
+
 # Day 67
 13 May
 https://www.hackingwithswift.com/100/swiftui/67
