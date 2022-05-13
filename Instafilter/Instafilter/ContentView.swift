@@ -22,6 +22,9 @@ struct ContentView: View {
     let context = CIContext()
     @State private var showingFilterSheet = false
 
+    // image saver things
+    @State private var processedImage: UIImage?
+
     var body: some View {
         NavigationView {
             VStack {
@@ -113,6 +116,7 @@ struct ContentView: View {
         if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
             let uiImage = UIImage(cgImage: cgimg)
             image = Image(uiImage: uiImage)
+            processedImage = uiImage
         }
     }
 
@@ -122,19 +126,23 @@ struct ContentView: View {
     }
 
     func save() {
-
-    }
-
-    class ImageSaver: NSObject {
-        func writeToPhotoAlbum(image: UIImage) {
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
+        guard let processedImage = processedImage else {
+            return
         }
 
-        // @objc tells the compiler to create objective-c bindings
-        @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-            print("Save finished")
+        let imageSaver = ImageSaver()
+
+        imageSaver.successHandler = {
+            print("Success")
         }
+
+        imageSaver.errorHandler = { error in
+            print("error saving image. \(error.localizedDescription)")
+        }
+
+        imageSaver.writeToPhotoAlbum(image: processedImage)
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
