@@ -3,6 +3,70 @@ Goal: be done by memorial day. Which is 56 days total.
 - [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 - [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+# Day 69
+13 May
+https://www.hackingwithswift.com/100/swiftui/69
+
+Maps
+
+```swift
+import MapKit
+
+@State private var mapRegion = MKCoordinateRegion(
+    center: CLLocationCoordinate2D(latitude: 51.5, longitude: -0.12),
+    span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+)
+
+Map(coordinateRegion: $mapRegion)
+```
+
+Annotations
+
+1. defining a new data type that contains your location
+  - Whatever new data type you create to store locations, it must conform to the
+    Identifiable protocol so that SwiftUI can identify each map marker uniquely.
+2. creating an array of those containing all your locations
+3. adding them as annotations in the map
+
+MapMarker is the most basic annotation, just a red dot:
+```swift
+Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+    MapMarker(coordinate: location.coordinate)
+}
+```
+
+MapAnnotation allows you to customize the view:
+```swift
+Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+    MapAnnotation(coordinate: location.coordinate) {
+        Circle()
+            .stroke(.red, lineWidth: 3)
+            .frame(width: 44, height: 44)
+    }
+}
+
+// can accept tap gestures:
+MapAnnotation(coordinate: location.coordinate) {
+    Circle()
+        .stroke(.red, lineWidth: 3)
+        .frame(width: 44, height: 44)
+        .onTapGesture {
+            print("Tapped on \(location.name)")
+        }
+}
+
+// can be NavigationLinks
+MapAnnotation(coordinate: location.coordinate) {
+    NavigationLink {
+        Text(location.name)
+    } label: {
+        Circle()
+            .stroke(.red, lineWidth: 3)
+            .frame(width: 44, height: 44)
+    }
+}
+```
+
 # Day 68
 13 May
 https://www.hackingwithswift.com/100/swiftui/68
