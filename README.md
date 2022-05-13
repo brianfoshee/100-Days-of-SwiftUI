@@ -29,6 +29,53 @@ struct User: Identifiable, Comparable {
 }
 ```
 
+Reading the app's Documents directory:
+
+```swift
+func getDocumentsDirectory() -> URL {
+    // find all possible documents directories for this user
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
+    // just send back the first one, which ought to be the only one
+    return paths[0]
+}
+```
+
+`UserDefaults` is not great for storing large amounts of data. The app's
+documents directory is good for this, and it is sync'd to iCloud.
+
+`write(to:)` method takes three parameters:
+- A URL to write to.
+- Whether to make the write atomic, which means “all at once”. (usually set to
+  true)
+- What character encoding to use.
+
+```swift
+let url = getDocumentsDirectory().appendingPathComponent("message.txt")
+
+do {
+  // write the string
+  try str.write(to: url, atomically: true, encoding: .utf8)
+  // read it back
+  let input = try String(contentsOf: url)
+} catch {
+  outputOrError = error.localizedDescription
+}
+```
+
+turn the func into an extension:
+```swift
+extension FileManager {
+    static func userDocumentsDirectory() -> URL {
+        // find all possible documents directories
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
+        //just use the first one, which should be the only one
+        return paths[0]
+    }
+}
+```
+
 # Day 67
 13 May
 https://www.hackingwithswift.com/100/swiftui/67

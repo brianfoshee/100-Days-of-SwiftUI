@@ -8,28 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
-    let users = [
-        User(firstName: "Arnold", lastName: "Rimmer"),
-        User(firstName: "Kristine", lastName: "Kochanski"),
-        User(firstName: "David", lastName: "Lister"),
-    ].sorted()
+    @State private var outputOrError: String = ""
 
     var body: some View {
-        List(users) { user in
-            Text("\(user.lastName), \(user.firstName)")
+        HStack {
+            Text("Test")
+                .onTapGesture {
+                    let str = "Test Message"
+                    let url = FileManager.userDocumentsDirectory().appendingPathComponent("message.txt")
+
+                    do {
+                        try str.write(to: url, atomically: true, encoding: .utf8)
+                        let input = try String(contentsOf: url)
+                        outputOrError = input
+                    } catch {
+                        outputOrError = error.localizedDescription
+                    }
+                }
+
+            Text(outputOrError)
         }
     }
 }
 
-struct User: Identifiable, Comparable {
-    let id = UUID()
-    let firstName: String
-    let lastName: String
+extension FileManager {
+    static func userDocumentsDirectory() -> URL {
+        // find all possible documents directories
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
-    static func <(lhs: User, rhs: User) -> Bool {
-        lhs.lastName < rhs.lastName
+        //just use the first one, which should be the only one
+        return paths[0]
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
