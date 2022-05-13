@@ -8,26 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var outputOrError: String = ""
+    var loadingState = LoadingState.loading
 
     var body: some View {
-        HStack {
-            Text("Test")
-                .onTapGesture {
-                    let str = "Test Message"
-                    let url = FileManager.userDocumentsDirectory().appendingPathComponent("message.txt")
-
-                    do {
-                        try str.write(to: url, atomically: true, encoding: .utf8)
-                        let input = try String(contentsOf: url)
-                        outputOrError = input
-                    } catch {
-                        outputOrError = error.localizedDescription
-                    }
-                }
-
-            Text(outputOrError)
+        if loadingState == .loading {
+            LoadingView()
+        } else if loadingState == .success {
+            SuccessView()
+        } else {
+            FailedView() 
         }
+    }
+
+}
+
+enum LoadingState {
+    case loading, success, failed
+}
+
+struct LoadingView: View {
+    var body: some View {
+        Text("Loading...")
+    }
+}
+
+struct SuccessView: View {
+    var body: some View {
+        Text("Success!")
+    }
+}
+
+struct FailedView: View {
+    var body: some View {
+        Text("Failed.")
     }
 }
 
@@ -40,7 +53,6 @@ extension FileManager {
         return paths[0]
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

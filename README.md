@@ -76,6 +76,60 @@ extension FileManager {
 }
 ```
 
+Showing Views Conditionally
+
+Instead of using if statements with bools, use an enum for all of the
+representations of state.
+
+1. The first is to define an enum for the various view states you want to
+   represent
+
+```swift
+enum LoadingState {
+    case loading, success, failed
+}
+```
+
+2. Next, create individual views for those states. I’m just going to use simple
+   text views here, but they could hold anything:
+
+```swift
+struct LoadingView: View {
+    var body: some View {
+        Text("Loading...")
+    }
+}
+
+struct SuccessView: View {
+    var body: some View {
+        Text("Success!")
+    }
+}
+
+struct FailedView: View {
+    var body: some View {
+        Text("Failed.")
+    }
+}
+```
+
+3. use this in your content view:
+```swift
+struct ContentView: View {
+    var loadingState = LoadingState.loading
+
+    var body: some View {
+        if loadingState == .loading {
+            LoadingView()
+        } else if loadingState == .success {
+            SuccessView()
+        } else {
+            FailedView()
+        }
+    }
+}
+```
+
 # Day 67
 13 May
 https://www.hackingwithswift.com/100/swiftui/67
