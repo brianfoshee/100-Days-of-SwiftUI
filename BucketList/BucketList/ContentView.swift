@@ -14,6 +14,7 @@ struct ContentView: View {
         span: MKCoordinateSpan(latitudeDelta: 25, longitudeDelta: 25)
     )
     @State private var locations = [Location]()
+    @State private var selectedPlace: Location?
 
     var body: some View {
         ZStack {
@@ -28,6 +29,7 @@ struct ContentView: View {
                             .clipShape(Circle())
 
                         Text(location.name)
+                            .fixedSize()
                     }
                 }
             }
@@ -52,6 +54,7 @@ struct ContentView: View {
                         // create a new location{
                         let location = Location(id: UUID(), name: "New Location", description: "", latitude: mapRegion.center.latitude, longitude: mapRegion.center.longitude)
                         locations.append(location)
+                        selectedPlace = location
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -61,6 +64,14 @@ struct ContentView: View {
                     .font(.title)
                     .clipShape(Circle())
                     .padding(.trailing) // move it off the edge of the screen
+                }
+            }
+        }
+        .sheet(item: $selectedPlace) { place in
+            EditView(location: place) { newLocation in
+                // this is why Location struct has == method
+                if let index = locations.firstIndex(of: place) {
+                    locations[index] = newLocation
                 }
             }
         }

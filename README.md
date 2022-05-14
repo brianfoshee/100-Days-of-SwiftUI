@@ -11,6 +11,49 @@ https://www.hackingwithswift.com/100/swiftui/70
 
 BucketList app
 
+Can determine whether to show a sheet based on an optional(!):
+
+```swift
+@State private var selectedPlace: Location?
+
+// in view body
+.sheet(item: $selectedPlace) { place in
+  // sheet appears when selectedPlace is not nil
+  // place is unwrapped inside here
+  // sickk
+}
+```
+
+When you have a View (sheet view in this case) that needs initial values set for
+@State properties, create an initializer to set the State struct's
+`initialValue` property:
+```swift
+@State private var name: String
+@State private var description: String
+
+init(location: Location) {
+    self.location = location
+
+    _name = State(initialValue: location.name)
+    _description = State(initialValue: location.description)
+}
+```
+
+To use a callback function in a view when you don't want to pass a Binding
+object, pass a closure with @escaping
+```swift
+var onSave: (Location) -> Void
+
+init(location: Location, onsave: @escaping (Location) -> Void) {
+// .. etc
+```
+
+@escaping means the function is being stashed away for user later on, rather
+than being called immediately.
+
+fixedSize() lets us bypass MapAnnotation's clipping so the text automatically
+grows into as much space as needed.
+
 # Day 69
 13 May
 https://www.hackingwithswift.com/100/swiftui/69
