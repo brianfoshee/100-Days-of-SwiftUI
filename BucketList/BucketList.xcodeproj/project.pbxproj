@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D3076146282F1F96009B7297 /* LoadingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3076145282F1F96009B7297 /* LoadingViews.swift */; };
+		D3076148282F2358009B7297 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3076147282F2358009B7297 /* MapView.swift */; };
 		D3F82B3A282F0CBA00054466 /* BucketListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F82B39282F0CBA00054466 /* BucketListApp.swift */; };
 		D3F82B3C282F0CBA00054466 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F82B3B282F0CBA00054466 /* ContentView.swift */; };
 		D3F82B3E282F0CBB00054466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F82B3D282F0CBB00054466 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		D3076145282F1F96009B7297 /* LoadingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViews.swift; sourceTree = "<group>"; };
+		D3076147282F2358009B7297 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		D3F82B36282F0CBA00054466 /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F82B39282F0CBA00054466 /* BucketListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListApp.swift; sourceTree = "<group>"; };
 		D3F82B3B282F0CBA00054466 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				D3F82B39282F0CBA00054466 /* BucketListApp.swift */,
 				D3F82B3B282F0CBA00054466 /* ContentView.swift */,
+				D3076147282F2358009B7297 /* MapView.swift */,
 				D3076145282F1F96009B7297 /* LoadingViews.swift */,
 				D3F82B3D282F0CBB00054466 /* Assets.xcassets */,
 				D3F82B3F282F0CBB00054466 /* Preview Content */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3076146282F1F96009B7297 /* LoadingViews.swift in Sources */,
+				D3076148282F2358009B7297 /* MapView.swift in Sources */,
 				D3F82B3C282F0CBA00054466 /* ContentView.swift in Sources */,
 				D3F82B3A282F0CBA00054466 /* BucketListApp.swift in Sources */,
 			);
@@ -274,6 +278,7 @@
 				DEVELOPMENT_TEAM = 8BW8AB7SF7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your app data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -303,6 +308,7 @@
 				DEVELOPMENT_TEAM = 8BW8AB7SF7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your app data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

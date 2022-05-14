@@ -5,43 +5,43 @@
 //  Created by Brian Foshee on 13/5/22.
 //
 
-import MapKit
+import LocalAuthentication
 import SwiftUI
 
 struct ContentView: View {
-    @State private var mapRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 51.5, longitude: -0.12),
-        span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-    )
-
-    let locations = [
-        Location(name: "Buckingham Palace", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141)),
-        Location(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076))
-    ]
-
+    @State private var isUnlocked = false
     var body: some View {
-        NavigationView {
-            Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-                MapAnnotation(coordinate: location.coordinate) {
-                    NavigationLink {
-                        Text(location.name)
-                    } label: {
-                        Circle()
-                            .stroke(.red, lineWidth: 3)
-                            .frame(width: 44, height: 44)
-                    }
+        VStack {
+            if isUnlocked {
+                Text("Unlocked")
+            } else {
+                Text("locked")
+            }
+        }
+        .onAppear(perform: authenticate)
+    }
+
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, go ahead and use
+            let reason = "We need to unlock your app data"
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                if success {
+                    // auth success
+                    isUnlocked = true
+                } else {
+                    // nope
                 }
             }
-            .navigationTitle("London Explorer")
+        } else {
+            // no biometrics
         }
     }
 
-}
-
-struct Location: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
 }
 
 

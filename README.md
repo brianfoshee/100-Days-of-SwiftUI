@@ -3,6 +3,8 @@ Goal: be done by memorial day. Which is 56 days total.
 - [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 - [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
+Notes for each Day:
+
 # Day 69
 13 May
 https://www.hackingwithswift.com/100/swiftui/69
@@ -66,6 +68,56 @@ MapAnnotation(coordinate: location.coordinate) {
     }
 }
 ```
+
+Securing with FaceID or TouchID
+
+For some reason we pass the Touch ID request reason in code, and the Face ID
+request reason in project options.
+
+Add to target's info `Privacy - Face ID Usage Description` with message about
+why you need.
+
+Then `import LocalAuthentication`.
+
+1. Create instance of LAContext, which allows us to query biometric status and
+   perform the authentication check.
+2. Ask that context whether it’s capable of performing biometric authentication.
+   this is important because iPod touch has neither Touch ID nor Face ID.
+3. If biometrics are possible, then we kick off the actual request for
+   authentication, passing in a closure to run when authentication completes.
+4. When the user has either been authenticated or not, our completion closure
+   will be called and tell us whether it worked or not, and if not what the
+   error was.
+
+```swift
+func authenticate() {
+    let context = LAContext()
+    var error: NSError?
+
+    // check whether biometric authentication is possible
+    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+        // it's possible, so go ahead and use it
+        let reason = "We need to unlock your data."
+
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+            // authentication has now completed
+            if success {
+                // authenticated successfully
+            } else {
+                // there was a problem
+            }
+        }
+    } else {
+        // no biometrics
+    }
+}
+```
+
+To get this to work in the simulator:  go to the Features menu and choose Face
+ID > Enrolled, then launch the app again. This time you should see the Face ID
+prompt appear, and you can trigger successful or failed authentication by going
+back to the Features menu and choosing Face ID > Matching Face or Non-matching
+Face.
 
 # Day 68
 13 May
