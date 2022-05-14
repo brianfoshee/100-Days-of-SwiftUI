@@ -44,6 +44,27 @@ safe. So, by adding the @MainActor attribute here we’re taking a “belt and
 braces” approach: we’re telling Swift every part of this class should run on the
 main actor, so it’s safe to update the UI, no matter where it’s used.
 
+Important Caveat: if we specifcally tell the app to call this code from
+elsewhere it will not run on the main actor, for instance if we ask to unlock
+with FaceID and its callback calls code here it will not run on the main actor.
+
+One option to fix is to create a background task, then run something on the
+MainActor:
+```swift
+Task {
+    await MainActor.run {
+        self.isUnlocked = true
+    }
+}
+```
+
+A better option is to tell the Task to run on the MainActor directly:
+```swift
+Task { @MainActor in
+    self.isUnlocked = true
+}
+```
+
 there will be a compiler warning about the main actor not appearing in a default
 value. [Ignore, see this
 article](https://www.hackingwithswift.com/forums/swiftui/expression-requiring-global-actor-mainactor-cannot-appear-in-default-value-expression-of-property-vm-this-is-an-error-in-swift-6/13695)
@@ -53,7 +74,9 @@ tests for your code. Views work best when they handle presentation of data,
 meaning that manipulation of data is a great candidate for code to move into a
 view model.
 
-Encrypting saved data
+Encrypting saved data. Note: this will not enforce faceid/touchid upon reading!
+It just encrypts at rest. Add the faceid stuff to unlock the app if it needs
+protecting.
 
 ```swift
 let data = try JSONEncoder().encode(locations)

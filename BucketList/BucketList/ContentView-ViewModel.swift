@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import LocalAuthentication
 import MapKit
 
 extension ContentView {
@@ -16,6 +17,7 @@ extension ContentView {
         )
         @Published private(set) var locations: [Location]
         @Published var selectedPlace: Location?
+        @Published var isUnlocked = false
 
         let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedPlaces")
 
@@ -61,5 +63,29 @@ extension ContentView {
                 save()
             }
         }
+
+        func authenticate() {
+            let context = LAContext()
+            var error: NSError?
+
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                let reason = "Please auth yourself to get your places"
+
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authError in
+                    // this completion closure is not called on the main actor, so modifying isUnlocked
+                    // is a compiler error. Wrap it in a task instead.
+                    if success {
+                        Task { @MainActor in
+                            self.isUnlocked = true
+                        }
+                    } else {
+                        // error
+                    }
+                }
+            } else {
+                // no biometrics
+            }
+        }
+
     }
 }
