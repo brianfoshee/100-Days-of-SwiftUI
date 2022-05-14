@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 /*
  Identifiable, so we can create many location markers in our map.
@@ -18,4 +19,15 @@ struct Location: Identifiable, Codable, Equatable {
     var description: String
     var latitude: Double
     var longitude: Double
+
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+
+    static func ==(lhs: Location, rhs: Location) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    static let example = Location(id: UUID(), name: "Buckingham Palace", description: "Where Queen Elizabeth lives with her dorgis.", latitude: 51.501, longitude: -0.141)
+
 }
