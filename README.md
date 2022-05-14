@@ -5,6 +5,61 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 72
+14 May
+https://www.hackingwithswift.com/100/swiftui/72
+
+MVVM: Model View View-Model
+
+a way of getting some of our program state and logic out of our view structs. We
+are, in effect, separating logic from layout.
+
+Creating `ContentView-ViewModel.swift` file. We’re going to use this to create a
+new class that manages our data, and manipulates it on behalf of the ContentView
+struct so that our view doesn’t really care how the underlying data system
+works.
+
+The main actor is responsible for running all user interface updates, and adding
+that attribute to the class means we want all its code – any time it runs
+anything, unless we specifically ask otherwise – to run on that main actor.
+
+```swift
+extension ContentView {
+    // this ViewModel is only for ContentView
+    @MainActor class ViewModel: ObservableObject {
+
+    }
+}
+```
+
+behind the scenes whenever we use @StateObject or @ObservedObject Swift was
+silently inferring the @MainActor attribute for us – it knows that both mean a
+SwiftUI view is relying on an external object to trigger its UI updates, and so
+it will make sure all the work automatically happens on the main actor.
+
+However, that doesn’t provide 100% safety. Yes, Swift will infer this when used
+from a SwiftUI view, but what if you access your class from somewhere else –
+from another class, for example? Then the code could run anywhere, which isn’t
+safe. So, by adding the @MainActor attribute here we’re taking a “belt and
+braces” approach: we’re telling Swift every part of this class should run on the
+main actor, so it’s safe to update the UI, no matter where it’s used.
+
+there will be a compiler warning about the main actor not appearing in a default
+value. [Ignore, see this
+article](https://www.hackingwithswift.com/forums/swiftui/expression-requiring-global-actor-mainactor-cannot-appear-in-default-value-expression-of-property-vm-this-is-an-error-in-swift-6/13695)
+
+having all this functionality in a separate class makes it much easier to write
+tests for your code. Views work best when they handle presentation of data,
+meaning that manipulation of data is a great candidate for code to move into a
+view model.
+
+Encrypting saved data
+
+```swift
+let data = try JSONEncoder().encode(locations)
+try data.write(to: savePath, options: [.atomic, .completeFileProtection])
+```
+
 # Day 71
 14 May
 https://www.hackingwithswift.com/100/swiftui/71

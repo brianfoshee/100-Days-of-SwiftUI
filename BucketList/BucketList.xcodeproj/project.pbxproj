@@ -13,6 +13,8 @@
 		D307614C282F2FDD009B7297 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D307614B282F2FDD009B7297 /* Location.swift */; };
 		D307614E282F366F009B7297 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D307614D282F366F009B7297 /* EditView.swift */; };
 		D30761572830668D009B7297 /* WikipediaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30761562830668D009B7297 /* WikipediaResult.swift */; };
+		D307615928306C1B009B7297 /* ContentView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D307615828306C1B009B7297 /* ContentView-ViewModel.swift */; };
+		D307615B28307150009B7297 /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D307615A28307150009B7297 /* FileManager-DocumentsDirectory.swift */; };
 		D3F82B3A282F0CBA00054466 /* BucketListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F82B39282F0CBA00054466 /* BucketListApp.swift */; };
 		D3F82B3C282F0CBA00054466 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F82B3B282F0CBA00054466 /* ContentView.swift */; };
 		D3F82B3E282F0CBB00054466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F82B3D282F0CBB00054466 /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 		D307614B282F2FDD009B7297 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		D307614D282F366F009B7297 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		D30761562830668D009B7297 /* WikipediaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaResult.swift; sourceTree = "<group>"; };
+		D307615828306C1B009B7297 /* ContentView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView-ViewModel.swift"; sourceTree = "<group>"; };
+		D307615A28307150009B7297 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
 		D3F82B36282F0CBA00054466 /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F82B39282F0CBA00054466 /* BucketListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListApp.swift; sourceTree = "<group>"; };
 		D3F82B3B282F0CBA00054466 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,9 +67,11 @@
 		D3F82B38282F0CBA00054466 /* BucketList */ = {
 			isa = PBXGroup;
 			children = (
+				D307615A28307150009B7297 /* FileManager-DocumentsDirectory.swift */,
 				D3F82B39282F0CBA00054466 /* BucketListApp.swift */,
 				D3F82B3B282F0CBA00054466 /* ContentView.swift */,
 				D307614D282F366F009B7297 /* EditView.swift */,
+				D307615828306C1B009B7297 /* ContentView-ViewModel.swift */,
 				D30761562830668D009B7297 /* WikipediaResult.swift */,
 				D307614B282F2FDD009B7297 /* Location.swift */,
 				D3076149282F2A3D009B7297 /* AuthView.swift */,
@@ -159,7 +165,9 @@
 				D307614A282F2A3D009B7297 /* AuthView.swift in Sources */,
 				D3076148282F2358009B7297 /* MapView.swift in Sources */,
 				D3F82B3C282F0CBA00054466 /* ContentView.swift in Sources */,
+				D307615928306C1B009B7297 /* ContentView-ViewModel.swift in Sources */,
 				D307614E282F366F009B7297 /* EditView.swift in Sources */,
+				D307615B28307150009B7297 /* FileManager-DocumentsDirectory.swift in Sources */,
 				D307614C282F2FDD009B7297 /* Location.swift in Sources */,
 				D30761572830668D009B7297 /* WikipediaResult.swift in Sources */,
 				D3F82B3A282F0CBA00054466 /* BucketListApp.swift in Sources */,
