@@ -5,6 +5,20 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 71
+14 May
+https://www.hackingwithswift.com/100/swiftui/71
+
+we can use + to add text views together. This lets us create larger text views
+that mix and match different kinds of formatting.
+```swift
+Text(page.title)
+       .font(.headline)
+   + Text(": ") +
+   Text("Page description here")
+       .italic()
+```
+
 # Day 70
 13 May
 https://www.hackingwithswift.com/100/swiftui/70
