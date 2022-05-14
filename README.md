@@ -5,6 +5,12 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 70
+13 May
+https://www.hackingwithswift.com/100/swiftui/70
+
+BucketList app
+
 # Day 69
 13 May
 https://www.hackingwithswift.com/100/swiftui/69
