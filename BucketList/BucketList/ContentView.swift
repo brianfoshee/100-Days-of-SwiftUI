@@ -50,13 +50,13 @@ struct ContentView: View {
                             viewModel.addLocation()
                         } label: {
                             Image(systemName: "plus")
+                                .padding() // make sure the button is large before adding bkg
+                                .background(.black.opacity(0.75))
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .clipShape(Circle())
+                                .padding(.trailing) // move it off the edge of the screen
                         }
-                        .padding() // make sure the button is large before adding bkg
-                        .background(.black.opacity(0.75))
-                        .foregroundColor(.white)
-                        .font(.title)
-                        .clipShape(Circle())
-                        .padding(.trailing) // move it off the edge of the screen
                     }
                 }
             } else {
@@ -74,6 +74,9 @@ struct ContentView: View {
             EditView(location: place) { newLocation in
                 viewModel.update(location: newLocation)
             }
+        }
+        .alert("Auth Error", isPresented: $viewModel.authError) {
+            Button("OK") { }
         }
     }
 

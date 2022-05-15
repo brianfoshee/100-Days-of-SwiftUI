@@ -18,6 +18,7 @@ extension ContentView {
         @Published private(set) var locations: [Location]
         @Published var selectedPlace: Location?
         @Published var isUnlocked = false
+        @Published var authError = false
 
         let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedPlaces")
 
@@ -71,7 +72,7 @@ extension ContentView {
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 let reason = "Please auth yourself to get your places"
 
-                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authError in
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
                     // this completion closure is not called on the main actor, so modifying isUnlocked
                     // is a compiler error. Wrap it in a task instead.
                     if success {
@@ -80,10 +81,16 @@ extension ContentView {
                         }
                     } else {
                         // error
+                        Task { @MainActor in
+                            self.authError = true
+                        }
                     }
                 }
             } else {
                 // no biometrics
+                Task { @MainActor in
+                    self.authError = true
+                }
             }
         }
 
