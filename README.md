@@ -5,6 +5,12 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 75
+16 May
+https://www.hackingwithswift.com/100/swiftui/75
+
+update old projects for accessibility
+
 # Day 74
 15 May
 https://www.hackingwithswift.com/100/swiftui/74
