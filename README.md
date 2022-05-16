@@ -5,6 +5,71 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 74
+15 May
+https://www.hackingwithswift.com/100/swiftui/74
+
+We can control what VoiceOver reads for a given view by attaching two modifiers:
+.accessibilityLabel() and .accessibilityHint(). They both take text containing
+anything we want, but they serve different purposes:
+
+- The label is read immediately, and should be a short piece of text that gets
+  right to the point. If this view deletes an item from the user’s data, it
+  might say “Delete”.
+- The hint is read after a short delay, and should provide more details on what
+  the view is there for. It might say “Deletes an email from your inbox”, for
+  example.
+
+```swift
+Image()
+  .onTapGesture { }
+  .accessibilityLabel(labels[selectedPicture])
+  .accessibilityAddTraits(.isButton)
+  .accessibilityRemoveTraits(.isImage)
+```
+
+it’s important we ensure our UI removes as much clutter as possible there are
+several ways we can control what VoiceOver reads out. There are three in
+particular I want to focus on:
+
+- Marking images as being unimportant for VoiceOver.
+- Hiding views from the accessibility system.
+- Grouping several views as one.
+
+we can tell SwiftUI that a particular image is just there to make the UI look
+better by using `Image(decorative:)`. tells SwiftUI it should be ignored by
+VoiceOver. `.accessibilityHidden()` modifier, which makes any view completely
+invisible to the accessibility system:
+
+VoiceOver sees this as two unrelated text views, and so it will either read
+“Your score is” or “1000” depending on what the user has selected. Both of those
+are unhelpful, which is where the .accessibilityElement(children:) modifier
+comes in: we can apply it to a parent view, and ask it to combine children into
+a single accessibility element:
+```swift
+VStack {
+    Text("Your score is")
+    Text("1000")
+        .font(.title)
+}
+.accessibilityElement(children: .combine)
+```
+
+A better solution:
+```swift
+VStack {
+    Text("Your score is")
+    Text("1000")
+        .font(.title)
+}
+.accessibilityElement(children: .ignore)
+.accessibilityLabel("Your score is 1000")
+```
+
+.ignore is the default parameter for children, so you can get the same results
+as .accessibilityElement(children: .ignore) just by saying
+.accessibilityElement().
+
 # Day 73
 14 May
 https://www.hackingwithswift.com/100/swiftui/73
