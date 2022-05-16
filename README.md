@@ -70,6 +70,35 @@ VStack {
 as .accessibilityElement(children: .ignore) just by saying
 .accessibilityElement().
 
+We can specify custom swipe actions using accessibilityAdjustableAction()
+
+```swift
+VStack {
+    Text("Value: \(value)")
+
+    Button("Increment") {
+        value += 1
+    }
+
+    Button("Decrement") {
+        value -= 1
+    }
+}
+.accessibilityElement()
+.accessibilityLabel("Value")
+.accessibilityValue(String(value))
+.accessibilityAdjustableAction { direction in
+    switch direction {
+    case .increment:
+        value += 1
+    case .decrement:
+        value -= 1
+    default:
+        print("Not handled.")
+    }
+}
+```
+
 # Day 73
 14 May
 https://www.hackingwithswift.com/100/swiftui/73
