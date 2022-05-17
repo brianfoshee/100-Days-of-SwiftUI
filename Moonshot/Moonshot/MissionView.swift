@@ -37,6 +37,7 @@ struct MissionView: View {
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.6)
                         .padding(.top)
+                        .accessibilityLabel("\(mission.displayName) badge")
 
                     Text(mission.formattedLaunchDate)
 
@@ -51,13 +52,12 @@ struct MissionView: View {
                         Text(mission.description)
 
                         CustomSpacer()
-
-                        Text("Crew")
-                            .font(.title.bold())
-                            .padding(.bottom, 5)
                     }
                     .padding(.horizontal)
                     
+                    Text("Crew")
+                        .font(.title.bold())
+                        .padding(.bottom, 5)
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
@@ -74,6 +74,7 @@ struct MissionView: View {
                                                 Capsule()
                                                     .strokeBorder(.white, lineWidth: 1)
                                             )
+                                            .accessibilityHidden(true)
 
                                         VStack(alignment: .leading) {
                                             Text(crewMember.astronaut.name)
@@ -83,6 +84,8 @@ struct MissionView: View {
                                             Text(crewMember.role)
                                                 .foregroundColor(.secondary)
                                         }
+                                        .accessibilityElement(children: .ignore)
+                                        .accessibilityLabel("\(crewMember.astronaut.name): \(crewMember.role)")
                                     }
                                     .padding(.horizontal)
                                 }

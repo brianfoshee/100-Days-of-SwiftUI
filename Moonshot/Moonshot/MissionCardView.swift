@@ -20,6 +20,7 @@ struct MissionCardView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .padding()
+                    .accessibilityLabel("\(mission.displayName) badge")
 
                 VStack {
                     Text(mission.displayName)
@@ -32,6 +33,8 @@ struct MissionCardView: View {
                 .padding(.vertical)
                 .frame(maxWidth: .infinity)
                 .background(.lightBackground)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("\(mission.displayName) launched on \(mission.formattedLaunchDate)")
             }
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay {

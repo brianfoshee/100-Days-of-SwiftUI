@@ -106,6 +106,9 @@ struct ItemView: View {
             Text(item.amount, format: .currency(code: currencyCode))
                 .foregroundColor(amountColor)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(item.name): \(item.amount)")
+        .accessibilityHint("\(item.type) expense")
     }
 }
 
