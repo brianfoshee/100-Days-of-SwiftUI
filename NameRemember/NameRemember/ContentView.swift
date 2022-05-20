@@ -14,7 +14,6 @@ struct ContentView: View {
     @State private var image: Image?
 
     // naming image things
-    @State private var showingNameImageSheet = false
     @State private var imageName = ""
 
     // need an array of objects that has an image and a string
@@ -22,11 +21,22 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                image?
-                    .resizable()
-                    .scaledToFit()
+                if image != nil {
+                    VStack {
+                        Text("Name this face")
+                            .font(.headline)
 
-                Text(imageName)
+                        HStack {
+                            image?
+                                .resizable()
+                                .scaledToFit()
+
+                            TextField("Image Name", text: $imageName)
+                        }
+
+                        Button("Save") { }
+                    }
+                }
             }
             .navigationTitle("Name Remember")
             .toolbar {
@@ -40,11 +50,6 @@ struct ContentView: View {
                 ImagePicker(image: $selectedImage)
             }
             .onChange(of: selectedImage) { _ in addImage() }
-            .sheet(isPresented: $showingNameImageSheet) {
-                NameImageView(image: image, onSave: { name in
-                    imageName = name
-                })
-            }
         }
     }
 
@@ -54,7 +59,6 @@ struct ContentView: View {
         }
 
         image = Image(uiImage: selectedImage)
-        showingNameImageSheet = true
     }
 }
 
