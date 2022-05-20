@@ -12,6 +12,10 @@ struct ContentView: View {
     @State private var showingImagePicker = false
     @State private var selectedImage: UIImage?
 
+    // naming image things
+    @State private var showingNameImageSheet = false
+    @State private var imageName = ""
+
     // temp things for setting up
     @State private var image: Image?
 
@@ -22,6 +26,7 @@ struct ContentView: View {
                     .resizable()
                     .scaledToFit()
 
+                Text(imageName)
             }
             .navigationTitle("Name Remember")
             .toolbar {
@@ -35,6 +40,9 @@ struct ContentView: View {
                 ImagePicker(image: $selectedImage)
             }
             .onChange(of: selectedImage) { _ in addImage() }
+            .sheet(isPresented: $showingNameImageSheet) {
+                NameImageView(image: image, name: $imageName)
+            }
         }
     }
 
@@ -44,6 +52,7 @@ struct ContentView: View {
         }
 
         image = Image(uiImage: selectedImage)
+        showingNameImageSheet = true
     }
 }
 
