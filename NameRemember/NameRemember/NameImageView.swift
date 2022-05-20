@@ -11,7 +11,9 @@ struct NameImageView: View {
     @Environment(\.dismiss) var dismiss
 
     var image: Image?
-    @Binding var name: String
+    @State private var name = ""
+
+    var onSave: (String) -> Void
 
     var body: some View {
         NavigationView {
@@ -28,6 +30,7 @@ struct NameImageView: View {
             .navigationTitle("Name this Image")
             .toolbar {
                 Button("Save") {
+                    onSave(name)
                     dismiss()
                 }
             }
@@ -36,8 +39,7 @@ struct NameImageView: View {
 }
 
 struct NameImageView_Previews: PreviewProvider {
-    @State static var name = "brian"
     static var previews: some View {
-        NameImageView(name: $name)
+        NameImageView(onSave: { _ in })
     }
 }

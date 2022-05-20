@@ -11,14 +11,14 @@ struct ContentView: View {
     // image picker things
     @State private var showingImagePicker = false
     @State private var selectedImage: UIImage?
+    @State private var image: Image?
 
     // naming image things
     @State private var showingNameImageSheet = false
     @State private var imageName = ""
 
-    // temp things for setting up
-    @State private var image: Image?
-
+    // need an array of objects that has an image and a string
+    
     var body: some View {
         NavigationView {
             List {
@@ -41,7 +41,9 @@ struct ContentView: View {
             }
             .onChange(of: selectedImage) { _ in addImage() }
             .sheet(isPresented: $showingNameImageSheet) {
-                NameImageView(image: image, name: $imageName)
+                NameImageView(image: image, onSave: { name in
+                    imageName = name
+                })
             }
         }
     }
