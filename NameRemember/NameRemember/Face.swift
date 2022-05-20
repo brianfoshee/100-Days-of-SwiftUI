@@ -7,8 +7,18 @@
 
 import Foundation
 import PhotosUI
+import SwiftUI
 
-struct Face {
+struct Face: Identifiable, Comparable {
+    var id = UUID()
     var image: UIImage
     var name: String
+
+    var displayableImage: Image {
+        Image(uiImage: image)
+    }
+
+    static func <(lhs: Face, rhs: Face) -> Bool {
+        lhs.name < rhs.name
+    }
 }
