@@ -5,9 +5,69 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 78
+20 May
+https://www.hackingwithswift.com/100/swiftui/78
+
+Adding a map to the Face Remember app.
+
+Fetch a user's location:
+
+```swift
+import CoreLocation
+
+class LocationFetcher: NSObject, CLLocationManagerDelegate {
+    let manager = CLLocationManager()
+    var lastKnownLocation: CLLocationCoordinate2D?
+
+    override init() {
+        super.init()
+        manager.delegate = self
+    }
+
+    func start() {
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        lastKnownLocation = locations.first?.coordinate
+    }
+}
+```
+
+Use it like:
+```swift
+struct ContentView: View {
+    let locationFetcher = LocationFetcher()
+
+    var body: some View {
+        VStack {
+            Button("Start Tracking Location") {
+                self.locationFetcher.start()
+            }
+
+            Button("Read Location") {
+                if let location = self.locationFetcher.lastKnownLocation {
+                    print("Your location is \(location)")
+                } else {
+                    print("Your location is unknown")
+                }
+            }
+        }
+    }
+}
+```
+
+# Day 77
+20 May
+https://www.hackingwithswift.com/100/swiftui/77
+
+Face Remember app.
+
 # Day 76
 16 May
-https://www.hackingwithswift.com/100/swiftui/75
+https://www.hackingwithswift.com/100/swiftui/76
 
 challenges.
 

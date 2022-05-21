@@ -8,10 +8,13 @@
 import Foundation
 import PhotosUI
 import SwiftUI
+import MapKit
 
 struct Face: Identifiable, Comparable, Codable {
     var id = UUID()
     var name: String
+    var latitude: Double
+    var longitude: Double
 
     // lazy load the image from storage
     var image: Image {
@@ -24,13 +27,19 @@ struct Face: Identifiable, Comparable, Codable {
         return Image(systemName: "x.square")
     }
 
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+
     // where the image is stored in the device's documents directory
     var imageURL: URL {
         FileManager.userDocumentsDirectory.appendingPathComponent("\(id).jpg")
     }
 
-    init(image: UIImage, name: String) {
+    init(image: UIImage, name: String, latitude: Double, longitude: Double) {
         self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
         
         // save image
         self.saveImage(image: image)

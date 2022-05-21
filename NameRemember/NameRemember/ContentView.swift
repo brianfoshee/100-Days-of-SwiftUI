@@ -18,6 +18,8 @@ struct ContentView: View {
 
     // need an array of objects that has an image and a string
     @State private var faces = [Face]()
+
+    let locationFetcher = LocationFetcher()
     
     var body: some View {
         NavigationView {
@@ -40,7 +42,16 @@ struct ContentView: View {
                                 return
                             }
 
-                            let face = Face(image: selectedImage, name: imageName)
+                            var latitude = 0.0
+                            var longitude = 0.0
+                            if let location = self.locationFetcher.lastKnownLocation {
+                                latitude = location.latitude
+                                longitude = location.longitude
+                            } else {
+                                print("Your location is unknown")
+                            }
+
+                            let face = Face(image: selectedImage, name: imageName, latitude: latitude, longitude: longitude)
                             faces.append(face)
                             do {
                                 try Face.save(faces: faces)
@@ -57,13 +68,8 @@ struct ContentView: View {
                 }
 
                 ForEach(faces.sorted()) { face in
-                    // show each face
                     NavigationLink {
-                        Text(face.name)
-
-                        face.image
-                            .resizable()
-                            .scaledToFit()
+                        FaceView(face: face)
                     } label: {
                         VStack {
                             Text(face.name)
@@ -78,6 +84,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
+                self.locationFetcher.start()
                 do {
                     faces = try Face.load()
                 } catch {

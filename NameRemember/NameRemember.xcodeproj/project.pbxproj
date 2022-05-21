@@ -14,6 +14,8 @@
 		D36A82D12838511800E441FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82D02838511800E441FC /* ImagePicker.swift */; };
 		D36A82D52838595C00E441FC /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82D42838595C00E441FC /* Face.swift */; };
 		D36A82D72838606100E441FC /* Filemanager+DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82D62838606100E441FC /* Filemanager+DocumentsDirectory.swift */; };
+		D36A82D92838685300E441FC /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82D82838685300E441FC /* UserLocation.swift */; };
+		D36A82DB28386B2100E441FC /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82DA28386B2100E441FC /* FaceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		D36A82D02838511800E441FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D36A82D42838595C00E441FC /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		D36A82D62838606100E441FC /* Filemanager+DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filemanager+DocumentsDirectory.swift"; sourceTree = "<group>"; };
+		D36A82D82838685300E441FC /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		D36A82DA28386B2100E441FC /* FaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +63,9 @@
 			children = (
 				D31DC91F283322F5008C21E3 /* NameRememberApp.swift */,
 				D31DC921283322F5008C21E3 /* ContentView.swift */,
+				D36A82DA28386B2100E441FC /* FaceView.swift */,
 				D36A82D42838595C00E441FC /* Face.swift */,
+				D36A82D82838685300E441FC /* UserLocation.swift */,
 				D36A82D62838606100E441FC /* Filemanager+DocumentsDirectory.swift */,
 				D36A82D02838511800E441FC /* ImagePicker.swift */,
 				D31DC923283322F6008C21E3 /* Assets.xcassets */,
@@ -148,7 +154,9 @@
 			files = (
 				D36A82D12838511800E441FC /* ImagePicker.swift in Sources */,
 				D36A82D52838595C00E441FC /* Face.swift in Sources */,
+				D36A82DB28386B2100E441FC /* FaceView.swift in Sources */,
 				D36A82D72838606100E441FC /* Filemanager+DocumentsDirectory.swift in Sources */,
+				D36A82D92838685300E441FC /* UserLocation.swift in Sources */,
 				D31DC922283322F5008C21E3 /* ContentView.swift in Sources */,
 				D31DC920283322F5008C21E3 /* NameRememberApp.swift in Sources */,
 			);
@@ -282,6 +290,7 @@
 				DEVELOPMENT_TEAM = 8BW8AB7SF7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To store where you met a person";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to add people ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -312,6 +321,7 @@
 				DEVELOPMENT_TEAM = 8BW8AB7SF7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To store where you met a person";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to add people ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
