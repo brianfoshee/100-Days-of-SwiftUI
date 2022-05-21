@@ -97,6 +97,58 @@ List {
 }
 ```
 
+Local Notifications
+
+UserNotifications lets us create notifications to the user that can be shown on
+the lock screen. We have two types of notifications to work with, and they
+differ depending on where they were created: local notifications are ones we
+schedule locally, and remote notifications (commonly called push notifications)
+are sent from a server somewhere. You have to request permissions to send them.
+
+```swift
+import UserNotifications
+
+// button stuff
+// Request Permissions:
+UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+    if success {
+        print("All set!")
+    } else if let error = error {
+        print(error.localizedDescription)
+    }
+}
+```
+
+Apple breaks them down into three parts to give it maximum flexibility:
+
+- The content is what should be shown, and can be a title, subtitle, sound,
+  image, and so on.
+- The trigger determines when the notification should be shown, and can be a
+  number of seconds from now, a date and time in the future, or a location.
+- The request combines the content and trigger, but also adds a unique
+  identifier so you can edit or remove specific alerts later on. If you don’t
+  want to edit or remove stuff, use UUID().uuidString to get a random
+  identifier.
+
+The easiest trigger type to use is UNTimeIntervalNotificationTrigger, which lets
+us request a notification to be shown in a certain number of seconds from now:
+
+```swift
+let content = UNMutableNotificationContent()
+content.title = "Feed the dog"
+content.subtitle = "It looks hungry"
+content.sound = UNNotificationSound.default
+
+// schedule for 5s in the future
+let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+// choose a random identifier
+let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+// add the notifcation request
+UNUserNotificationCenter.current().add(request)
+```
+
 # Day 80
 20 May
 https://www.hackingwithswift.com/100/swiftui/80

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 
 struct ContentView: View {
@@ -13,47 +14,31 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            // swipe actions stuff
-            List {
-                Text("Taylor Swift")
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            print("Hi")
-                        } label: {
-                            Label("Delete", systemImage: "minus.circle")
-                        }
-                    }
-                    .swipeActions(edge: .leading) {
-                        Button {
-                            print("Hi")
-                        } label: {
-                            Label("Pin", systemImage: "pin")
-                        }
-                        .tint(.orange)
-                    }
-            }
-            // context menu stuff
-            Text("Hello World")
-                .padding()
-                .background(backgroundColor)
-
-            Text("Change Color")
-                .padding()
-                .contextMenu {
-                    Button {
-                        backgroundColor = .red
-                    } label: {
-                        Label("Red", systemImage: "checkmark.circle.fill")
-                    }
-                    
-                    Button("Green") {
-                        backgroundColor = .green
-                    }
-
-                    Button("Blue") {
-                        backgroundColor = .blue
+            Button("Request Permission") {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                    if success {
+                        print("All set!")
+                    } else if let error = error {
+                        print(error.localizedDescription)
                     }
                 }
+            }
+
+            Button("Schedule Notification") {
+                let content = UNMutableNotificationContent()
+                content.title = "Feed the dog"
+                content.subtitle = "It looks hungry"
+                content.sound = UNNotificationSound.default
+
+                // schedule for 5s in the future
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+                // choose a random identifier
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                // add the notifcation request
+                UNUserNotificationCenter.current().add(request)
+            }
         }
     }
 
