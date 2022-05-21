@@ -9,13 +9,53 @@ import Foundation
 import PhotosUI
 import SwiftUI
 
-struct Face: Identifiable, Comparable {
+struct Face: Identifiable, Comparable, Codable {
     var id = UUID()
-    var image: UIImage
     var name: String
 
-    var displayableImage: Image {
-        Image(uiImage: image)
+    // lazy load the image from storage
+    var image: Image {
+        if let data = try? Data(contentsOf: imageURL) {
+            if let uiImg = UIImage(data: data) {
+                return Image(uiImage: uiImg)
+            }
+        }
+
+        return Image(systemName: "x.square")
+    }
+
+    // where the image is stored in the device's documents directory
+    var imageURL: URL {
+        FileManager.userDocumentsDirectory.appendingPathComponent("\(id).jpg")
+    }
+
+    init(image: UIImage, name: String) {
+        self.name = name
+        
+        // save image
+        self.saveImage(image: image)
+    }
+
+    func saveImage(image: UIImage) {
+        if let jpegData = image.jpegData(compressionQuality: 0.8) {
+            try? jpegData.write(to: imageURL, options: [.atomic, .completeFileProtection])
+        }
+    }
+
+    // where the json file containing face names and IDs is stored
+    static var dataPath: URL {
+        FileManager.userDocumentsDirectory.appendingPathComponent("faces.json")
+    }
+
+    static func save(faces: [Face]) throws {
+        let data = try JSONEncoder().encode(faces)
+        try data.write(to: dataPath, options: [.atomic, .completeFileProtection])
+    }
+
+    static func load() throws -> [Face] {
+        let data = try Data(contentsOf: dataPath)
+        let faces = try JSONDecoder().decode([Face].self, from: data)
+        return faces
     }
 
     static func <(lhs: Face, rhs: Face) -> Bool {

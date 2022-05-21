@@ -13,6 +13,7 @@
 		D31DC927283322F6008C21E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D31DC926283322F6008C21E3 /* Preview Assets.xcassets */; };
 		D36A82D12838511800E441FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82D02838511800E441FC /* ImagePicker.swift */; };
 		D36A82D52838595C00E441FC /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82D42838595C00E441FC /* Face.swift */; };
+		D36A82D72838606100E441FC /* Filemanager+DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36A82D62838606100E441FC /* Filemanager+DocumentsDirectory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		D31DC926283322F6008C21E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D36A82D02838511800E441FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D36A82D42838595C00E441FC /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
+		D36A82D62838606100E441FC /* Filemanager+DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filemanager+DocumentsDirectory.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				D31DC91F283322F5008C21E3 /* NameRememberApp.swift */,
 				D31DC921283322F5008C21E3 /* ContentView.swift */,
 				D36A82D42838595C00E441FC /* Face.swift */,
+				D36A82D62838606100E441FC /* Filemanager+DocumentsDirectory.swift */,
 				D36A82D02838511800E441FC /* ImagePicker.swift */,
 				D31DC923283322F6008C21E3 /* Assets.xcassets */,
 				D31DC925283322F6008C21E3 /* Preview Content */,
@@ -145,6 +148,7 @@
 			files = (
 				D36A82D12838511800E441FC /* ImagePicker.swift in Sources */,
 				D36A82D52838595C00E441FC /* Face.swift in Sources */,
+				D36A82D72838606100E441FC /* Filemanager+DocumentsDirectory.swift in Sources */,
 				D31DC922283322F5008C21E3 /* ContentView.swift in Sources */,
 				D31DC920283322F5008C21E3 /* NameRememberApp.swift in Sources */,
 			);

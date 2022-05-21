@@ -42,6 +42,11 @@ struct ContentView: View {
 
                             let face = Face(image: selectedImage, name: imageName)
                             faces.append(face)
+                            do {
+                                try Face.save(faces: faces)
+                            } catch {
+                                print("error saving faces \(error.localizedDescription)")
+                            }
 
                             // reset values for another image
                             self.selectedImage = nil
@@ -56,7 +61,7 @@ struct ContentView: View {
                     NavigationLink {
                         Text(face.name)
 
-                        face.displayableImage
+                        face.image
                             .resizable()
                             .scaledToFit()
                     } label: {
@@ -64,12 +69,19 @@ struct ContentView: View {
                             Text(face.name)
                                 .font(.headline)
 
-                            face.displayableImage
+                            face.image
                                 .resizable()
                                 .scaledToFit()
 
                         }
                     }
+                }
+            }
+            .onAppear {
+                do {
+                    faces = try Face.load()
+                } catch {
+                    print("could not load faces \(error.localizedDescription)")
                 }
             }
             .navigationTitle("Name Remember")
