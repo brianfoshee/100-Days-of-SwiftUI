@@ -5,8 +5,12 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 82
+21 May
+https://www.hackingwithswift.com/100/swiftui/82
+
 # Day 81
-20 May
+21 May
 https://www.hackingwithswift.com/100/swiftui/81
 
 Context Menus
