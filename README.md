@@ -52,6 +52,51 @@ tips for when working with context menus:
 - Keep your list of options as short as you can – aim for three or less.
 - Don’t repeat options the user can already see elsewhere in your UI.
 
+Swipe Actions
+
+`swipeActions(`) modifier, which lets us register one or more buttons on one or
+both sides of a List row. By default buttons will be placed on the right edge of
+the row, and won’t have any color.
+
+```swift
+List {
+    Text("Taylor Swift")
+        .swipeActions {
+            Button {
+                print("Hi")
+            } label: {
+                Label("Send message", systemImage: "message")
+            }
+        }
+}
+```
+
+You can customize the edge where your buttons are placed by providing an edge
+parameter to your swipeActions() modifier, and you can customize the color of
+your buttons either by adding a tint() modifier to them with a color of your
+choosing, or by attaching a button role.
+
+```swift
+List {
+    Text("Taylor Swift")
+        .swipeActions {
+            Button(role: .destructive) {
+                print("Hi")
+            } label: {
+                Label("Delete", systemImage: "minus.circle")
+            }
+        }
+        .swipeActions(edge: .leading) {
+            Button {
+                print("Hi")
+            } label: {
+                Label("Pin", systemImage: "pin")
+            }
+            .tint(.orange)
+        }
+}
+```
+
 # Day 80
 20 May
 https://www.hackingwithswift.com/100/swiftui/80

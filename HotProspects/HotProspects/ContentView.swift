@@ -13,6 +13,26 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            // swipe actions stuff
+            List {
+                Text("Taylor Swift")
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            print("Hi")
+                        } label: {
+                            Label("Delete", systemImage: "minus.circle")
+                        }
+                    }
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            print("Hi")
+                        } label: {
+                            Label("Pin", systemImage: "pin")
+                        }
+                        .tint(.orange)
+                    }
+            }
+            // context menu stuff
             Text("Hello World")
                 .padding()
                 .background(backgroundColor)
