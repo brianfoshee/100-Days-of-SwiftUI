@@ -5,6 +5,42 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 80
+20 May
+https://www.hackingwithswift.com/100/swiftui/80
+
+`objectWillChange`
+
+Every class that conforms to ObservableObject automatically gains a property
+called objectWillChange. This is a publisher, which means it does the same job
+as the @Published property wrapper: it notifies any views that are observing
+that object that something important has changed.
+
+we have the opportunity to add extra functionality inside that willSet observer.
+Perhaps you want to log something, perhaps you want to call another method, or
+perhaps you want to clamp the integer inside value so it never goes outside of a
+range – it’s all under our control now.
+
+```swift
+@MainActor class DelayedUpdater: ObservableObject {
+    // Instead of using @Published, you can use objectWillChange
+    // @Published var value = 0
+    var value = 0 {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+}
+
+// use with @StateObject as per usual
+@StateObject var updater = DelayedUpdater()
+```
+
+Run a job later:
+```swift
+DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+```
+
 # Day 79
 20 May
 https://www.hackingwithswift.com/100/swiftui/79

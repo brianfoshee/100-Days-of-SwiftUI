@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var user = User()
+    @StateObject var updater = DelayedUpdater()
 
     var body: some View {
-        TabView {
-            Text("Tab 1")
-                .tabItem {
-                    Label("One", systemImage: "star")
-                }
+        Text("Value is: \(updater.value)")
+    }
+}
 
-            Text("Tab 2")
-                .tabItem {
-                    Label("Two", systemImage: "circle")
-                }
+@MainActor class DelayedUpdater: ObservableObject {
+    // Instead of using @Published, you can use objectWillChange
+    // @Published var value = 0
+    var value = 0 {
+        willSet {
+            objectWillChange.send()
         }
     }
 
+    init() {
+        for i in 1...10 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+                self.value += 1
+            }
+        }
+    }
 }
 
 @MainActor class User: ObservableObject {
