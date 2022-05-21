@@ -6,21 +6,11 @@
 //
 
 import SwiftUI
-import SamplePackage
-
 
 struct ContentView: View {
-    let possibleNumbers = Array(1...60)
-    var results: String {
-        // SamplePackage provides this random function
-        let selected = possibleNumbers.random(7).sorted()
-        // convert those into strings
-        let strings = selected.map(String.init)
-        return strings.joined(separator: ", ")
-    }
 
     var body: some View {
-        Text(results)
+        Text("hi")
     }
 
 }
