@@ -9,6 +9,43 @@ Notes for each Day:
 21 May
 https://www.hackingwithswift.com/100/swiftui/82
 
+Using environment objects:
+
+1. Create a class for an individual entity. Class so one copy is shared.
+```swift
+class Prospect: Identifiable, Codable {
+    var id = UUID()
+    var name = "Anonymous"
+    var emailAddress = ""
+    var isContacted = false
+}
+```
+
+2. Create an ObservableObject class that can store multiple entities as a
+   Published property
+```swift
+@MainActor class Prospects: ObservableObject {
+    @Published var people: [Prospect]
+
+    init() {
+        self.people = []
+    }
+}
+```
+
+3. Setup a StateObject in root view, add to .environmentObject, then confugure
+   child views with EnvironmentObject to access.
+```swift
+// In the root view add this property
+@StateObject var prospects = Prospects()
+
+// add this to the root view, something like a TabView
+.environmentObject(prospects)
+
+// add this to all child views that need access
+@EnvironmentObject var prospects: Prospects
+```
+
 # Day 81
 21 May
 https://www.hackingwithswift.com/100/swiftui/81

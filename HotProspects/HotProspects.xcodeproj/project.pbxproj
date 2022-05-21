@@ -13,6 +13,7 @@
 		D36A82F028386EBA00E441FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D36A82EF28386EBA00E441FC /* Preview Assets.xcassets */; };
 		D3B9EEFD28398A1300891D92 /* ProspectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9EEFC28398A1300891D92 /* ProspectsView.swift */; };
 		D3B9EEFF28398A1A00891D92 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9EEFE28398A1A00891D92 /* MeView.swift */; };
+		D3B9EF0128398C1E00891D92 /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9EF0028398C1E00891D92 /* Prospect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		D36A82EF28386EBA00E441FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D3B9EEFC28398A1300891D92 /* ProspectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsView.swift; sourceTree = "<group>"; };
 		D3B9EEFE28398A1A00891D92 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
+		D3B9EF0028398C1E00891D92 /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				D36A82E828386EB900E441FC /* HotProspectsApp.swift */,
 				D36A82EA28386EB900E441FC /* ContentView.swift */,
 				D3B9EEFC28398A1300891D92 /* ProspectsView.swift */,
+				D3B9EF0028398C1E00891D92 /* Prospect.swift */,
 				D3B9EEFE28398A1A00891D92 /* MeView.swift */,
 				D36A82EC28386EBA00E441FC /* Assets.xcassets */,
 				D36A82EE28386EBA00E441FC /* Preview Content */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B9EEFF28398A1A00891D92 /* MeView.swift in Sources */,
+				D3B9EF0128398C1E00891D92 /* Prospect.swift in Sources */,
 				D3B9EEFD28398A1300891D92 /* ProspectsView.swift in Sources */,
 				D36A82EB28386EB900E441FC /* ContentView.swift in Sources */,
 				D36A82E928386EB900E441FC /* HotProspectsApp.swift in Sources */,

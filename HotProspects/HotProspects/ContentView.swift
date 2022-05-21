@@ -12,6 +12,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var prospects = Prospects()
 
     var body: some View {
         TabView {
@@ -35,6 +36,8 @@ struct ContentView: View {
                     Label("Me", systemImage: "person.crop.square")
                 }
         }
+        // all tabs are children of TabView and as such will receive this env object
+        .environmentObject(prospects)
     }
 
 }
