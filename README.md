@@ -149,6 +149,12 @@ let request = UNNotificationRequest(identifier: UUID().uuidString, content: cont
 UNUserNotificationCenter.current().add(request)
 ```
 
+Swift Package Manager
+
+go to the File menu and choose Add Packages. Enter a URL or choose from the
+list. Select the Dependency Rule then add. The package will show up in the
+Project Navigator under `Package Dependencies` and in the Project -> Info page.
+
 # Day 80
 20 May
 https://www.hackingwithswift.com/100/swiftui/80
