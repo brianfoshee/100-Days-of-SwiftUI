@@ -12,12 +12,18 @@ struct ContentView: View {
     @State private var output = ""
 
     var body: some View {
-        Text(output)
-            .task {
-                await fetchReadings()
-            }
+        Image("example")
+            .interpolation(.none)
+            .resizable()
+            .scaledToFit()
+            .frame(maxHeight: .infinity)
+            .background(.black)
+            .ignoresSafeArea()
     }
 
+}
+
+/*
     // using Result:
     func fetchReadings() async {
         let fetchTask = Task { () -> String in
@@ -57,8 +63,7 @@ struct ContentView: View {
         }
     }
      */
-}
-
+ */
 @MainActor class DelayedUpdater: ObservableObject {
     // Instead of using @Published, you can use objectWillChange
     // @Published var value = 0

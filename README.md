@@ -96,6 +96,23 @@ the advantage of Result is that it lets us store the whole success or failure of
 some work in a single value, pass that around wherever we need, and read the
 error only when we’re ready.
 
+Controlling Image Interpolation
+
+```swift
+Image("example")
+    .interpolation(.none)
+    .resizable()
+    .scaledToFit()
+    .frame(maxHeight: .infinity)
+    .background(.black)
+    .ignoresSafeArea()
+```
+
+If you have an Image that is being shown scaled up (eg the image is smaller than
+the frame it's in) you can turn off interpolation with `.interpolation(.none)`
+so pixel blending doesn't happen. The resulting image is sharper with jagged
+edges intead of being blurry with jagged edges.
+
 # Day 79
 20 May
 https://www.hackingwithswift.com/100/swiftui/79
