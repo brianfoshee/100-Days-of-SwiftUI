@@ -5,6 +5,56 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 79
+20 May
+https://www.hackingwithswift.com/100/swiftui/79
+
+HotProspects app
+
+`@State` is used to work with state that is local to a single view, and how
+`@ObservedObject` lets us pass one object from view to view so we can share it.
+Well, `@EnvironmentObject` takes that one step further: we can place an object
+into the environment so that any child view can automatically have access to it.
+
+View chain: `A -> B -> B -> D -> E ->`
+
+With @EnvironmentObject view A can put the object into the environment, view E
+can read the object out from the environment, and views B, C, and D don’t have
+to know anything happened.
+
+environment objects use the same ObservableObject protocol you’ve already
+learned, and SwiftUI will automatically make sure all views that share the same
+environment object get updated when it changes.
+
+If you try to load a variable with `@EnvironmentObject` and it does not exist,
+your code will crash.
+
+```swift
+struct DisplayView: View {
+    @EnvironmentObject var user: User
+
+    var body: some View {
+        Text(user.name)
+    }
+}
+
+struct ContentView: View {
+    @StateObject private var user = User()
+
+    var body: some View {
+        VStack {
+            DisplayView().environmentObject(user)
+        }
+    }
+}
+```
+
+Environment Objects work like dictionaries: The environment effectively lets us
+use data types themselves for the key, and instances of the type as the value.
+This is a bit mind bending at first, but imagine it like this: the keys are
+things like Int, String, and Bool, with the values being things like 5, “Hello”,
+and true, which means we can say “give me the Int” and we’d get back 5.
+
 # Day 78
 20 May
 https://www.hackingwithswift.com/100/swiftui/78
