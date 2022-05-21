@@ -11,11 +11,17 @@ struct ContentView: View {
     @StateObject private var user = User()
 
     var body: some View {
-        VStack {
-            EditView()
-            DisplayView()
+        TabView {
+            Text("Tab 1")
+                .tabItem {
+                    Label("One", systemImage: "star")
+                }
+
+            Text("Tab 2")
+                .tabItem {
+                    Label("Two", systemImage: "circle")
+                }
         }
-        .environmentObject(user)
     }
 
 }

@@ -55,6 +55,35 @@ This is a bit mind bending at first, but imagine it like this: the keys are
 things like Int, String, and Bool, with the values being things like 5, “Hello”,
 and true, which means we can say “give me the Int” and we’d get back 5.
 
+`TabView`
+
+Attach `.tag` modifiers to each tab to allow programmic changing of tabs.
+
+```swift
+struct ContentView: View {
+    @State private var selectedTab = "One"
+
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            Text("Tab 1")
+                .onTapGesture {
+                    selectedTab = "Two"
+                }
+                .tabItem {
+                    Label("One", systemImage: "star")
+                }
+                .tag("One")
+
+            Text("Tab 2")
+                .tabItem {
+                    Label("Two", systemImage: "circle")
+                }
+                .tag("Two")
+        }
+    }
+}
+```
+
 # Day 78
 20 May
 https://www.hackingwithswift.com/100/swiftui/78
