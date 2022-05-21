@@ -28,22 +28,32 @@ struct ProspectsView: View {
         }
     }
 
-    var body: some View {
-        NavigationView {
-            Text("People: \(prospects.people.count)")
-                .navigationTitle(title)
-                .toolbar {
-                    Button {
-                        let prospect = Prospect()
-                        prospect.name = "Paul Hudson"
-                        prospect.emailAddress = "paul@hackingwithswift.com"
-                        prospects.people.append(prospect)
-                    } label: {
-                        Label("Scal", systemImage: "qrcode.viewfinder")
-                    }
-                }
+    var filteredProspects: [Prospect] {
+        switch filter {
+        case .none:
+            return prospects.people
+        case .contacted:
+            return prospects.people.filter { $0.isContacted }
+        case .uncontacted:
+            return prospects.people.filter { !$0.isContacted }
         }
     }
+
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(filteredProspects) { prospect in
+                    VStack(alignment: .leading) {
+                        Text(prospect.name)
+                            .font(.headline)
+                        Text(prospect.emailAddress)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 struct ProspectsView_Previews: PreviewProvider {

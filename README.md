@@ -46,6 +46,12 @@ class Prospect: Identifiable, Codable {
 @EnvironmentObject var prospects: Prospects
 ```
 
+Filter method of an array
+
+This runs every element in a sequence through a test you provide as a closure,
+and any elements that return true from the test are sent back as part of a new
+array.
+
 # Day 81
 21 May
 https://www.hackingwithswift.com/100/swiftui/81
