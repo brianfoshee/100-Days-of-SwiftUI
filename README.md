@@ -5,6 +5,53 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 81
+20 May
+https://www.hackingwithswift.com/100/swiftui/81
+
+Context Menus
+
+SwiftUI lets us attach context menus to objects to provide this extra
+functionality, all done using the contextMenu() modifier.
+
+You can pass this a selection of buttons and they’ll be shown in order.
+
+```swift
+Text("Change Color")
+       .padding()
+       .contextMenu {
+           Button("Red") {
+               backgroundColor = .red
+           }
+
+           Button("Green") {
+               backgroundColor = .green
+           }
+
+           Button("Blue") {
+               backgroundColor = .blue
+           }
+       }
+```
+
+Each item in a context menu can have text and an image attached to it using a
+Label view.
+
+```swift
+Button {
+    backgroundColor = .red
+} label: {
+    Label("Red", systemImage: "checkmark.circle.fill")
+}
+```
+
+tips for when working with context menus:
+
+- If you’re going to use them, use them in lots of places – it can be
+  frustrating to press and hold on something only to find nothing happens.
+- Keep your list of options as short as you can – aim for three or less.
+- Don’t repeat options the user can already see elsewhere in your UI.
+
 # Day 80
 20 May
 https://www.hackingwithswift.com/100/swiftui/80
