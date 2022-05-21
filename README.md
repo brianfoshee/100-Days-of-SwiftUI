@@ -41,6 +41,61 @@ Run a job later:
 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 ```
 
+`Result` type
+
+allows us to encapsulate either a successful value or some kind of error type,
+all in a single piece of data.
+
+Instead of using do/catch like this:
+```swift
+func fetchReadings() async {
+  do {
+    let url = URL(string: "https://hws.dev/readings.json")!
+      let (data, _) = try await URLSession.shared.data(from: url)
+      let readings = try JSONDecoder().decode([Double].self, from: data)
+      output = "Found \(readings.count) readings"
+  } catch {
+    print("download error")
+  }
+}
+```
+
+Wrap the async work in a Task, and then access its `result` to determine whether
+it succeeded or failed:
+```swift
+func fetchReadings() async {
+  // give Task a name so we can cancel etc
+  let fetchTask = Task { () -> String in
+    let url = URL(string: "https://hws.dev/readings.json")!
+      let (data, _) = try await URLSession.shared.data(from: url)
+      let readings = try JSONDecoder().decode([Double].self, from: data)
+      return "Found \(readings.count) readings"
+  }
+
+  // get the Task's Result
+  let result = await fetchTask.result
+
+  // can either get the result status in a do block:
+  do {
+    output = try result.get()
+  } catch {
+    output = "Error: \(error.localizedDescription)"
+  }
+
+  // or a switch statement:
+  switch result {
+    case .success(let str):
+      output = str
+    case .failure(let error):
+        output = "Error: \(error.localizedDescription)"
+  }
+}
+```
+
+the advantage of Result is that it lets us store the whole success or failure of
+some work in a single value, pass that around wherever we need, and read the
+error only when we’re ready.
+
 # Day 79
 20 May
 https://www.hackingwithswift.com/100/swiftui/79
