@@ -5,6 +5,24 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 85
+22 May
+https://www.hackingwithswift.com/100/swiftui/85
+
+Adding Multiple Items To A Toolbar
+
+```swift
+.toolbar {
+    ToolbarItemGroup(placement: .navigationBarLeading) {
+      // button
+    }
+
+    ToolbarItemGroup(placement: .navigationBarTrailing) {
+      // button
+    }
+}
+```
+
 # Day 84
 22 May
 https://www.hackingwithswift.com/100/swiftui/84

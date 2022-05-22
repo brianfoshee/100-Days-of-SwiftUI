@@ -11,17 +11,17 @@ class Prospect: Identifiable, Codable {
     var id = UUID()
     var name = "Anonymous"
     var emailAddress = ""
+    var createdAt = Date.now
     fileprivate(set) var isContacted = false
 }
 
 @MainActor class Prospects: ObservableObject {
     @Published private(set) var people: [Prospect]
 
-    fileprivate let saveKey = "SavedData"
-
+    fileprivate let savePath = FileManager.userDocumentsDirectory.appendingPathComponent("SavedData.json")
 
     init() {
-        if let data = UserDefaults.standard.data(forKey: saveKey) {
+        if let data = try? Data(contentsOf: savePath) {
             if let decoded = try? JSONDecoder().decode([Prospect].self, from: data) {
                 people = decoded
                 return
@@ -44,7 +44,17 @@ class Prospect: Identifiable, Codable {
 
     private func save() {
         if let encoded = try? JSONEncoder().encode(people) {
-            UserDefaults.standard.set(encoded, forKey: saveKey)
+            try? encoded.write(to: savePath)
         }
+    }
+}
+
+extension FileManager {
+    static var userDocumentsDirectory: URL {
+        // find all possible documents directories
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
+        //just use the first one, which should be the only one
+        return paths[0]
     }
 }

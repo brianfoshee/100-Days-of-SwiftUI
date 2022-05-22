@@ -14,10 +14,17 @@ struct ProspectsView: View {
         case none, contacted, uncontacted
     }
 
+    enum SortType {
+        case name, mostRecent
+    }
+
     // this reads from ContentView's instance of prospects through .environmentObject
     @EnvironmentObject var prospects: Prospects
 
     @State private var isShowingScanner = false
+
+    @State private var isShowingSortOptions = false
+    @State private var sort = SortType.name
 
     let filter: FilterType
 
@@ -43,15 +50,39 @@ struct ProspectsView: View {
         }
     }
 
+    var sortedProspects: [Prospect] {
+        let prospects = filteredProspects
+        switch sort {
+        case .name:
+            return prospects.sorted { $0.name < $1.name }
+        case .mostRecent:
+            return prospects.sorted { $0.createdAt > $1.createdAt }
+        }
+    }
+
     var body: some View {
         NavigationView {
             List {
-                ForEach(filteredProspects) { prospect in
-                    VStack(alignment: .leading) {
-                        Text(prospect.name)
-                            .font(.headline)
-                        Text(prospect.emailAddress)
-                            .foregroundColor(.secondary)
+                ForEach(sortedProspects) { prospect in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(prospect.name)
+                                .font(.headline)
+                            Text(prospect.emailAddress)
+                                .foregroundColor(.secondary)
+                        }
+
+                        if filter == .none {
+                            Spacer()
+
+                            if prospect.isContacted {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                            } else {
+                                Image(systemName: "x.circle.fill")
+                                    .foregroundColor(.red)
+                            }
+                        }
                     }
                     .swipeActions {
                         if prospect.isContacted {
@@ -81,10 +112,20 @@ struct ProspectsView: View {
             }
             .navigationTitle(title)
             .toolbar {
-                Button {
-                    isShowingScanner = true
-                } label: {
-                    Label("Scan", systemImage: "qrcode.viewfinder")
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Button {
+                        isShowingSortOptions = true
+                    } label: {
+                        Text("Sort")
+                    }
+                }
+
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        isShowingScanner = true
+                    } label: {
+                        Label("Scan", systemImage: "qrcode.viewfinder")
+                    }
                 }
             }
             .sheet(isPresented: $isShowingScanner) {
@@ -93,6 +134,10 @@ struct ProspectsView: View {
                     simulatedData: "Paul Hudson\npaul@hackingwithswift.com",
                     completion: handleScan
                 )
+            }
+            .confirmationDialog("Sort Prospects By", isPresented: $isShowingSortOptions) {
+                Button("Name") { sort = .name }
+                Button("Most Recent") { sort = .mostRecent }
             }
         }
     }
