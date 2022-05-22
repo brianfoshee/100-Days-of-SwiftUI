@@ -20,6 +20,43 @@ requested. However, while it’s running that method, we then change our new
 property yet. (see
 [MeView.swift](https://www.hackingwithswift.com/books/ios-swiftui/adding-a-context-menu-to-an-image))
 
+On Checking Notification Permissions
+
+we also need to be careful subsequent times because the user can retroactively
+change their mind and disable notifications.
+
+One option is to call requestAuthorization() every time we want to post a
+notification, and honestly that works great: the first time it will show an
+alert, and all other times it will immediately return success or failure based
+on the previous response.
+
+A more complete alternative: we can request the current authorization settings,
+and use that to determine whether we should schedule a notification or request
+permission. the settings object handed back to us includes properties such as
+alertSetting to check whether we can show an alert or not – the user might have
+restricted this so all we can do is display a numbered badge on our icon.
+
+```swift
+let addRequest = {
+// setup the notification center request in here. see earlier days for info, or
+code.
+}
+
+center.getNotificationSettings { settings in
+    if settings.authorizationStatus == .authorized {
+        addRequest()
+    } else {
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                addRequest()
+            } else {
+                print("could not authorize for notifications")
+            }
+        }
+    }
+}
+```
+
 # Day 83
 21 May
 https://www.hackingwithswift.com/100/swiftui/83
