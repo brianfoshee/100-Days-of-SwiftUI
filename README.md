@@ -5,6 +5,31 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 83
+21 May
+https://www.hackingwithswift.com/100/swiftui/83
+
+`textContentType()` modifier tells iOS what kind of information we’re asking the
+user for. This should allow iOS to provide autocomplete data on behalf of the
+user.
+
+If an array is marked with @Published, and we add or remove items from that
+array a change notification will be sent out. However, if we quietly change an
+item inside the array then SwiftUI won’t detect that change, and no views will
+be refreshed.
+
+Add this to the Prospects class
+```swift
+func toggle(_ prospect: Prospect) {
+    // call send before doing anything else
+    objectWillChange.send()
+    prospect.isContacted.toggle()
+}
+```
+
+`fileprivate(set)`, which means “this property can be read from anywhere, but only
+written from the current file”
+
 # Day 82
 21 May
 https://www.hackingwithswift.com/100/swiftui/82
