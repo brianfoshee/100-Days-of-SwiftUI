@@ -9,6 +9,17 @@ Notes for each Day:
 22 May
 https://www.hackingwithswift.com/100/swiftui/84
 
+Modifying state error:
+
+> Modifying state during view update, this will cause undefined behavior.
+
+we’re telling Swift it can load our image by calling the generateQRCode()
+method, so when SwiftUI calls the body property it will run generateQRCode() as
+requested. However, while it’s running that method, we then change our new
+@State property, even though SwiftUI hasn’t actually finished updating the body
+property yet. (see
+[MeView.swift](https://www.hackingwithswift.com/books/ios-swiftui/adding-a-context-menu-to-an-image))
+
 # Day 83
 21 May
 https://www.hackingwithswift.com/100/swiftui/83
