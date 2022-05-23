@@ -5,40 +5,46 @@
 //  Created by Brian Foshee on 22/5/22.
 //
 
+import CoreHaptics
 import SwiftUI
 
 struct ContentView: View {
-    // how far the circle has been dragged
-    @State private var offset = CGSize.zero
-
-    // whether it's being dragged
-    @State private var isDragging = false
+    @State private var engine: CHHapticEngine?
 
     var body: some View {
-        let dragGesture = DragGesture()
-            .onChanged { value in offset = value.translation }
-            .onEnded { _ in
-                withAnimation {
-                    offset = .zero
-                    isDragging = false
-                }
-            }
+        Text("Hello")
+            .onAppear(perform: prepareHaptics)
+            .onTapGesture(perform: complexSuccess)
+    }
 
-        let longPressGesture = LongPressGesture()
-            .onEnded { value in
-                withAnimation {
-                    isDragging = true
-                }
-            }
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
 
-        let combined = longPressGesture.sequenced(before: dragGesture)
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("error creating haptic engine \(error.localizedDescription)")
+        }
+    }
 
-        Circle()
-            .fill(.red)
-            .frame(width: 64, height: 64)
-            .scaleEffect(isDragging ? 1.5: 1)
-            .offset(offset)
-            .gesture(combined)
+    func complexSuccess() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        var events = [CHHapticEvent]()
+
+        // create one intense, sharp tap
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+        events.append(event)
+
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("failed to play pattern \(error.localizedDescription)")
+        }
     }
 }
 
