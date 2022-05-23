@@ -264,6 +264,37 @@ for i in stride(from: 0, to: 1, by: 0.1) {
 }
 ```
 
+Hit Testing
+
+SwiftUI has an advanced hit testing algorithm that uses both the frame of a view
+and often also its contents. For example, if you add a tap gesture to a text
+view then all parts of the text view are tappable – you can’t tap through the
+text if you happen to press exactly where a space is. On the other hand, if you
+attach the same gesture to a circle then SwiftUI will ignore the transparent
+parts of the circle.
+
+`.allowsHitTesting(false)` will pass through taps to views behind it.
+
+`contentShape()` modifier, which lets us specify the tappable shape for
+something. eg make a circle a rectangle `.contentShape(Rectangle())`
+
+For instance if a Stack has a Spacer and the Spacer is tapped, the gesture
+recognizer will not fire unless you give it a shape
+
+```swift
+VStack {
+    Text("Hello")
+    // will not accept taps
+    Spacer().frame(height: 100)
+    Text("World")
+}
+// uncomment this to allow the Spacer to accept taps
+// .contentShape(Rectangle())
+.onTapGesture {
+    print("VStack tapped!")
+}
+```
+
 # Day 85
 22 May
 https://www.hackingwithswift.com/100/swiftui/85

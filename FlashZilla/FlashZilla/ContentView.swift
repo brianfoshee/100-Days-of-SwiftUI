@@ -12,9 +12,22 @@ struct ContentView: View {
     @State private var engine: CHHapticEngine?
 
     var body: some View {
-        Text("Hello")
-            .onAppear(perform: prepareHaptics)
-            .onTapGesture(perform: complexSuccess)
+        ZStack {
+            Rectangle()
+                .fill(.blue)
+                .frame(width: 300, height: 300)
+                .onTapGesture {
+                    print("Rectangle tapped!")
+                }
+
+            Circle()
+                .fill(.red)
+                .frame(width: 300, height: 300)
+                .onTapGesture {
+                    print("Circle tapped!")
+                }
+        }
+        
     }
 
     func prepareHaptics() {
