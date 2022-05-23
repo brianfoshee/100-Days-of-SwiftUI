@@ -5,6 +5,184 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 86
+22 May
+https://www.hackingwithswift.com/100/swiftui/86
+
+Gestures
+
+onTapGesture can take a count param for handling double tap etc
+```swift
+.onTapGesture(count: 2) {
+        print("Double tapped!")
+}
+```
+
+Long Press
+
+```swift
+.onLongPressGesture {
+        print("Long pressed!")
+}
+
+.onLongPressGesture(minimumDuration: 2) {
+    print("Long pressed!")
+}
+```
+
+You can even add a second closure that triggers whenever the state of the
+gesture has changed. This will be given a single Boolean parameter as input, and
+it will work like this:
+
+- As soon as you press down the change closure will be called with its parameter
+  set to true.
+- If you release before the gesture has been recognized (so, if you release
+  after 1 second when using a 2-second recognizer), the change closure will be
+  called with its parameter set to false.
+- If you hold down for the full length of the recognizer, then the change
+  closure will be called with its parameter set to false (because the gesture is
+  no longer in flight), and your completion closure will be called too.
+
+```swift
+.onLongPressGesture(minimumDuration: 1) {
+    print("Long pressed!")
+} onPressingChanged: { inProgress in
+    print("In progress: \(inProgress)!")
+}
+```
+
+For more advanced gestures you should use the gesture() modifier with one of the
+gesture structs: DragGesture, LongPressGesture, MagnificationGesture,
+RotationGesture, and TapGesture. These all have special modifiers, usually
+onEnded() and often onChanged() too, and you can use them to take action when
+the gestures are in-flight (for onChanged()) or completed (for onEnded()).
+
+attach a magnification gesture to a view so that pinching in and out scales the
+view up and down:
+
+```swift
+@State private var currentAmount = 0.0
+@State private var finalAmount = 1.0
+
+Text("Gesturing")
+    .scaleEffect(finalAmount + currentAmount)
+    .gesture(
+        MagnificationGesture()
+            .onChanged { amount in
+                currentAmount = amount - 1
+            }
+            .onEnded { amount in
+                finalAmount += currentAmount
+                currentAmount = 0
+            }
+    )
+```
+
+Do the same but with rotation:
+```swift
+@State private var currentAmount = Angle.zero
+@State private var finalAmount = Angle.zero
+
+Text("Hello, World!")
+    .rotationEffect(currentAmount + finalAmount)
+    .gesture(
+        RotationGesture()
+            .onChanged { angle in
+                currentAmount = angle
+            }
+            .onEnded { angle in
+                finalAmount += currentAmount
+                currentAmount = .zero
+            }
+    )
+```
+
+Gestures can clash. In this scenario the child gesture has priority:
+
+```swift
+VStack {
+    Text("Hello, World!")
+        .onTapGesture {
+            print("Text tapped")
+        }
+}
+.onTapGesture {
+    print("VStack tapped")
+}
+```
+
+This can be overridden with:
+```swift
+VStack {
+    Text("Hello, World!")
+        .onTapGesture {
+            print("Text tapped")
+        }
+}
+.highPriorityGesture(
+    TapGesture()
+        .onEnded { _ in
+            print("VStack tapped")
+        }
+)
+```
+
+Alternatively, you can use the simultaneousGesture() modifier to tell SwiftUI
+you want both the parent and child gestures to trigger at the same time:
+
+```swift
+VStack {
+    Text("Hello, World!")
+        .onTapGesture {
+            print("Text tapped")
+        }
+}
+.simultaneousGesture(
+    TapGesture()
+        .onEnded { _ in
+            print("VStack tapped")
+        }
+)
+```
+
+`gesture sequences`, where one gesture will only become active if another
+gesture has first succeeded.
+
+This allows you to drag a circle around, but only if you long press on it first:
+
+```swift
+// how far the circle has been dragged
+@State private var offset = CGSize.zero
+
+// whether it's being dragged
+@State private var isDragging = false
+
+let dragGesture = DragGesture()
+    .onChanged { value in offset = value.translation }
+    .onEnded { _ in
+        withAnimation {
+            offset = .zero
+            isDragging = false
+        }
+    }
+
+let longPressGesture = LongPressGesture()
+    .onEnded { value in
+        withAnimation {
+            isDragging = true
+        }
+    }
+
+let combined = longPressGesture.sequenced(before: dragGesture)
+
+Circle()
+    .fill(.red)
+    .frame(width: 64, height: 64)
+    .scaleEffect(isDragging ? 1.5: 1)
+    .offset(offset)
+    .gesture(combined)
+```
+
 # Day 85
 22 May
 https://www.hackingwithswift.com/100/swiftui/85
