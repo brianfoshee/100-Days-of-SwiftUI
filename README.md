@@ -5,8 +5,61 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 87
+24 May
+https://www.hackingwithswift.com/100/swiftui/87
+
+Combine
+
+Timer class, which is designed to run a function after a certain number of
+seconds, but it can also run code repeatedly. Combine adds an extension to this
+so that timers can become publishers, which are things that announce when their
+value changes. `@Published` and `ObservableObject` use Combine
+
+The following sets up a timer:
+- It asks the timer to fire every 1 second.
+- It says the timer should run on the main thread.
+- It says the timer should run on the common run loop, which is the one you’ll
+  want to use most of the time. (Run loops let iOS handle running code while the
+  user is actively doing something, such as scrolling in a list.)
+- It connects the timer immediately, which means it will start counting time.
+- It assigns the whole thing to the timer constant so that it stays alive.
+
+```swift
+let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+```
+
+onReceive() modifier. This accepts a publisher as its first parameter and a
+function to run as its second, and it will make sure that function is called
+whenever the publisher sends its change notification.
+
+```swift
+Text("Hello, World!")
+    .onReceive(timer) { time in
+        print("The time is now \(time)")
+    }
+```
+
+Canceling the timer: timer property we made is an autoconnected publisher, so we
+need to go to its upstream publisher to find the timer itself
+
+```swift
+timer.upstream.connect().cancel()
+```
+
+Tolerance allows iOS to perform important energy optimization, because it can
+fire the timer at any point between its scheduled fire time and its scheduled
+fire time plus the tolerance you specify
+
+```swift
+let timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common).autoconnect()
+```
+
+the Timer class is still “best effort” – the system makes no guarantee it will
+execute precisely.
+
 # Day 86
-22 May
+23 May
 https://www.hackingwithswift.com/100/swiftui/86
 
 Gestures
