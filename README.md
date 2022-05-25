@@ -89,6 +89,62 @@ Text("Hello, world!")
 - Background scenes are not visible to the user, which on iOS means they might
   be terminated at some point in the future.
 
+Specific Accessibility Settings
+
+SwiftUI gives us a number of environment properties that describe the user’s
+custom accessibility settings
+
+For color blineness:
+```swift
+@Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
+```
+
+or
+
+For reduced motion:
+```swift
+@Environment(\.accessibilityReduceMotion) var reduceMotion
+@State private var scale = 1.0
+
+Text("Hello, World!")
+    .scaleEffect(scale)
+    .onTapGesture {
+        if reduceMotion {
+            scale *= 1.5
+        } else {
+            withAnimation {
+                scale *= 1.5
+            }
+        }
+    }
+```
+
+cleaning that up:
+```swift
+func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+    if UIAccessibility.isReduceMotionEnabled {
+        return try body()
+    } else {
+        return try withAnimation(animation, body)
+    }
+}
+
+.onTapGesture {
+    withOptionalAnimation {
+        scale *= 1.5
+    }
+}
+```
+
+Reduce Transparency
+
+```swift
+@Environment(\.accessibilityReduceTransparency) var reduceTransparency
+
+Text()
+    .background(reduceTransparency ? .black : .black.opacity(0.5))
+```
+
 # Day 86
 23 May
 https://www.hackingwithswift.com/100/swiftui/86
