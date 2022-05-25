@@ -58,6 +58,37 @@ let timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common).auto
 the Timer class is still “best effort” – the system makes no guarantee it will
 execute precisely.
 
+Detecting an app entering Foreground / Background
+
+- Adding a new property to watch an environment value called scenePhase.
+- Using onChange() to watch for the scene phase changing.
+- Responding to the new scene phase somehow.
+
+```swift
+@Environment(\.scenePhase) var scenePhase
+
+Text("Hello, world!")
+    .padding()
+    .onChange(of: scenePhase) { newPhase in
+        if newPhase == .active {
+            print("Active")
+        } else if newPhase == .inactive {
+            print("Inactive")
+        } else if newPhase == .background {
+            print("Background")
+        }
+    }
+```
+
+- Active scenes are running right now, which on iOS means they are visible to
+  the user. On macOS an app’s window might be wholly hidden by another app’s
+  window, but that’s okay – it’s still considered to be active.
+- Inactive scenes are running and might be visible to the user, but the user
+  isn’t able to access them. For example, if you’re swiping down to partially
+  reveal the control center then the app underneath is considered inactive.
+- Background scenes are not visible to the user, which on iOS means they might
+  be terminated at some point in the future.
+
 # Day 86
 23 May
 https://www.hackingwithswift.com/100/swiftui/86
