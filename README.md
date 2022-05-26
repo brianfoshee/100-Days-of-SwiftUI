@@ -16,6 +16,11 @@ App is landscape-only, removed the portrait entries in Target -> Info
 A width of 450 is no accident: the smallest iPhones have a landscape width of
 480 points, so this means our card will be fully visible on all devices.
 
+Create an array of repeating value:
+```swift
+var cards = [Card](repeating: Card.example, count: 10)
+```
+
 # Day 87
 24 May
 https://www.hackingwithswift.com/100/swiftui/87
