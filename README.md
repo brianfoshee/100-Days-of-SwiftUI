@@ -21,6 +21,10 @@ Create an array of repeating value:
 var cards = [Card](repeating: Card.example, count: 10)
 ```
 
+Important stuff about order of modifiers when dragging / rotating / translating
+etc
+https://www.hackingwithswift.com/books/ios-swiftui/moving-views-with-draggesture-and-offset
+
 # Day 87
 24 May
 https://www.hackingwithswift.com/100/swiftui/87
