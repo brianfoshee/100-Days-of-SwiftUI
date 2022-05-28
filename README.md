@@ -9,6 +9,9 @@ Notes for each Day:
 27 May
 https://www.hackingwithswift.com/100/swiftui/89
 
+SwiftUI lets us disable interactivity for a view by setting allowsHitTesting()
+to false.
+
 # Day 88
 26 May
 https://www.hackingwithswift.com/100/swiftui/88
