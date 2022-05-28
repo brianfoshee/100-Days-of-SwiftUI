@@ -14,6 +14,7 @@
 		D378D95D283DAE74006B7B53 /* HapticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D378D95C283DAE74006B7B53 /* HapticsView.swift */; };
 		D378D95F2840342F006B7B53 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D378D95E2840342F006B7B53 /* Card.swift */; };
 		D378D961284034C4006B7B53 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D378D960284034C4006B7B53 /* CardView.swift */; };
+		D37F23682842A46C00D79B20 /* EditCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37F23672842A46C00D79B20 /* EditCards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		D378D95C283DAE74006B7B53 /* HapticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsView.swift; sourceTree = "<group>"; };
 		D378D95E2840342F006B7B53 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		D378D960284034C4006B7B53 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		D37F23672842A46C00D79B20 /* EditCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				D378D950283AF3D5006B7B53 /* ContentView.swift */,
 				D378D95E2840342F006B7B53 /* Card.swift */,
 				D378D960284034C4006B7B53 /* CardView.swift */,
+				D37F23672842A46C00D79B20 /* EditCards.swift */,
 				D378D95C283DAE74006B7B53 /* HapticsView.swift */,
 				D378D952283AF3D6006B7B53 /* Assets.xcassets */,
 				D378D954283AF3D6006B7B53 /* Preview Content */,
@@ -149,6 +152,7 @@
 				D378D951283AF3D5006B7B53 /* ContentView.swift in Sources */,
 				D378D94F283AF3D5006B7B53 /* FlashZillaApp.swift in Sources */,
 				D378D95D283DAE74006B7B53 /* HapticsView.swift in Sources */,
+				D37F23682842A46C00D79B20 /* EditCards.swift in Sources */,
 				D378D95F2840342F006B7B53 /* Card.swift in Sources */,
 				D378D961284034C4006B7B53 /* CardView.swift in Sources */,
 			);
