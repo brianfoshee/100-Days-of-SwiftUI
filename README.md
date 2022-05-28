@@ -5,6 +5,39 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 90
+27 May
+https://www.hackingwithswift.com/100/swiftui/90
+
+More control over Haptics
+
+Creating an instance of one of the subclasses of UIFeedbackGenerator then
+triggering it when you’re ready, but for more precise control over feedback you
+should first call its prepare() method to give the Taptic Engine chance to warm
+up.
+
+Warming up the Taptic Engine helps reduce the latency between us playing the
+effect and it actually happening, but it also has a battery impact so the system
+will only stay ready for a second or two after you call prepare().
+
+it’s OK to call prepare() then never triggering the effect – the system will
+keep the Taptic Engine ready for a few seconds then just power it down again.
+If you repeatedly call prepare() and never trigger it the system might start
+ignoring your prepare() calls until at least one effect has happened.
+
+it’s perfectly allowable to call prepare() many times before triggering it once
+– prepare() doesn’t pause your app while the Taptic Engine warms up, and also
+doesn’t have any real performance cost when the system is already prepared.
+
+while you’re testing out in small doses these haptics probably feel great –
+you’re making your phone buzz, and it can be really delightful. However, if
+you’re a serious user of this app then our haptics might hit two problems:
+
+- The user might find them annoying, because they’ll happen once every two or
+  three seconds depending on how fast they are.
+- Worse, the user might become desensitized to them – they lose all usefulness
+  either as a notification or as a little spark of delight.
+
 # Day 89
 27 May
 https://www.hackingwithswift.com/100/swiftui/89
