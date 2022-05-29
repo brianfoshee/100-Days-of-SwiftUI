@@ -5,8 +5,20 @@ Goal: be done by memorial day. Which is 56 days total.
 
 Notes for each Day:
 
+# Day 91
+28 May
+https://www.hackingwithswift.com/100/swiftui/91
+
+TODO figure this one out
+
+If you drag a card to the right but not far enough to remove it, then release,
+you see it turn red as it slides back to the center. Why does this happen and
+how can you fix it? (Tip: think about the way we set offset back to 0
+immediately, even though the card hasn’t animated yet. You might solve this with
+a ternary within a ternary, but a custom modifier will be cleaner.)
+
 # Day 90
-27 May
+28 May
 https://www.hackingwithswift.com/100/swiftui/90
 
 More control over Haptics
