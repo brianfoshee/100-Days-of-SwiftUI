@@ -60,6 +60,32 @@ If text views of differing size need to line up use
 HStack(alignment: .lastTextBaseline) {
 ```
 
+alignmentGuide() modifier for custom alignments inside a Stack
+This takes two parameters: the guide we want to change, and a closure that
+returns a new alignment. The closure is given a ViewDimensions object that
+contains the width and height of its view, along with the ability to read its
+various edges.
+```swift
+VStack(alignment: .leading) {
+    Text("Hello, world!")
+        .alignmentGuide(.leading) { d in d[.trailing] }
+    Text("This is a longer line of text")
+}
+```
+
+Custom Alignment Guide
+
+SwiftUI gives us alignment guides for the various edges of our views. However,
+none of these work well when you’re working with views that are split across
+disparate views – if you have to make two views aligned the same when they are
+in entirely different parts of your user interface. To fix this, SwiftUI lets us
+create custom alignment guides.
+
+This should be an extension on either VerticalAlignment or HorizontalAlignment,
+and be a custom type that conforms to the AlignmentID protocol.
+
+See code from today, in LayoutAndGeometry project.
+
 # Day 91
 28 May
 https://www.hackingwithswift.com/100/swiftui/91
