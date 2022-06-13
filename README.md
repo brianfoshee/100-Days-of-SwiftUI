@@ -1,9 +1,64 @@
 Goal: be done by memorial day. Which is 56 days total.
 
+ok I missed the memorial day goal but had a much needed vacation.
+
 - [Glossary of Swift Terms](https://www.hackingwithswift.com/glossary)
 - [SwiftUI By Example](https://www.hackingwithswift.com/quick-start/swiftui)
 
 Notes for each Day:
+
+# Day 92
+12 June
+https://www.hackingwithswift.com/100/swiftui/92
+
+Layout and Geometry
+
+All SwiftUI layout happens in three simple steps, and understanding these steps
+is the key to getting great layouts every time. The steps are:
+
+- A parent view proposes a size for its child.
+- Based on that information, the child then chooses its own size and the parent
+  must respect that choice.
+- The parent then positions the child in its coordinate space.
+
+Behind the scenes, SwiftUI performs a fourth step: although it stores positions
+and sizes as floating-point numbers, when it comes to rendering SwiftUI rounds
+off any pixels to their nearest values so our graphics remain sharp.
+
+how big is ContentView? the size of ContentView is exactly and always the size
+of its body, no more and no less. This is called being layout neutral:
+ContentView doesn’t have any size of its own, and instead happily adjusts to fit
+whatever size is needed.
+
+when you apply a modifier to a view we actually get back a new view type called
+ModifiedContent, which stores both our original view and its modifier. This
+means when we apply a modifier, the actual view that goes into the hierarchy is
+the modified view, not the original one.
+
+if your view hierarchy is wholly layout neutral, then it will automatically take
+up all available space.
+
+applying modifiers creates new views rather than just modifying existing views
+in-place.
+
+Alignment
+
+The simplest alignment option is to use the alignment parameter of a frame()
+modifier.
+```swift
+Text("Live long and prosper")
+    .frame(width: 300, height: 300, alignment: .topLeading)
+```
+
+Next option is to use a Stack with alignment:
+```swift
+HStack(alignment: .bottom) {
+```
+
+If text views of differing size need to line up use
+```swift
+HStack(alignment: .lastTextBaseline) {
+```
 
 # Day 91
 28 May
