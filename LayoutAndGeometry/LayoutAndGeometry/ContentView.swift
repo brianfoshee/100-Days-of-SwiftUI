@@ -9,6 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        Text("Hello, world")
+            .offset(x: 100, y: 100)
+            .background(.red)
+    }
+}
+
+/*
+
         HStack(alignment: .midAccountAndName) {
             VStack {
                 Text("@twostraws")
@@ -25,9 +33,7 @@ struct ContentView: View {
                     .font(.largeTitle)
             }
         }
-    }
-}
-
+ */
 extension VerticalAlignment {
     enum MidAccountAndName: AlignmentID {
         static func defaultValue(in context: ViewDimensions) -> CGFloat {

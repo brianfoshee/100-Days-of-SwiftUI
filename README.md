@@ -7,6 +7,35 @@ ok I missed the memorial day goal but had a much needed vacation.
 
 Notes for each Day:
 
+# Day 93
+13 June
+https://www.hackingwithswift.com/100/swiftui/93
+
+GeometryReader. This lets us read the size and position for a view at runtime,
+and keep reading those values as they change over time.
+
+Absolute View Positioning
+
+SwiftUI gives us two ways of positioning views: absolute positions using
+position(), and relative positions using offset()
+
+If you want to absolute position:
+```swift
+Text("Hello, world!")
+    .position(x: 100, y: 100)
+```
+
+when we use position() we get back a new view that takes up all available space,
+so it can position its child (the text) at the correct location.
+
+If you offset some text its original dimensions don’t actually change, even
+though the resulting view is rendered in a different location.
+```swift
+Text("Hello, world")
+    .offset(x: 100, y: 100)
+    .background(.red)
+```
+
 # Day 92
 12 June
 https://www.hackingwithswift.com/100/swiftui/92
