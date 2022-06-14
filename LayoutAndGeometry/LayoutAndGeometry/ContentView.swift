@@ -19,12 +19,22 @@ struct ContentView: View {
                         Text("Row #\(index)")
                             .font(.title)
                             .frame(maxWidth: .infinity)
-                            .background(colors[index % 7])
+                            // color based on row
+                            // .background(colors[index % 7])
+                            // color based on vertical position
+                            .background(Color(
+                                hue: min(geo.frame(in: .global).minY / fullView.size.height, 1),
+                                saturation: 1,
+                                brightness: 1)
+                            )
                             .rotation3DEffect(
                                 .degrees(geo.frame(in: .global).minY - fullView.size.height / 2) / 5,
                                 axis: (x: 0, y: 1, z: 0)
                             )
+                            // fade to 0 when 200 px from the top
                             .opacity(geo.frame(in: .global).minY < 200 ? geo.frame(in: .global).minY / 200 : 1)
+                            // scale views depending on vertical position, no less than 50% though
+                            .scaleEffect(max(0.5, geo.frame(in: .global).minY / fullView.size.height))
 
                     }
                     .frame(height: 40)
