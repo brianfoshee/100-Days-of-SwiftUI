@@ -36,6 +36,66 @@ Text("Hello, world")
     .background(.red)
 ```
 
+Frames and Coordinates in GeometryReader
+
+In its most basic usage, what GeometryReader does is let us read the size that
+was proposed by the parent, then use that to manipulate our view.
+
+we could use GeometryReader to make a text view have 90% of all available width
+regardless of its content:
+```swift
+GeometryReader { geo in
+     Text("Hello, World!")
+         .frame(width: geo.size.width * 0.9)
+         .background(.red)
+}
+```
+
+That geo parameter that comes in is a GeometryProxy, and it contains the
+proposed size, any safe area insets that have been applied, plus a method for
+reading frame values that we’ll look at in a moment.
+
+GeometryReader has an interesting side effect that might catch you out at first:
+the view that gets returned has a flexible preferred size, which means it will
+expand to take up more space as needed.
+
+coordinate spaces:
+the global space: measuring our view’s frame relative to the whole screen
+the local space: measuring our view’s frame relative to its parent
+
+We can also create custom coordinate spaces by attaching the coordinateSpace()
+modifier to a view – any children of that can then read its frame relative to
+that coordinate space.
+
+See LayoutAndGeometry project for code that explains this:
+- A global center X of 189 means that the center of the geometry reader is 189
+  points from the left edge of the screen.
+- A global center Y of 430 means the center of the text view is 430 points from
+  the top edge of the screen. This isn’t dead in the center of the screen
+  because there is more safe area at the top than the bottom.
+- A custom center X of 189 means the center of the text view is 189 points from
+  the left edge of whichever view owns the “Custom” coordinate space, which in
+  our case is OuterView because we attach it in ContentView. This number matches
+  the global position because OuterView runs edge to edge horizontally.
+- A custom center Y of 383 means the center of the text view is 383 points from
+  the top edge of OuterView. This value is smaller than the global center Y
+  because OuterView doesn’t extend into the safe area.
+- A local center X of 152 means the center of the text view is 152 points from
+  the left edge of its direct container, which in this case is the
+  GeometryReader.
+- A local center Y of 350 means the center of the text view is 350 points from
+  the top edge of its direct container, which again is the GeometryReader.
+
+Which coordinate space you want to use depends on what question you want to
+answer:
+
+- Want to know where this view is on the screen? Use the global space.
+- Want to know where this view is relative to its parent? Use the local space.
+- What to know where this view is relative to some other view? Use a custom space.
+
+frame(in:) method of a GeometryProxy, SwiftUI will calculate the view’s current
+position in the coordinate space we ask for.
+
 # Day 92
 12 June
 https://www.hackingwithswift.com/100/swiftui/92
