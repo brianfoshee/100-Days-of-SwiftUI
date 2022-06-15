@@ -37,6 +37,24 @@ Leaving off a Button on an alert is okay, it'll show a default buton:
 .alert("Welcome", isPresented: $isShowingUser) { }
 ```
 
+size classes, which is a thoroughly vague way of telling us how much space we
+have for our views. we have only two size classes horizontally and vertically,
+called “compact” and “regular”.
+
+```swift
+@Environment(\.horizontalSizeClass) var sizeClass
+
+if sizeClass == .compact {
+    VStack(content: UserView.init)
+} else {
+    HStack(content: UserView.init)
+}
+```
+
+UserView just doesn’t care – its Group simply groups the text views together
+without affecting their layout at all, so the layout arrangement UserView is
+given depends entirely on how it’s used.
+
 # Day 95
 14 June
 https://www.hackingwithswift.com/100/swiftui/95
