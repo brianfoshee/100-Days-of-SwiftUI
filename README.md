@@ -7,9 +7,15 @@ ok I missed the memorial day goal but had a much needed vacation.
 
 Notes for each Day:
 
+# Day 96
+14 June
+https://www.hackingwithswift.com/100/swiftui/96
+
 # Day 95
 14 June
 https://www.hackingwithswift.com/100/swiftui/95
+
+Milestone project.
 
 # Day 94
 13 June
