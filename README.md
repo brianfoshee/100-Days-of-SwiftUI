@@ -11,6 +11,32 @@ Notes for each Day:
 14 June
 https://www.hackingwithswift.com/100/swiftui/96
 
+Present a sheet depending on whether an optional has a value. When the sheet
+disappears the optional is set back to nil.
+```swift
+@State private var selectedUser: User? = nil
+
+Text("Hello, World!")
+    .onTapGesture {
+        selectedUser = User()
+    }
+    .sheet(item: $selectedUser) { user in
+        Text(user.id)
+    }
+```
+
+.alert does the same thing, but it still needs a bool Binding:
+```swift
+.alert("Welcome", isPresented: $isShowingUser, presenting: selectedUser) { user in
+    Button(user.id) { }
+}
+```
+
+Leaving off a Button on an alert is okay, it'll show a default buton:
+```swift
+.alert("Welcome", isPresented: $isShowingUser) { }
+```
+
 # Day 95
 14 June
 https://www.hackingwithswift.com/100/swiftui/95
