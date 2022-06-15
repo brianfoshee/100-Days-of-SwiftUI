@@ -55,6 +55,18 @@ UserView just doesn’t care – its Group simply groups the text views together
 without affecting their layout at all, so the layout arrangement UserView is
 given depends entirely on how it’s used.
 
+Search Views
+
+```swift
+@State private var searchText = ""
+
+NavigationView {
+    Text("Searching for \(searchText)")
+        .searchable(text: $searchText, prompt: "Look for something")
+        .navigationTitle("Searching")
+}
+```
+
 # Day 95
 14 June
 https://www.hackingwithswift.com/100/swiftui/95
