@@ -14,7 +14,7 @@ struct ContentView: View {
         NavigationView {
             List(resorts) { resort in
                 NavigationLink {
-                    Text(resort.name)
+                    ResortView(resort: resort)
                 } label: {
                     Image(resort.country)
                         .resizable()
@@ -36,9 +36,26 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Resorts")
+
+            // this is so that, on large devices, a welcome screen is shown on
+            // first launch. Otherwise the list of resorts will be hidden without
+            // any hint as to where they are.
+            WelcomeView()
         }
     }
 
+}
+
+struct WelcomeView: View {
+    var body: some View {
+        VStack {
+            Text("Welcome to Snowseeker!")
+                .font(.largeTitle)
+
+            Text("Please select a resort from the left-hand menu; swipe from the left edge to show it.")
+                .foregroundColor(.secondary)
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

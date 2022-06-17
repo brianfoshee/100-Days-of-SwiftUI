@@ -18,6 +18,32 @@ what’s visible in the secondary view.
 when we use `static let` for properties, Swift automatically makes them lazy –
 they don’t get created until they are used.
 
+When we use a NavigationView, by default SwiftUI expects us to provide both a
+primary view and a secondary detail view that can be shown side by side, with
+the primary view shown on the left and the secondary on the right.
+
+On landscape iPhones that are big enough – iPhone 13 Pro Max, for example –
+SwiftUI’s default behavior is to show the secondary view, and provide the
+primary view as a slide over.
+
+UIKit lets us control whether the primary view should be shown on iPad portrait,
+this is not yet possible in SwiftUI. However, we can stop iPhones from using the
+slide over approach if that’s what you want – try it first and see what you
+think. If you want it gone, add this extension
+```swift
+extension View {
+    // We need to use the @ViewBuilder attribute here because the two returned
+    // view types are different.
+    @ViewBuilder func phoneOnlyStackNavigationView() -> some View {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationViewStyle(.stack)
+        } else {
+            self
+        }
+    }
+}
+```
+
 # Day 96
 14 June
 https://www.hackingwithswift.com/100/swiftui/96
