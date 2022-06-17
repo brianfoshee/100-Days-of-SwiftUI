@@ -7,6 +7,17 @@ ok I missed the memorial day goal but had a much needed vacation.
 
 Notes for each Day:
 
+# Day 97
+15 June
+https://www.hackingwithswift.com/100/swiftui/97
+
+To display two views side by side, this is done by placing two views into a
+NavigationView, then using a NavigationLink in the primary view to control
+what’s visible in the secondary view.
+
+when we use `static let` for properties, Swift automatically makes them lazy –
+they don’t get created until they are used.
+
 # Day 96
 14 June
 https://www.hackingwithswift.com/100/swiftui/96

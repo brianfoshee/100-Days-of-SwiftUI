@@ -8,47 +8,47 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var searchText = ""
-    let allNames = ["Subh", "Vina", "Melvin", "Stefanie"]
+    let resorts = Resort.allResorts
 
     var body: some View {
         NavigationView {
-            List(filteredNames, id: \.self) { name in
-                Text(name)
+            List(resorts) { resort in
+                NavigationLink {
+                    Text(resort.name)
+                } label: {
+                    Image(resort.country)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 40, height: 25)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(.black, lineWidth: 1)
+                        )
+
+                    VStack(alignment: .leading) {
+                        Text(resort.name)
+                            .font(.headline)
+
+                        Text("\(resort.runs) runs")
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
-            .searchable(text: $searchText, prompt: "Look for something")
-            .navigationTitle("Searching")
+            .navigationTitle("Resorts")
         }
     }
 
-    var filteredNames: [String] {
-        if searchText.isEmpty {
-            return allNames
-        } else {
-            return allNames.filter { $0.contains(searchText) }
-        }
-    }
-
-}
-
-struct UserView: View {
-    var body: some View {
-        Group {
-            Text("Name: Paul")
-            Text("Country: England")
-            Text("Pets: Luna and Arya")
-        }
-        .font(.title)
-    }
-}
-
-struct User: Identifiable {
-    var id = "Taylor Swift"
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .previewInterfaceOrientation(.portraitUpsideDown)
+            .previewInterfaceOrientation(.landscapeRight)
+            .previewDevice("iPhone 13 Pro Max")
+
+        ContentView()
+            .previewInterfaceOrientation(.landscapeRight)
+            .previewDevice("iPhone 13 mini")
     }
 }
