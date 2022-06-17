@@ -10,9 +10,21 @@ import SwiftUI
 struct ContentView: View {
     let resorts = Resort.allResorts
 
+    var filteredResorts: [Resort] {
+        if searchText.isEmpty {
+            return resorts
+        } else {
+            return resorts.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+
+    @State private var searchText = ""
+
     var body: some View {
         NavigationView {
-            List(resorts) { resort in
+            List(filteredResorts) { resort in
                 NavigationLink {
                     ResortView(resort: resort)
                 } label: {
@@ -36,6 +48,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Resorts")
+            .searchable(text: $searchText, prompt: "Search for a resort")
 
             // this is so that, on large devices, a welcome screen is shown on
             // first launch. Otherwise the list of resorts will be hidden without
