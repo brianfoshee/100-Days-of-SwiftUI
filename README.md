@@ -7,6 +7,35 @@ ok I missed the memorial day goal but had a much needed vacation.
 
 Notes for each Day:
 
+# Day 98
+17 June
+https://www.hackingwithswift.com/100/swiftui/98
+
+Size Classes
+
+SwiftUI gives us two environment values to monitor the current size class of our
+app, which in practice means we can show one layout when space is restricted and
+another when space is plentiful.
+
+That will tell us whether we have a regular or compact size class. Very roughly:
+
+- All iPhones in portrait have compact width and regular height.
+- Most iPhones in landscape have compact width and compact height.
+- Large iPhones (Plus-sized and Max devices) in landscape have regular width and
+  compact height.
+- All iPads in both orientations have regular width and regular height when your
+app is running with the full screen.
+
+```swift
+@Environment(\.horizontalSizeClass) var sizeClass
+```
+
+you can limit the range of Dynamic Type sizes supported by a particular view.
+any size up to and including .xxxLarge is fine, but nothing larger:
+```swift
+.dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+```
+
 # Day 97
 15 June
 https://www.hackingwithswift.com/100/swiftui/97
