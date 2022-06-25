@@ -7,6 +7,20 @@ ok I missed the memorial day goal but had a much needed vacation.
 
 Notes for each Day:
 
+# Day 100
+24 June
+https://www.hackingwithswift.com/100/swiftui/100
+
+Final Exam: passed with merit, 94%
+
+![cert](certificate.jpg)
+
+# Day 99
+17 June
+https://www.hackingwithswift.com/100/swiftui/99
+
+Challenges
+
 # Day 98
 17 June
 https://www.hackingwithswift.com/100/swiftui/98
